@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binge Leisure Resort | Elevated Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #BC8A5F;
+            --secondary-color: #3D5A5B;
+            --accent-color: #A52A2A;
+            --light-color: #F7F3EE;
+            --dark-color: #1A1A1A;
+            --text-color: #333333;
+            --text-light: #666666;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        header.scrolled {
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(188, 138, 95, 0.3);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        
+        /* Search Bar */
+        .search-bar {
+            background-color: white;
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: var(--shadow);
+        }
+        
+        .search-item {
+            flex: 1;
+            padding: 15px;
+            border-right: 1px solid #eee;
+        }
+        
+        .search-item:last-child {
+            border-right: none;
+        }
+        
+        .search-item label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        
+        .search-item input, .search-item select {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: var(--text-color);
+            background: transparent;
+        }
+        
+        .search-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-btn:hover {
+            background-color: var(--accent-color);
+        }
+        
+        /* Unique Features Section */
+        .features {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 42px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover .feature-img img {
+            transform: scale(1.05);
+        }
+        
+        .feature-content {
+            padding: 25px;
+        }
+        
+        .feature-content h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .feature-content p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        /* Raised Dining Highlight */
+        .raised-dining {
+            background-color: var(--light-color);
+            padding: 100px 0;
+            margin: 100px 0;
+        }
+        
+        .raised-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .raised-text h2 {
+            font-size: 42px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .raised-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+        
+        .raised-stats {
+            display: flex;
+            margin-top: 30px;
+        }
+        
+        .stat {
+            margin-right: 40px;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Accommodations */
+        .accommodations {
+            padding: 100px 0;
+        }
+        
+        .accommodation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .accommodation-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .accommodation-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .accommodation-img {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .accommodation-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .accommodation-card:hover .accommodation-img img {
+            transform: scale(1.05);
+        }
+        
+        .accommodation-info {
+            padding: 20px;
+        }
+        
+        .accommodation-info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .accommodation-info p {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .accommodation-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: var(--light-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 15px;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .raised-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+                background: transparent;
+                box-shadow: none;
+            }
+            
+            .search-item {
+                background-color: white;
+                margin-bottom: 10px;
+                border-radius: 8px;
+                border-right: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .features-grid, .accommodation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .raised-stats {
+                flex-direction: column;
+            }
+            
+            .stat {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo"><i class="fas fa-crown"></i>Binge<span>Leisure</span></a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Unique Features</a></li>
+                    <li><a href="#accommodations">Accommodations</a></li>
+                    <li><a href="#dining">Raised Dining</a></li>
+                    <li><a href="#dam">Natural Dam</a></li>
+                    <li><a href="#experiences">Experiences</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <a href="#" class="btn">Book Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Elevated Luxury Awaits</h1>
+            <p>Experience the world's first 40-foot raised dining at Binge Leisure Resort, where luxury meets nature in perfect harmony.</p>
+            
+            <div class="search-bar">
+                <div class="search-item">
+                    <label>DESTINATION</label>
+                    <input type="text" placeholder="Binge Leisure Resort" readonly>
+                </div>
+                <div class="search-item">
+                    <label>CHECK-IN</label>
+                    <input type="date">
+                </div>
+                <div class="search-item">
+                    <label>CHECK-OUT</label>
+                    <input type="date">
+                </div>
+                <div class="search-item">
+                    <label>GUESTS</label>
+                    <select>
+                        <option>2 Guests</option>
+                        <option>4 Guests</option>
+                        <option>6+ Guests</option>
+                    </select>
+                </div>
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Unique Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Unparalleled Experiences</h2>
+                <p>Discover the extraordinary amenities that make Binge Leisure Resort a destination like no other.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2094&q=80" alt="Raised Dining Area">
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <h3>40-Foot Raised Dining</h3>
+                        <p>Dine among the treetops in our architecturally stunning raised dining area, offering panoramic views of the surrounding landscape.</p>
+                        <a href="#" class="btn btn-outline">Experience It</a>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Natural Dam">
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h3>Vast Natural Dam</h3>
+                        <p>Our pristine natural dam connects to neighboring resorts, offering exclusive water activities and breathtaking views.</p>
+                        <a href="#" class="btn btn-outline">Explore Waters</a>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1492684223066-dd23140edf6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Performance Stage">
+                    </div>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-theater-masks"></i>
+                        </div>
+                        <h3>Curated Performances</h3>
+                        <p>World-class entertainment on our dedicated stage featuring local and international artists in an intimate setting.</p>
+                        <a href="#" class="btn btn-outline">View Events</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Raised Dining Highlight -->
+    <section class="raised-dining" id="dining">
+        <div class="container">
+            <div class="raised-content">
+                <div class="raised-text">
+                    <h2>Dining Above the Clouds</h2>
+                    <p>Our signature raised dining area stands 40 feet above ground, offering an unparalleled culinary experience. Accessed via an elegant staircase, guests are treated to gourmet meals while enjoying breathtaking views of the resort and natural dam.</p>
+                    <p>The structure is supported by reinforced poles and designed by award-winning architects to provide both safety and aesthetic appeal. This unique dining experience has become the hallmark of Binge Leisure Resort.</p>
+                    
+                    <div class="raised-stats">
+                        <div class="stat">
+                            <div class="stat-value">40ft</div>
+                            <div class="stat-label">Elevated Dining</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">360°</div>
+                            <div class="stat-label">Panoramic Views</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">5-Star</div>
+                            <div class="stat-label">Culinary Experience</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn" style="margin-top: 30px;">Reserve Your Table</a>
+                </div>
+                
+                <div class="raised-img">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80" alt="Raised Dining Structure">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accommodations -->
+    <section class="accommodations" id="accommodations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Luxury Accommodations</h2>
+                <p>Select from our exclusive collection of villas and suites, each designed with sophistication and comfort in mind.</p>
+            </div>
+            
+            <div class="accommodation-grid">
+                <div class="accommodation-card">
+                    <div class="accommodation-img">
+                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Treetop Villa">
+                    </div>
+                    <div class="accommodation-info">
+                        <h3>Treetop Villa</h3>
+                        <p>Nestled among the canopy, these villas offer private access to the raised dining area and panoramic dam views.</p>
+                        <div class="accommodation-price">
+                            <div class="price">$1,200 <span>/ night</span></div>
+                            <a href="#" class="btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accommodation-card">
+                    <div class="accommodation-img">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Waterfront Suite">
+                    </div>
+                    <div class="accommodation-info">
+                        <h3>Waterfront Suite</h3>
+                        <p>Direct access to the natural dam with private dock, infinity pool, and personalized butler service.</p>
+                        <div class="accommodation-price">
+                            <div class="price">$2,500 <span>/ night</span></div>
+                            <a href="#" class="btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accommodation-card">
+                    <div class="accommodation-img">
+                        <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Executive Residence">
+                    </div>
+                    <div class="accommodation-info">
+                        <h3>Executive Residence</h3>
+                        <p>Our most exclusive offering with private chef, dedicated concierge, and helicopter pad access.</p>
+                        <div class="accommodation-price">
+                            <div class="price">$5,000 <span>/ night</span></div>
+                            <a href="#" class="btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Binge Leisure Resort</h3>
+                    <p>An unparalleled luxury destination featuring the world's first 40-foot raised dining experience, vast natural dam, and curated performances.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Unique Features</a></li>
+                        <li><a href="#accommodations">Accommodations</a></li>
+                        <li><a href="#dining">Raised Dining</a></li>
+                        <li><a href="#dam">Natural Dam</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Lane, Resort Valley</li>
+                        <li><i class="fas fa-phone"></i> +1 (888) 555-BINGE</li>
+                        <li><i class="fas fa-envelope"></i> info@bingleisureresort.com</li>
+                        <li><i class="fas fa-globe"></i> www.bingleisureresort.com</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Exclusive Offers</h3>
+                    <p>Subscribe to receive updates on special packages and curated experiences.</p>
+                    <div style="margin-top: 20px;">
+                        <input type="email" placeholder="Your email" style="width: 100%; padding: 12px; border-radius: 4px; border: none; margin-bottom: 10px;">
+                        <a href="#" class="btn" style="width: 100%; text-align: center;">Subscribe</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Binge Leisure Resort. All rights reserved. | Property value exceeding $15M</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Set default dates for search
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        const checkinInput = document.querySelector('input[type="date"]');
+        const checkoutInput = document.querySelectorAll('input[type="date"]')[1];
+        
+        // Format date as YYYY-MM-DD
+        const formatDate = (date) => {
+            return date.toISOString().split('T')[0];
+        };
+        
+        checkinInput.value = formatDate(today);
+        checkoutInput.value = formatDate(tomorrow);
+        
+        // Set minimum dates to today
+        checkinInput.min = formatDate(today);
+        checkoutInput.min = formatDate(tomorrow);
+        
+        // Update checkout min date when checkin changes
+        checkinInput.addEventListener('change', function() {
+            const checkinDate = new Date(this.value);
+            const nextDay = new Date(checkinDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+            checkoutInput.min = formatDate(nextDay);
+            
+            // If checkout is before new min, update it
+            if(new Date(checkoutInput.value) < nextDay) {
+                checkoutInput.value = formatDate(nextDay);
+            }
+        });
+    </script>
+</body>
+</html>
