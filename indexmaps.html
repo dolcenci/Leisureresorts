@@ -1,1095 +1,1022 @@
- 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fun Store - Accessories, Gadgets & Personal Care</title>
+    <title>Binge Leisure Resort | Elevated Luxury</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #ff6b6b;
-            --secondary: #4ecdc4;
-            --dark: #292f36;
-            --light: #f7fff7;
-            --accent: #ffd166;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary-color: #BC8A5F;
+            --secondary-color: #3D5A5B;
+            --accent-color: #A52A2A;
+            --light-color: #F7F3EE;
+            --dark-color: #1A1A1A;
+            --text-color: #333333;
+            --text-light: #666666;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
         }
         
         body {
-            background-color: #f5f5f5;
-            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         
-        /* Header Styles */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header & Navigation */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 1rem 2rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: var(--transition);
         }
         
-        .header-container {
+        header.scrolled {
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
         }
         
         .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 10px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
         }
         
         .logo i {
-            font-size: 2rem;
+            margin-right: 10px;
+            font-size: 28px;
         }
         
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 800;
-        }
-        
-        nav ul {
+        .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
         }
         
-        nav a {
-            color: white;
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
             text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-        }
-        
-        nav a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-        
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .header-actions button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
             position: relative;
         }
         
-        .cart-count {
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a:after {
+            content: '';
             position: absolute;
-            top: -8px;
-            right: -8px;
-            background-color: var(--accent);
-            color: var(--dark);
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-actions {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 500px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            margin-bottom: 3rem;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            padding: 2rem;
-        }
-        
-        .hero h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
         }
         
         .btn {
             display: inline-block;
-            padding: 0.8rem 2rem;
-            background-color: var(--accent);
-            color: var(--dark);
+            padding: 12px 28px;
+            background-color: var(--primary-color);
+            color: white;
             border: none;
-            border-radius: 30px;
+            border-radius: 4px;
             font-weight: 600;
-            text-decoration: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(188, 138, 95, 0.3);
         }
         
-        .btn-primary {
-            background-color: var(--primary);
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
             color: white;
         }
-
-
-
-
-/* Testimonials */
-        .testimonials {
-            padding: 3rem 2rem;
-            background-color: white;
-        }
         
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .testimonial-card {
-            background-color: #f9f9f9;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-        
-        .testimonial-author {
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
         }
         
-        .author-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            overflow: hidden;
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
         }
         
-        .author-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            line-height: 1.1;
         }
         
-        .author-info h5 {
-            font-size: 1rem;
-            margin-bottom: 0.2rem;
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            font-weight: 300;
         }
         
-        .author-info p {
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-
-      
-        
-        /* Categories Section */
-        .categories {
-            padding: 3rem 2rem;
-            max-width: 1200px;
+        /* Search Bar */
+        .search-bar {
+            background-color: white;
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            max-width: 800px;
             margin: 0 auto;
+            box-shadow: var(--shadow);
+        }
+        
+        .search-item {
+            flex: 1;
+            padding: 15px;
+            border-right: 1px solid #eee;
+        }
+        
+        .search-item:last-child {
+            border-right: none;
+        }
+        
+        .search-item label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        
+        .search-item input, .search-item select {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            color: var(--text-color);
+            background: transparent;
+        }
+        
+        .search-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 25px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-btn:hover {
+            background-color: var(--accent-color);
+        }
+        
+        /* Unique Features Section */
+        .features {
+            padding: 100px 0;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
+            margin-bottom: 60px;
         }
         
         .section-title h2 {
-            font-size: 2.5rem;
-            display: inline-block;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            font-size: 42px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
         }
         
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            margin: 0.5rem auto 0;
-        }
-        
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .category-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
-        }
-        
-        .category-img {
-            height: 200px;
-            overflow: hidden;
-        }
-        
-        .category-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .category-card:hover .category-img img {
-            transform: scale(1.1);
-        }
-        
-        .category-info {
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
-        .category-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .category-info p {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-        
-        /* Featured Products */
-        .featured-products {
-            padding: 3rem 2rem;
-            background-color: #f0f8ff;
-            margin-bottom: 3rem;
-        }
-        
-        .products-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .product-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-        }
-        
-        .product-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: var(--primary);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            z-index: 1;
-        }
-        
-        .product-img {
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .product-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .product-card:hover .product-img img {
-            transform: scale(1.05);
-        }
-        
-        .product-actions {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .product-card:hover .product-actions {
-            opacity: 1;
-        }
-        
-        .product-actions button {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: none;
-            background-color: white;
-            color: var(--dark);
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .product-actions button:hover {
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .product-info {
-            padding: 1.5rem;
-        }
-        
-        .product-category {
-            color: var(--secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-        
-        .product-title {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .product-price {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .current-price {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .old-price {
-            font-size: 0.9rem;
-            color: #999;
-            text-decoration: line-through;
-        }
-        
-        .product-rating {
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-        
-        .add-to-cart {
-            width: 100%;
-            padding: 0.6rem;
-            background-color: var(--dark);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .add-to-cart:hover {
-            background-color: var(--primary);
-        }
-        
-        /* Newsletter */
-        .newsletter {
-            padding: 4rem 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            text-align: center;
-        }
-        
-        .newsletter-container {
+        .section-title p {
+            font-size: 18px;
+            color: var(--text-light);
             max-width: 600px;
             margin: 0 auto;
         }
         
-        .newsletter h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
         }
         
-        .newsletter p {
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
+        .feature-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
         
-        .newsletter-form {
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-img {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .feature-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover .feature-img img {
+            transform: scale(1.05);
+        }
+        
+        .feature-content {
+            padding: 25px;
+        }
+        
+        .feature-content h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .feature-content p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        /* Raised Dining Highlight */
+        .raised-dining {
+            background-color: var(--light-color);
+            padding: 100px 0;
+            margin: 100px 0;
+        }
+        
+        .raised-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .raised-text h2 {
+            font-size: 42px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .raised-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+        
+        .raised-stats {
             display: flex;
-            max-width: 500px;
+            margin-top: 30px;
+        }
+        
+        .stat {
+            margin-right: 40px;
+        }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Accommodations */
+        .accommodations {
+            padding: 100px 0;
+        }
+        
+        .accommodation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .accommodation-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .accommodation-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .accommodation-img {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .accommodation-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .accommodation-card:hover .accommodation-img img {
+            transform: scale(1.05);
+        }
+        
+        .accommodation-info {
+            padding: 20px;
+        }
+        
+        .accommodation-info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        
+        .accommodation-info p {
+            color: var(--text-light);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .accommodation-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .price span {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+        
+        /* Map Section - Added from second site */
+        .map-section {
+            padding: 80px 0;
+            background-color: var(--light-color);
+        }
+        
+        .map-container {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
-        .newsletter-form input {
+        .map-wrapper {
             flex: 1;
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: 30px 0 0 30px;
-            font-size: 1rem;
+            height: 400px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
         }
         
-        .newsletter-form button {
-            padding: 0 1.5rem;
-            background-color: var(--accent);
-            color: var(--dark);
+        .embedded-map {
+            width: 100%;
+            height: 100%;
             border: none;
-            border-radius: 0 30px 30px 0;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
         }
         
-        .newsletter-form button:hover {
+        .map-info {
+            flex: 1;
+            padding: 30px;
             background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .map-info h3 {
+            font-size: 32px;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .map-info p {
+            color: var(--text-light);
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        
+        .location-details {
+            margin-top: 30px;
+        }
+        
+        .location-details h4 {
+            font-size: 20px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .location-details ul {
+            list-style: none;
+        }
+        
+        .location-details li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            color: var(--text-light);
+        }
+        
+        .location-details i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            width: 20px;
         }
         
         /* Footer */
         footer {
-            background-color: var(--dark);
+            background-color: var(--dark-color);
             color: white;
-            padding: 3rem 2rem 1rem;
+            padding: 80px 0 30px;
         }
         
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
         }
         
-        .footer-col h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 0.5rem;
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: var(--light-color);
         }
         
-        .footer-col h3::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px;
-            height: 2px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-        }
-        
-        .footer-col ul {
+        .footer-column ul {
             list-style: none;
         }
         
-        .footer-col ul li {
-            margin-bottom: 0.8rem;
+        .footer-column ul li {
+            margin-bottom: 12px;
         }
         
-        .footer-col ul li a {
-            color: #ddd;
+        .footer-column ul li a {
+            color: #aaa;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
         
-        .footer-col ul li a:hover {
-            color: var(--primary);
+        .footer-column ul li a:hover {
+            color: var(--primary-color);
             padding-left: 5px;
-        }
-        
-        .footer-col p {
-            color: #ddd;
-            margin-bottom: 1rem;
-            line-height: 1.6;
         }
         
         .social-links {
             display: flex;
-            gap: 1rem;
+            margin-top: 20px;
         }
         
         .social-links a {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             justify-content: center;
             width: 40px;
             height: 40px;
-            background-color: rgba(255,255,255,0.1);
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
+            margin-right: 15px;
             color: white;
-            transition: all 0.3s ease;
+            text-decoration: none;
+            transition: var(--transition);
         }
         
         .social-links a:hover {
-            background-color: var(--primary);
+            background-color: var(--primary-color);
             transform: translateY(-3px);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #aaa;
-            font-size: 0.9rem;
+            font-size: 14px;
         }
         
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-container {
+        /* Responsive */
+        @media (max-width: 992px) {
+            .raised-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 48px;
+            }
+            
+            .search-bar {
                 flex-direction: column;
-                gap: 1rem;
+                background: transparent;
+                box-shadow: none;
             }
             
-            nav ul {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
+            .search-item {
+                background-color: white;
+                margin-bottom: 10px;
+                border-radius: 8px;
+                border-right: none;
             }
             
-            .hero h2 {
-                font-size: 2rem;
-            }
-            
-            .newsletter-form {
+            .map-container {
                 flex-direction: column;
-                gap: 0.5rem;
             }
             
-            .newsletter-form input,
-            .newsletter-form button {
-                border-radius: 30px;
-                width: 100%;
+            .map-wrapper {
+                height: 350px;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-    /* Video & Map Section Styles */
-.video-map-section {
-    padding: 3rem 2rem;
-    background-color: white;
-}
-
-.media-container {
-    display: flex;
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.media-wrapper {
-    flex: 1;
-    height: 275px;
-    position: relative;
-}
-
-.embedded-media {
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .media-container {
-        flex-direction: column;
-    }
-    
-    .media-wrapper {
-        width: 100%;
-        height: 275px; /* Maintain height on mobile */
-    }
-}
-
-
-
-
-
-
-     
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .features-grid, .accommodation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .raised-stats {
+                flex-direction: column;
+            }
+            
+            .stat {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .map-wrapper {
+                height: 300px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-smile"></i>
-                <h1>Fun Store</h1>
-            </div>
-            
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container">
             <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">Categories</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                 <li><a href="home2.html">home2</a></li>
+                <a href="#" class="logo"><i class="fas fa-crown"></i>Binge<span>Leisure</span></a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="aboutus.html">About-Us</a></li>
+                    <li><a href="luxurysignup.html">Signup5</a></li>
+                    <li><a href="#features">Unique Features</a></li>
+                    <li><a href="luxurysignup.html">Signup5</a></li>
+                    <li><a href="#accommodations">Accommodations</a></li>
+                    <li><a href="Bookings.html">Book</a></li>
+                    <li><a href="#dining">Raised Dining</a></li>
+                    <li><a href="#dam">Natural Dam</a></li>
+                    <li><a href="#experiences">Experiences</a></li>
                 </ul>
+                
+                <div class="nav-actions">
+                    <a href="#" class="btn">Book Now</a>
+                </div>
             </nav>
-            
-            <div class="header-actions">
-                <button><i class="fas fa-search"></i></button>
-                <button><i class="fas fa-user"></i></button>
-                <button>
-                    
-                </button>
-            </div>
         </div>
     </header>
-    
+
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="hero-content">
-            <h2>Discover Amazing Products</h2>
-            <p>Shop the latest accessories, gadgets, and personal care items at unbeatable prices</p>
-            <a href="#" class="btn btn-primary">Shop Now</a>
-        </div>
-    </section>
-    
-    <!-- Categories Section -->
-    <section class="categories">
-        <div class="section-title">
-            <h2>Shop By Category</h2>
-        </div>
-        
-        <div class="category-grid">
-            <div class="category-card">
-                <div class="category-img">
-                    <img src="https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80" alt="Accessories">
-                </div>
-                <div class="category-info">
-                    <h3>Accessories</h3>
-                    <p>Stylish additions to complement your look</p>
-                    <a href="#" class="btn">View All</a>
-                </div>
-            </div>
+            <h1>Elevated Luxury Awaits</h1>
+            <p>Experience the world's first 40-foot raised dining at Binge Leisure Resort, where luxury meets nature in perfect harmony.</p>
             
-            <div class="category-card">
-                <div class="category-img">
-                    <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80" alt="Gadgets">
+            <div class="search-bar">
+                <div class="search-item">
+                    <label>DESTINATION</label>
+                    <input type="text" placeholder="Binge Leisure Resort" readonly>
                 </div>
-                <div class="category-info">
-                    <h3>Gadgets & Appliances</h3>
-                    <p>Innovative tech to simplify your life</p>
-                    <a href="#" class="btn">View All</a>
+                <div class="search-item">
+                    <label>CHECK-IN</label>
+                    <input type="date">
                 </div>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-img">
-                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80" alt="Personal Care">
+                <div class="search-item">
+                    <label>CHECK-OUT</label>
+                    <input type="date">
                 </div>
-                <div class="category-info">
-                    <h3>Personal Care</h3>
-                    <p>Products to help you look and feel your best</p>
-                    <a href="#" class="btn">View All</a>
+                <div class="search-item">
+                    <label>GUESTS</label>
+                    <select>
+                        <option>2 Guests</option>
+                        <option>4 Guests</option>
+                        <option>6+ Guests</option>
+                    </select>
                 </div>
+                <button class="search-btn"><i class="fas fa-search"></i></button>
             </div>
         </div>
     </section>
-    
-    <!-- Featured Products -->
-    <section class="featured-products">
-        <div class="products-container">
+
+    <!-- Unique Features Section -->
+    <section class="features" id="features">
+        <div class="container">
             <div class="section-title">
-                <h2>Featured Products</h2>
+                <h2>Unparalleled Experiences</h2>
+                <p>Discover the extraordinary amenities that make Binge Leisure Resort a destination like no other.</p>
             </div>
             
-            <div class="product-grid">
-                <!-- Product 1 -->
-                <div class="product-card">
-                    <span class="product-badge">Sale</span>
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Smart Watch">
-                        <div class="product-actions">
-                            <button><i class="fas fa-heart"></i></button>
-                            <button><i class="fas fa-eye"></i></button>
-                            <button><i class="fas fa-share-alt"></i></button>
-                        </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2094&q=80" alt="Raised Dining Area">
                     </div>
-                    <div class="product-info">
-                        <span class="product-category">Gadgets</span>
-                        <h3 class="product-title">Smart Watch Pro</h3>
-                        <div class="product-price">
-                            <span class="current-price">$129.99</span>
-                            <span class="old-price">$159.99</span>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-arrow-up"></i>
                         </div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(42)</span>
-                        </div>
-                        <button class="add-to-cart">Purchase</button>
+                        <h3>40-Foot Raised Dining</h3>
+                        <p>Dine among the treetops in our architecturally stunning raised dining area, offering panoramic views of the surrounding landscape.</p>
+                        <a href="#" class="btn btn-outline">Experience It</a>
                     </div>
                 </div>
                 
-                <!-- Product 2 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1592155931584-901ac15763e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Wireless Earbuds">
-                        <div class="product-actions">
-                            <button><i class="fas fa-heart"></i></button>
-                            <button><i class="fas fa-eye"></i></button>
-                            <button><i class="fas fa-share-alt"></i></button>
-                        </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Natural Dam">
                     </div>
-                    <div class="product-info">
-                        <span class="product-category">Accessories</span>
-                        <h3 class="product-title">Wireless Earbuds</h3>
-                        <div class="product-price">
-                            <span class="current-price">$79.99</span>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-water"></i>
                         </div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <span>(36)</span>
-                        </div>
-                        <button class="add-to-cart">Purchase</button>
+                        <h3>Vast Natural Dam</h3>
+                        <p>Our pristine natural dam connects to neighboring resorts, offering exclusive water activities and breathtaking views.</p>
+                        <a href="#" class="btn btn-outline">Explore Waters</a>
                     </div>
                 </div>
                 
-                <!-- Product 3 -->
-                <div class="product-card">
-                    <span class="product-badge">New</span>
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Hair Dryer">
-                        <div class="product-actions">
-                            <button><i class="fas fa-heart"></i></button>
-                            <button><i class="fas fa-eye"></i></button>
-                            <button><i class="fas fa-share-alt"></i></button>
-                        </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1492684223066-dd23140edf6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Performance Stage">
                     </div>
-                    <div class="product-info">
-                        <span class="product-category">Personal Care</span>
-                        <h3 class="product-title">Professional Hair Dryer</h3>
-                        <div class="product-price">
-                            <span class="current-price">$59.99</span>
-                            <span class="old-price">$69.99</span>
+                    <div class="feature-content">
+                        <div class="feature-icon">
+                            <i class="fas fa-theater-masks"></i>
                         </div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span>(28)</span>
-                        </div>
-                        <button class="add-to-cart">Purchase</button>
-                    </div>
-                </div>
-                
-                <!-- Product 4 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Portable Speaker">
-                        <div class="product-actions">
-                            <button><i class="fas fa-heart"></i></button>
-                            <button><i class="fas fa-eye"></i></button>
-                            <button><i class="fas fa-share-alt"></i></button>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <span class="product-category">Gadgets</span>
-                        <h3 class="product-title">Portable Bluetooth Speaker</h3>
-                        <div class="product-price">
-                            <span class="current-price">$49.99</span>
-                        </div>
-                        <div class="product-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span>(51)</span>
-                        </div>
-                        <button class="add-to-cart">Purchase</button>
+                        <h3>Curated Performances</h3>
+                        <p>World-class entertainment on our dedicated stage featuring local and international artists in an intimate setting.</p>
+                        <a href="#" class="btn btn-outline">View Events</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
-<!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="section-title">
-            <h2>What Our Customers Say</h2>
-        </div>
-        
-        <div class="testimonial-grid">
-            <div class="testimonial-card">
-                <div class="testimonial-text">
-                    "I absolutely love my new smartwatch from Fun Store! The delivery was super fast and the product quality exceeded my expectations. Will definitely shop here again!"
-                </div>
-                <div class="testimonial-author">
-                    <div class="author-img">
-                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah J.">
+    <!-- Raised Dining Highlight -->
+    <section class="raised-dining" id="dining">
+        <div class="container">
+            <div class="raised-content">
+                <div class="raised-text">
+                    <h2>Dining Above the Clouds</h2>
+                    <p>Our signature raised dining area stands 40 feet above ground, offering an unparalleled culinary experience. Accessed via an elegant staircase, guests are treated to gourmet meals while enjoying breathtaking views of the resort and natural dam.</p>
+                    <p>The structure is supported by reinforced poles and designed by award-winning architects to provide both safety and aesthetic appeal. This unique dining experience has become the hallmark of Binge Leisure Resort.</p>
+                    
+                    <div class="raised-stats">
+                        <div class="stat">
+                            <div class="stat-value">40ft</div>
+                            <div class="stat-label">Elevated Dining</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">360°</div>
+                            <div class="stat-label">Panoramic Views</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">5-Star</div>
+                            <div class="stat-label">Culinary Experience</div>
+                        </div>
                     </div>
-                    <div class="author-info">
-                        <h5>Sarah J.</h5>
-                        <p>Verified Customer</p>
-                    </div>
+                    
+                    <a href="#" class="btn" style="margin-top: 30px;">Reserve Your Table</a>
                 </div>
-            </div>
-            
-            <div class="testimonial-card">
-                <div class="testimonial-text">
-                    "The customer service at Fun Store is outstanding. They helped me choose the perfect gadget for my needs and even followed up to make sure I was happy with my purchase."
-                </div>
-                <div class="testimonial-author">
-                    <div class="author-img">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T.">
-                    </div>
-                    <div class="author-info">
-                        <h5>Michael T.</h5>
-                        <p>Verified Customer</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="testimonial-card">
-                <div class="testimonial-text">
-                    "I've ordered multiple items from Fun Store and each time the experience has been flawless. Great prices, fast shipping, and quality products. Highly recommend!"
-                </div>
-                <div class="testimonial-author">
-                    <div class="author-img">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emily R.">
-                    </div>
-                    <div class="author-info">
-                        <h5>Emily R.</h5>
-                        <p>Verified Customer</p>
+                
+                <div class="raised-img">
+                    <div class="feature-img">
+                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80" alt="Raised Dining Structure">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-
-   
-
-
-
-
-
-
-
-
-<!-- Video & Map Section -->
-<section class="video-map-section">
-    <div class="media-container">
-        <!-- YouTube Video -->
-        <div class="media-wrapper">
-            <iframe 
-                class="embedded-media"
-                src="https://www.youtube.com/embed/up7iGiSC7zY" 
-                title="Fun Store Home" 
-                frameborder="0" 
-                allowfullscreen>
-            </iframe>
-        </div>
-        
-        <!-- Google Map -->
-        <div class="media-wrapper">
-            <iframe
-                class="embedded-media"
-                loading="lazy"
-                allowfullscreen
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDsS7HN5C-8t6mtRLd2mPIDxLwd34yxM6w&q=Space+Needle,Seattle+WA">
-            </iframe>
-        </div>
-    </div>
-</section>
-
-
-
-     
-
-     
-    <!-- Newsletter -->
-    <section class="newsletter">
-        <div class="newsletter-container">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get the latest updates on new products and upcoming sales</p>
-            <form class="newsletter-form">
-                <input type="email" placeholder="Enter your email address">
-                <button type="submit">Subscribe</button>
-            </form>
+    <!-- Accommodations -->
+    <section class="accommodations" id="accommodations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Luxury Accommodations</h2>
+                <p>Select from our exclusive collection of villas and suites, each designed with sophistication and comfort in mind.</p>
+            </div>
+            
+            <div class="accommodation-grid">
+                <div class="accommodation-card">
+                    <div class="accommodation-img">
+                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Treetop Villa">
+                    </div>
+                    <div class="accommodation-info">
+                        <h3>Treetop Villa</h3>
+                        <p>Nestled among the canopy, these villas offer private access to the raised dining area and panoramic dam views.</p>
+                        <div class="accommodation-price">
+                            <div class="price">$1,200 <span>/ night</span></div>
+                            <a href="#" class="btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accommodation-card">
+                    <div class="accommodation-img">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Waterfront Suite">
+                    </div>
+                    <div class="accommodation-info">
+                        <h3>Waterfront Suite</h3>
+                        <p>Direct access to the natural dam with private dock, infinity pool, and personalized butler service.</p>
+                        <div class="accommodation-price">
+                            <div class="price">$2,500 <span>/ night</span></div>
+                            <a href="#" class="btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accommodation-card">
+                    <div class="accommodation-img">
+                        <img src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Executive Residence">
+                    </div>
+                    <div class="accommodation-info">
+                        <h3>Executive Residence</h3>
+                        <p>Our most exclusive offering with private chef, dedicated concierge, and helicopter pad access.</p>
+                        <div class="accommodation-price">
+                            <div class="price">$5,000 <span>/ night</span></div>
+                            <a href="#" class="btn">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-    
+
+    <!-- Map Section - Added from second site -->
+    <section class="map-section" id="location">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Prestigious Location</h2>
+                <p>Find your way to luxury at our exclusive resort destination</p>
+            </div>
+            
+            <div class="map-container">
+                <div class="map-wrapper">
+                    <iframe 
+                        class="embedded-map"
+                        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDsS7HN5C-8t6mtRLd2mPIDxLwd34yxM6w&q=Luxury+Resorts,Costa+Rica&zoom=12"
+                        title="Binge Leisure Resort Location"
+                        frameborder="0"
+                        style="border:0;"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                
+                <div class="map-info">
+                    <h3>Finding Paradise</h3>
+                    <p>Nestled in an exclusive private valley, Binge Leisure Resort offers the ultimate seclusion while remaining accessible to world-class amenities and natural attractions.</p>
+                    
+                    <div class="location-details">
+                        <h4>Resort Location Details</h4>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Lane, Resort Valley, Costa Rica</li>
+                            <li><i class="fas fa-plane"></i> 45 minutes from Juan Santamaría International Airport</li>
+                            <li><i class="fas fa-car"></i> Private helipad and chauffeur service available</li>
+                            <li><i class="fas fa-water"></i> Adjacent to 500-acre natural conservation area</li>
+                            <li><i class="fas fa-tree"></i> Surrounded by pristine rainforest and waterfalls</li>
+                        </ul>
+                    </div>
+                    
+                    <a href="#" class="btn" style="margin-top: 20px;">Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
-        <div class="footer-container">
-            <div class="footer-col">
-                <h3>Fun Store</h3>
-                <p>Your one-stop shop for the latest accessories, gadgets, and personal care products at amazing prices.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-pinterest"></i></a>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Binge Leisure Resort</h3>
+                    <p>An unparalleled luxury destination featuring the world's first 40-foot raised dining experience, vast natural dam, and curated performances.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Unique Features</a></li>
+                        <li><a href="#accommodations">Accommodations</a></li>
+                        <li><a href="#dining">Raised Dining</a></li>
+                        <li><a href="#location">Location</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Luxury Lane, Resort Valley</li>
+                        <li><i class="fas fa-phone"></i> +1 (888) 555-BINGE</li>
+                        <li><i class="fas fa-envelope"></i> info@bingleisureresort.com</li>
+                        <li><i class="fas fa-globe"></i> www.bingleisureresort.com</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Exclusive Offers</h3>
+                    <p>Subscribe to receive updates on special packages and curated experiences.</p>
+                    <div style="margin-top: 20px;">
+                        <input type="email" placeholder="Your email" style="width: 100%; padding: 12px; border-radius: 4px; border: none; margin-bottom: 10px;">
+                        <a href="#" class="btn" style="width: 100%; text-align: center;">Subscribe</a>
+                    </div>
                 </div>
             </div>
             
-            <div class="footer-col">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">New Arrivals</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
+            <div class="copyright">
+                <p>&copy; 2023 Binge Leisure Resort. All rights reserved. | Property value exceeding $15M</p>
             </div>
-            
-            <div class="footer-col">
-                <h3>Customer Service</h3>
-                <ul>
-                    <li><a href="#">My Account</a></li>
-                    <li><a href="#">Order Tracking</a></li>
-                    <li><a href="#">Wishlist</a></li>
-                    <li><a href="#">Shipping Policy</a></li>
-                    <li><a href="#">Returns & Refunds</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-col">
-                <h3>Contact Us</h3>
-                <p>
-                    <i class="fas fa-map-marker-alt"></i> 123 Store Street, Fun City, FC 12345
-                </p>
-                <p>
-                    <i class="fas fa-phone"></i> (123) 456-7890
-                </p>
-                <p>
-                    <i class="fas fa-envelope"></i> info@funstore.com
-                </p>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            <p>&copy; 2023 Fun Store. All Rights Reserved.</p>
         </div>
     </footer>
-    
+
     <script>
-        // Simple JavaScript for demo purposes
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add to cart functionality
-            const addToCartButtons = document.querySelectorAll('.add-to-cart');
-            const cartCount = document.querySelector('.cart-count');
-            let count = parseInt(cartCount.textContent);
-            
-            addToCartButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    count++;
-                    cartCount.textContent = count;
-                    
-                    // Animation for feedback
-                    this.textContent = 'Added!';
-                    this.style.backgroundColor = '#4CAF50';
-                    
-                    setTimeout(() => {
-                        this.textContent = 'Add to Cart';
-                        this.style.backgroundColor = '';
-                    }, 1000);
-                });
-            });
-            
-            // Newsletter form submission
-            const newsletterForm = document.querySelector('.newsletter-form');
-            newsletterForm.addEventListener('submit', function(e) {
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                const emailInput = this.querySelector('input');
-                alert(`Thank you for subscribing with ${emailInput.value}!`);
-                emailInput.value = '';
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
             });
+        });
+        
+        // Set default dates for search
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        
+        const checkinInput = document.querySelector('input[type="date"]');
+        const checkoutInput = document.querySelectorAll('input[type="date"]')[1];
+        
+        // Format date as YYYY-MM-DD
+        const formatDate = (date) => {
+            return date.toISOString().split('T')[0];
+        };
+        
+        checkinInput.value = formatDate(today);
+        checkoutInput.value = formatDate(tomorrow);
+        
+        // Set minimum dates to today
+        checkinInput.min = formatDate(today);
+        checkoutInput.min = formatDate(tomorrow);
+        
+        // Update checkout min date when checkin changes
+        checkinInput.addEventListener('change', function() {
+            const checkinDate = new Date(this.value);
+            const nextDay = new Date(checkinDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+            checkoutInput.min = formatDate(nextDay);
+            
+            // If checkout is before new min, update it
+            if(new Date(checkoutInput.value) < nextDay) {
+                checkoutInput.value = formatDate(nextDay);
+            }
         });
     </script>
 </body>
