@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binge Leisure Resort | Member Access</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-gold: #FFD700;
+            --diamond-white: #F0F8FF;
+            --luxury-black: #0A0A0A;
+            --platinum: #E5E4E2;
+            --sapphire: #0F52BA;
+            --shadow-glow: 0 0 30px rgba(212, 175, 55, 0.3);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body:before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(15, 82, 186, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+        
+        /* Luxury Container */
+        .luxury-auth-container {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .luxury-auth-container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold), var(--primary-gold));
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        /* Header Section */
+        .auth-header {
+            padding: 40px 40px 20px;
+            text-align: center;
+            background: rgba(10, 10, 10, 0.7);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .resort-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .resort-logo:after {
+            content: '✦';
+            position: absolute;
+            top: -10px;
+            right: -30px;
+            color: var(--secondary-gold);
+            font-size: 1.5rem;
+            animation: sparkle 3s infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.5; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        .auth-subtitle {
+            color: var(--platinum);
+            font-size: 1.1rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        
+        /* Form Container */
+        .auth-form-container {
+            padding: 40px;
+        }
+        
+        .form-title {
+            color: white;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .form-subtitle {
+            color: var(--platinum);
+            text-align: center;
+            margin-bottom: 35px;
+            font-size: 1rem;
+            font-weight: 300;
+        }
+        
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-label {
+            display: block;
+            color: var(--platinum);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .form-label i {
+            color: var(--primary-gold);
+            margin-right: 8px;
+            width: 20px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        /* File Upload */
+        .file-upload-container {
+            border: 2px dashed rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.03);
+        }
+        
+        .file-upload-container:hover {
+            border-color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+        
+        .file-upload-container.active {
+            border-color: var(--primary-gold);
+            background: rgba(212, 175, 55, 0.08);
+        }
+        
+        .file-upload-icon {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+        }
+        
+        .file-upload-text {
+            color: var(--platinum);
+            font-size: 0.9rem;
+        }
+        
+        .file-preview {
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: none;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Luxury Button */
+        .luxury-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary-gold) 0%, var(--secondary-gold) 100%);
+            color: var(--luxury-black);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .luxury-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .luxury-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .luxury-btn:hover:before {
+            left: 100%;
+        }
+        
+        .luxury-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Form Toggle */
+        .form-toggle {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .toggle-text {
+            color: var(--platinum);
+            font-size: 0.95rem;
+        }
+        
+        .toggle-link {
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 5px;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .toggle-link:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-gold);
+            transition: var(--transition);
+        }
+        
+        .toggle-link:hover {
+            color: var(--secondary-gold);
+        }
+        
+        .toggle-link:hover:after {
+            width: 100%;
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            display: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-gold);
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Diamond Background Elements */
+        .diamond-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .diamond {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, transparent 49%, var(--primary-gold) 50%, transparent 51%);
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+        
+        .diamond:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .diamond:nth-child(2) { top: 20%; right: 15%; animation-delay: 5s; }
+        .diamond:nth-child(3) { bottom: 15%; left: 20%; animation-delay: 10s; }
+        .diamond:nth-child(4) { bottom: 20%; right: 10%; animation-delay: 15s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        /* Error/Success Messages */
+        .alert-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: none;
+            font-size: 0.95rem;
+        }
+        
+        .alert-success {
+            background: rgba(80, 200, 120, 0.1);
+            border: 1px solid rgba(80, 200, 120, 0.3);
+            color: #50C878;
+        }
+        
+        .alert-error {
+            background: rgba(255, 100, 100, 0.1);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            color: #FF6464;
+        }
+        
+        /* Responsive */
+        @media (max-width: 576px) {
+            .luxury-auth-container {
+                max-width: 100%;
+            }
+            
+            .auth-header, .auth-form-container {
+                padding: 30px 20px;
+            }
+            
+            .resort-logo {
+                font-size: 2.2rem;
+            }
+            
+            .form-title {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Password Toggle */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 42px;
+            color: var(--platinum);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .password-toggle:hover {
+            color: var(--primary-gold);
+        }
+        
+        .form-group.password-group {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <!-- Diamond Background Elements -->
+    <div class="diamond-bg">
+        <div class="diamond"></div>
+        <div class="diamond"></div>
+        <div class="diamond"></div>
+        <div class="diamond"></div>
+    </div>
+    
+    <!-- Luxury Authentication Container -->
+    <div class="luxury-auth-container">
+        <!-- Header -->
+        <div class="auth-header">
+            <div class="resort-logo">BINGE LEISURE</div>
+            <p class="auth-subtitle">Exclusive Member Access</p>
+        </div>
+        
+        <!-- Login Form (Initially Visible) -->
+        <div class="auth-form-container" id="loginFormContainer">
+            <h2 class="form-title animate__animated animate__fadeIn">Welcome Back</h2>
+            <p class="form-subtitle">Sign in to access your exclusive resort benefits</p>
+            
+            <!-- Alert Messages -->
+            <div class="alert-message" id="loginAlert"></div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="luxuryguest@example.com" required>
+                </div>
+                
+                <div class="form-group password-group">
+                    <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Enter your password" required>
+                    <span class="password-toggle" id="loginPasswordToggle">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                
+                <button type="submit" class="luxury-btn" id="loginBtn">
+                    <span id="loginBtnText">Access Resort</span>
+                    <div class="loading-spinner" id="loginSpinner"></div>
+                </button>
+            </form>
+            
+            <div class="form-toggle">
+                <p class="toggle-text">New to Binge Leisure?</p>
+                <a href="#" class="toggle-link" id="showRegister">Create Exclusive Account</a>
+            </div>
+        </div>
+        
+        <!-- Register Form (Initially Hidden) -->
+        <div class="auth-form-container" id="registerFormContainer" style="display: none;">
+            <h2 class="form-title animate__animated animate__fadeIn">Join The Elite</h2>
+            <p class="form-subtitle">Create your account for personalized luxury experiences</p>
+            
+            <!-- Alert Messages -->
+            <div class="alert-message" id="registerAlert"></div>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                    <input type="email" id="registerEmail" class="form-control" placeholder="luxuryguest@example.com" required>
+                </div>
+                
+                <div class="form-group password-group">
+                    <label for="registerPassword"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="registerPassword" class="form-control" placeholder="Create a strong password" required>
+                    <span class="password-toggle" id="registerPasswordToggle">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerName"><i class="fas fa-user"></i> Full Name</label>
+                    <input type="text" id="registerName" class="form-control" placeholder="Enter your full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerAddress"><i class="fas fa-map-marker-alt"></i> Address</label>
+                    <input type="text" id="registerAddress" class="form-control" placeholder="Enter your residential address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerDob"><i class="fas fa-birthday-cake"></i> Date of Birth</label>
+                    <input type="date" id="registerDob" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerBio"><i class="fas fa-user-edit"></i> Personal Bio</label>
+                    <textarea id="registerBio" class="form-control" placeholder="Tell us about your luxury preferences and travel interests..." rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label><i class="fas fa-camera"></i> Profile Photo</label>
+                    <div class="file-upload-container" id="photoUploadContainer">
+                        <input type="file" id="registerPhoto" accept="image/*" style="display: none;">
+                        <div class="file-upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div class="file-upload-text">
+                            Click to upload profile photo<br>
+                            <small>JPG or PNG (max 5MB)</small>
+                        </div>
+                        <img id="photoPreview" class="file-preview">
+                    </div>
+                </div>
+                
+                <button type="submit" class="luxury-btn" id="registerBtn">
+                    <span id="registerBtnText">Create Elite Account</span>
+                    <div class="loading-spinner" id="registerSpinner"></div>
+                </button>
+            </form>
+            
+            <div class="form-toggle">
+                <p class="toggle-text">Already have an account?</p>
+                <a href="#" class="toggle-link" id="showLogin">Sign In Instead</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+        // Using the same Firebase credentials from ABC Education
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7jn56HDd6nME3dommemdPJHFaKHpjuhY",
+            authDomain: "prosper-a9810.firebaseapp.com",
+            projectId: "prosper-a9810",
+            storageBucket: "prosper-a9810.appspot.com",
+            messagingSenderId: "1040350127188",
+            appId: "1:1040350127188:web:da8987386085d778eaf9cl1",
+            measurementId: "G-6G8BMD6S3G"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const firestore = getFirestore(app);
+        const storage = getStorage(app);
+
+        // DOM Elements
+        const loginFormContainer = document.getElementById('loginFormContainer');
+        const registerFormContainer = document.getElementById('registerFormContainer');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const showRegisterBtn = document.getElementById('showRegister');
+        const showLoginBtn = document.getElementById('showLogin');
+        const loginAlert = document.getElementById('loginAlert');
+        const registerAlert = document.getElementById('registerAlert');
+        const photoUploadContainer = document.getElementById('photoUploadContainer');
+        const registerPhoto = document.getElementById('registerPhoto');
+        const photoPreview = document.getElementById('photoPreview');
+        const loginPasswordToggle = document.getElementById('loginPasswordToggle');
+        const loginPassword = document.getElementById('loginPassword');
+        const registerPasswordToggle = document.getElementById('registerPasswordToggle');
+        const registerPassword = document.getElementById('registerPassword');
+
+        // Form Toggle Functionality
+        showRegisterBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginFormContainer.style.display = 'none';
+            registerFormContainer.style.display = 'block';
+            resetAlerts();
+        });
+
+        showLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerFormContainer.style.display = 'none';
+            loginFormContainer.style.display = 'block';
+            resetAlerts();
+        });
+
+        // Password Toggle Functionality
+        loginPasswordToggle.addEventListener('click', () => {
+            const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            loginPassword.setAttribute('type', type);
+            loginPasswordToggle.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+
+        registerPasswordToggle.addEventListener('click', () => {
+            const type = registerPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            registerPassword.setAttribute('type', type);
+            registerPasswordToggle.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+        });
+
+        // File Upload Functionality
+        photoUploadContainer.addEventListener('click', () => {
+            registerPhoto.click();
+        });
+
+        registerPhoto.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                photoUploadContainer.classList.add('active');
+                
+                // Show preview
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        photoPreview.src = e.target.result;
+                        photoPreview.style.display = 'block';
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+        });
+
+        // Alert Functions
+        function showAlert(element, message, type) {
+            element.textContent = message;
+            element.className = `alert-message alert-${type}`;
+            element.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 5000);
+        }
+
+        function resetAlerts() {
+            loginAlert.style.display = 'none';
+            registerAlert.style.display = 'none';
+        }
+
+        // Loading State Functions
+        function setLoading(buttonId, isLoading) {
+            const button = document.getElementById(buttonId);
+            const buttonText = document.getElementById(buttonId + 'Text');
+            const spinner = document.getElementById(buttonId + 'Spinner');
+            
+            if (isLoading) {
+                button.disabled = true;
+                buttonText.style.display = 'none';
+                spinner.style.display = 'block';
+            } else {
+                button.disabled = false;
+                buttonText.style.display = 'inline';
+                spinner.style.display = 'none';
+            }
+        }
+
+        // Login Form Submission
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            setLoading('loginBtn', true);
+            
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Show success message
+                showAlert(loginAlert, 'Access granted! Welcome back to Binge Leisure.', 'success');
+                
+                // Redirect to resort homepage after short delay
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+                
+            } catch (error) {
+                setLoading('loginBtn', false);
+                
+                // User-friendly error messages
+                let errorMessage = 'Authentication failed. Please try again.';
+                switch(error.code) {
+                    case 'auth/invalid-email':
+                        errorMessage = 'Please enter a valid email address.';
+                        break;
+                    case 'auth/user-disabled':
+                        errorMessage = 'This account has been disabled.';
+                        break;
+                    case 'auth/user-not-found':
+                        errorMessage = 'No account found with this email.';
+                        break;
+                    case 'auth/wrong-password':
+                        errorMessage = 'Incorrect password. Please try again.';
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMessage = 'Too many failed attempts. Please try again later.';
+                        break;
+                }
+                
+                showAlert(loginAlert, errorMessage, 'error');
+            }
+        });
+
+        // Register Form Submission
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const name = document.getElementById('registerName').value;
+            const address = document.getElementById('registerAddress').value;
+            const dob = document.getElementById('registerDob').value;
+            const bio = document.getElementById('registerBio').value;
+            const photo = document.getElementById('registerPhoto').files[0];
+            
+            setLoading('registerBtn', true);
+            
+            try {
+                // Create user in Firebase Authentication
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                let photoURL = '';
+                // Upload profile photo if provided
+                if (photo) {
+                    const photoRef = ref(storage, 'resort_users/' + user.uid + '/profile.jpg');
+                    await uploadBytes(photoRef, photo);
+                    photoURL = await getDownloadURL(photoRef);
+                }
+                
+                // Store additional user data in Firestore
+                // Using 'resort_users' collection to separate from ABC Education users
+                await setDoc(doc(firestore, 'resort_users', user.uid), {
+                    name: name,
+                    email: email,
+                    address: address,
+                    dob: dob,
+                    bio: bio,
+                    photoURL: photoURL,
+                    membershipLevel: 'Elite',
+                    joinDate: new Date().toISOString(),
+                    totalBookings: 0,
+                    loyaltyPoints: 1000, // Welcome bonus points
+                    preferences: {
+                        roomType: '',
+                        diningPreference: '',
+                        activities: []
+                    }
+                });
+                
+                // Show success message
+                showAlert(registerAlert, 'Welcome to the Binge Leisure family! Your elite account has been created.', 'success');
+                
+                // Reset form
+                registerForm.reset();
+                photoPreview.style.display = 'none';
+                photoUploadContainer.classList.remove('active');
+                
+                // Redirect after short delay
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                
+            } catch (error) {
+                setLoading('registerBtn', false);
+                
+                // User-friendly error messages
+                let errorMessage = 'Registration failed. Please try again.';
+                switch(error.code) {
+                    case 'auth/email-already-in-use':
+                        errorMessage = 'This email is already registered. Please sign in instead.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Please enter a valid email address.';
+                        break;
+                    case 'auth/weak-password':
+                        errorMessage = 'Password should be at least 6 characters.';
+                        break;
+                    case 'auth/operation-not-allowed':
+                        errorMessage = 'Registration is currently disabled.';
+                        break;
+                }
+                
+                showAlert(registerAlert, errorMessage, 'error');
+            }
+        });
+
+        // Set max date for date of birth (must be 18+)
+        const dobInput = document.getElementById('registerDob');
+        const today = new Date();
+        const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+        dobInput.max = maxDate.toISOString().split('T')[0];
+        
+        // Set min date (reasonable limit)
+        const minDate = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
+        dobInput.min = minDate.toISOString().split('T')[0];
+        dobInput.value = maxDate.toISOString().split('T')[0];
+
+        // Add subtle animation to container
+        document.querySelector('.luxury-auth-container').classList.add('animate__animated', 'animate__fadeInUp');
+    </script>
+</body>
+</html>
