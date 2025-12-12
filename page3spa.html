@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binge Leisure Resort | Seven-Star Spa & Wellness</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-gold: #D4AF37;
+            --secondary-gold: #FFD700;
+            --platinum: #E5E4E2;
+            --crystal: #F0F8FF;
+            --onyx: #0F0F0F;
+            --jade: #00A86B;
+            --amethyst: #9966CC;
+            --shadow-glow: 0 0 40px rgba(212, 175, 55, 0.3);
+            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: #fefefe;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        /* Crystal Header */
+        .crystal-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 0;
+            background: linear-gradient(180deg, rgba(15,15,15,0.98) 0%, transparent 100%);
+            z-index: 1000;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        
+        .crystal-header.scrolled {
+            background: rgba(15, 15, 15, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .crystal-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-gold);
+            text-decoration: none;
+            letter-spacing: 3px;
+            position: relative;
+        }
+        
+        .crystal-logo:after {
+            content: '✦';
+            position: absolute;
+            right: -40px;
+            color: var(--secondary-gold);
+            animation: sparkle 3s infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 40px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--platinum);
+            font-weight: 500;
+            font-size: 16px;
+            letter-spacing: 1px;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--jade), var(--amethyst));
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--jade);
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .crystal-btn {
+            background: linear-gradient(135deg, var(--jade) 0%, var(--amethyst) 100%);
+            color: white;
+            padding: 16px 38px;
+            border: none;
+            border-radius: 2px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .crystal-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .crystal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 168, 107, 0.3);
+        }
+        
+        .crystal-btn:hover:before {
+            left: 100%;
+        }
+        
+        /* Sanctuary Hero */
+        .sanctuary-hero {
+            height: 100vh;
+            background: linear-gradient(rgba(15, 15, 15, 0.7), rgba(15, 15, 15, 0.8)), 
+                        url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sanctuary-hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(0, 168, 107, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 70%, rgba(153, 102, 204, 0.1) 0%, transparent 50%);
+            animation: pulse 10s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+        }
+        
+        .hero-content h1 {
+            font-size: 72px;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--crystal) 0%, var(--jade) 50%, var(--amethyst) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-subtitle {
+            font-size: 24px;
+            color: var(--platinum);
+            margin-bottom: 50px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+        
+        /* Awards Section */
+        .awards-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+        
+        .award-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .award-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--jade);
+        }
+        
+        .award-icon {
+            font-size: 48px;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+        
+        .award-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--crystal);
+        }
+        
+        /* Treatment Categories */
+        .treatments-section {
+            padding: 120px 0;
+            background: white;
+        }
+        
+        .treatment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
+            margin-top: 80px;
+        }
+        
+        .treatment-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .treatment-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.2);
+        }
+        
+        .treatment-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--jade), var(--amethyst));
+        }
+        
+        .treatment-img {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .treatment-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .treatment-card:hover .treatment-img img {
+            transform: scale(1.1);
+        }
+        
+        .treatment-content {
+            padding: 40px;
+        }
+        
+        .treatment-content h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--onyx);
+        }
+        
+        .treatment-price {
+            font-size: 32px;
+            color: var(--jade);
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+        
+        .treatment-duration {
+            display: inline-block;
+            background: rgba(0, 168, 107, 0.1);
+            color: var(--jade);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .treatment-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .treatment-features li {
+            margin-bottom: 12px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .treatment-features li i {
+            color: var(--jade);
+        }
+        
+        /* Signature Experiences */
+        .signature-section {
+            padding: 120px 0;
+            background: linear-gradient(rgba(15,15,15,0.9), rgba(15,15,15,0.9)), 
+                        url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: white;
+        }
+        
+        .signature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 60px;
+            margin-top: 80px;
+        }
+        
+        .signature-experience {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+        
+        .signature-experience:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-gold);
+        }
+        
+        .signature-price {
+            font-size: 42px;
+            color: var(--primary-gold);
+            font-weight: 700;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .signature-inclusions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .inclusion-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+        
+        .inclusion-icon {
+            font-size: 24px;
+            color: var(--jade);
+            margin-bottom: 10px;
+        }
+        
+        /* Wellness Programs */
+        .programs-section {
+            padding: 120px 0;
+            background: var(--crystal);
+        }
+        
+        .program-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .program-tab {
+            padding: 18px 40px;
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            color: #666;
+        }
+        
+        .program-tab.active {
+            background: linear-gradient(135deg, var(--jade), var(--amethyst));
+            color: white;
+            border-color: transparent;
+        }
+        
+        .program-tab:hover:not(.active) {
+            border-color: var(--jade);
+            color: var(--jade);
+        }
+        
+        .program-content {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        
+        .program-content.active {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .program-schedule {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .schedule-day {
+            background: rgba(0, 168, 107, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+        }
+        
+        /* Real-time Booking */
+        .booking-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 100%);
+            color: white;
+        }
+        
+        .booking-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 60px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .booking-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: var(--platinum);
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--jade);
+            box-shadow: 0 0 0 3px rgba(0, 168, 107, 0.1);
+        }
+        
+        /* The Team */
+        .team-section {
+            padding: 120px 0;
+            background: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+            margin-top: 80px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 30px;
+            border: 5px solid white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .team-member h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--onyx);
+        }
+        
+        .team-title {
+            color: var(--jade);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        /* Luxury Footer */
+        .luxury-footer {
+            background: var(--onyx);
+            color: white;
+            padding: 100px 0 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-column h3 {
+            color: var(--jade);
+            font-size: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--jade), var(--amethyst));
+        }
+        
+        .footer-links a {
+            color: var(--platinum);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 15px;
+            transition: var(--transition);
+            font-size: 15px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--jade);
+            padding-left: 10px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .signature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 56px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 42px;
+            }
+            
+            .hero-subtitle {
+                font-size: 20px;
+            }
+            
+            .treatment-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-container {
+                padding: 30px;
+            }
+            
+            .signature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Crystal Header -->
+    <header class="crystal-header" id="header">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="crystal-logo">BINGE LEISURE</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="experiences.html">Experiences</a></li>
+                    <li><a href="dining.html">Dining</a></li>
+                    <li><a href="spa.html" class="active">Spa & Wellness</a></li>
+                    <li><a href="events.html">Events</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <button class="crystal-btn">BOOK TREATMENT</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sanctuary Hero -->
+    <section class="sanctuary-hero">
+        <div class="hero-content">
+            <h1>The Crystal Sanctuary</h1>
+            <p class="hero-subtitle">World's First Seven-Star Wellness Destination • Forbes Five-Star Spa</p>
+            <div style="display: flex; gap: 30px; justify-content: center; margin-top: 50px; flex-wrap: wrap;">
+                <button class="crystal-btn">VIEW TREATMENTS</button>
+                <button class="crystal-btn" style="background: transparent; border: 2px solid var(--jade);">WELLNESS PROGRAMS</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section class="awards-section">
+        <div class="container">
+            <h2 style="font-size: 56px; margin-bottom: 30px; color: var(--crystal);">Global Recognition</h2>
+            <p style="font-size: 18px; color: var(--platinum); max-width: 600px; margin: 0 auto 60px;">
+                Awarded as the world's most innovative wellness destination for seven consecutive years.
+            </p>
+            
+            <div class="awards-grid">
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h3>Forbes Five-Star</h3>
+                    <p style="color: var(--platinum);">Seven consecutive years</p>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>World Spa Awards</h3>
+                    <p style="color: var(--platinum);">Best Luxury Spa 2024</p>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Seven-Star Rating</h3>
+                    <p style="color: var(--platinum);">Global Wellness Institute</p>
+                </div>
+                
+                <div class="award-card">
+                    <div class="award-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Healing Excellence</h3>
+                    <p style="color: var(--platinum);">International Spa Association</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Treatment Categories -->
+    <section class="treatments-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 56px; margin-bottom: 30px; color: var(--onyx);">Signature Treatments</h2>
+            <p style="text-align: center; font-size: 18px; color: #666; max-width: 600px; margin: 0 auto 60px;">
+                Curated wellness experiences using rare crystals, gold-infused oils, and ancient healing techniques.
+            </p>
+            
+            <div class="treatment-grid">
+                <div class="treatment-card">
+                    <div class="treatment-img">
+                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Diamond Facial">
+                    </div>
+                    <div class="treatment-content">
+                        <h3>Diamond & Gold Infusion</h3>
+                        <div class="treatment-duration">120 Minutes</div>
+                        <div class="treatment-price">R8,500</div>
+                        <ul class="treatment-features">
+                            <li><i class="fas fa-gem"></i> 24K Gold Leaf Application</li>
+                            <li><i class="fas fa-spa"></i> Diamond Microdermabrasion</li>
+                            <li><i class="fas fa-hand-sparkles"></i> Caviar & Truffle Extracts</li>
+                            <li><i class="fas fa-brain"></i> Neuro-Aromatherapy</li>
+                        </ul>
+                        <button class="crystal-btn" style="width: 100%; background: linear-gradient(135deg, var(--primary-gold), var(--secondary-gold));">BOOK NOW</button>
+                    </div>
+                </div>
+                
+                <div class="treatment-card">
+                    <div class="treatment-img">
+                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80" alt="Crystal Therapy">
+                    </div>
+                    <div class="treatment-content">
+                        <h3>Crystal Resonance Therapy</h3>
+                        <div class="treatment-duration">90 Minutes</div>
+                        <div class="treatment-price">R6,800</div>
+                        <ul class="treatment-features">
+                            <li><i class="fas fa-crystal"></i> Seven Chakra Crystal Alignment</li>
+                            <li><i class="fas fa-wave-square"></i> Sound Frequency Healing</li>
+                            <li><i class="fas fa-leaf"></i> Organic Essential Oils</li>
+                            <li><i class="fas fa-heart"></i> Energy Field Cleansing</li>
+                        </ul>
+                        <button class="crystal-btn" style="width: 100%;">BOOK NOW</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Experiences -->
+    <section class="signature-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 56px; margin-bottom: 30px; color: var(--primary-gold);">Immersion Journeys</h2>
+            <p style="text-align: center; font-size: 18px; color: var(--platinum); max-width: 600px; margin: 0 auto 60px;">
+                Multi-day wellness transformations curated by our team of international healing masters.
+            </p>
+            
+            <div class="signature-grid">
+                <div class="signature-experience">
+                    <h3 style="font-size: 32px; margin-bottom: 20px; color: var(--crystal);">The Rebirth Retreat</h3>
+                    <p style="color: var(--platinum); line-height: 1.8; margin-bottom: 30px;">
+                        7-Day complete cellular regeneration program featuring cryotherapy, IV nutrient therapy, 
+                        and personalized genomic wellness mapping.
+                    </p>
+                    <div class="signature-price">R85,000</div>
+                    <div class="signature-inclusions">
+                        <div class="inclusion-item">
+                            <div class="inclusion-icon"><i class="fas fa-dna"></i></div>
+                            <div>Genomic Analysis</div>
+                        </div>
+                        <div class="inclusion-item">
+                            <div class="inclusion-icon"><i class="fas fa-user-md"></i></div>
+                            <div>Daily Doctor Consult</div>
+                        </div>
+                        <div class="inclusion-item">
+                            <div class="inclusion-icon"><i class="fas fa-utensils"></i></div>
+                            <div>Personal Chef</div>
+                        </div>
+                    </div>
+                    <button class="crystal-btn" style="width: 100%;">ENQUIRE NOW</button>
+                </div>
+                
+                <div class="signature-experience">
+                    <h3 style="font-size: 32px; margin-bottom: 20px; color: var(--crystal);">Executive Vitality</h3>
+                    <p style="color: var(--platinum); line-height: 1.8; margin-bottom: 30px;">
+                        5-Day peak performance optimization with neurofeedback training, longevity treatments, 
+                        and executive coaching for sustained excellence.
+                    </p>
+                    <div class="signature-price">R65,000</div>
+                    <div class="signature-inclusions">
+                        <div class="inclusion-item">
+                            <div class="inclusion-icon"><i class="fas fa-brain"></i></div>
+                            <div>Neuro-Optimization</div>
+                        </div>
+                        <div class="inclusion-item">
+                            <div class="inclusion-icon"><i class="fas fa-running"></i></div>
+                            <div>Performance Training</div>
+                        </div>
+                        <div class="inclusion-item">
+                            <div class="inclusion-icon"><i class="fas fa-chart-line"></i></div>
+                            <div>Biometric Tracking</div>
+                        </div>
+                    </div>
+                    <button class="crystal-btn" style="width: 100%;">ENQUIRE NOW</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wellness Programs -->
+    <section class="programs-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 56px; margin-bottom: 30px; color: var(--onyx);">Structured Wellness</h2>
+            
+            <div class="program-tabs">
+                <div class="program-tab active" data-program="detox">Detox & Renewal</div>
+                <div class="program-tab" data-program="antiaging">Anti-Aging</div>
+                <div class="program-tab" data-program="stress">Stress Mastery</div>
+                <div class="program-tab" data-program="weight">Weight Optimization</div>
+            </div>
+            
+            <div class="program-content active" id="detoxProgram">
+                <h3 style="font-size: 32px; margin-bottom: 30px; color: var(--jade);">Detox & Cellular Renewal</h3>
+                <p style="color: #666; line-height: 1.8; margin-bottom: 40px;">
+                    A scientifically-backed program combining IV nutrient therapy, infrared sauna, lymphatic drainage, 
+                    and personalized nutrition to eliminate toxins and boost cellular regeneration.
+                </p>
+                <div class="program-schedule">
+                    <div class="schedule-day">
+                        <h4>Day 1-2: Preparation</h4>
+                        <p style="color: #666; font-size: 14px;">Assessment & gentle cleansing</p>
+                    </div>
+                    <div class="schedule-day">
+                        <h4>Day 3-5: Deep Cleanse</h4>
+                        <p style="color: #666; font-size: 14px;">Intensive detox protocols</p>
+                    </div>
+                    <div class="schedule-day">
+                        <h4>Day 6-7: Integration</h4>
+                        <p style="color: #666; font-size: 14px;">Rebuilding & maintenance</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="program-content" id="antiagingProgram">
+                <!-- Content for anti-aging program -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Real-time Booking -->
+    <section class="booking-section">
+        <div class="container">
+            <div class="booking-container">
+                <h2 style="font-size: 42px; margin-bottom: 30px; color: var(--crystal); text-align: center;">Book Your Transformation</h2>
+                <p style="color: var(--platinum); text-align: center; margin-bottom: 40px;">
+                    Our wellness concierge will contact you within 15 minutes to personalize your journey.
+                </p>
+                
+                <div class="booking-form">
+                    <div class="form-group">
+                        <label>Preferred Date</label>
+                        <input type="date" class="form-control" id="bookingDate">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Treatment Type</label>
+                        <select class="form-control" id="treatmentType">
+                            <option value="">Select Treatment</option>
+                            <option value="diamond">Diamond & Gold Infusion</option>
+                            <option value="crystal">Crystal Resonance Therapy</option>
+                            <option value="rebirth">Rebirth Retreat</option>
+                            <option value="executive">Executive Vitality</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Number of Guests</label>
+                        <select class="form-control" id="guestCount">
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4+">4+ Guests</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Special Requests</label>
+                        <textarea class="form-control" rows="3" placeholder="Any health considerations or preferences..."></textarea>
+                    </div>
+                </div>
+                
+                <button class="crystal-btn" style="width: 100%; margin-top: 30px; padding: 20px;">
+                    <i class="fas fa-calendar-check"></i> SECURE BOOKING
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Team -->
+    <section class="team-section">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 56px; margin-bottom: 30px; color: var(--onyx);">Healing Masters</h2>
+            <p style="text-align: center; font-size: 18px; color: #666; max-width: 600px; margin: 0 auto 60px;">
+                International experts in integrative medicine, energy healing, and luxury wellness.
+            </p>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-img">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Dr. Ava Chen">
+                    </div>
+                    <h3>Dr. Ava Chen</h3>
+                    <div class="team-title">Medical Director • Integrative Medicine</div>
+                    <p style="color: #666;">Harvard Medical School, 20+ years in luxury wellness</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-img">
+                        <img src="https://images.unsplash.com/photo-1594824434340-7e7dfc37cabb?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Master Li">
+                    </div>
+                    <h3>Master Li Wei</h3>
+                    <div class="team-title">Energy Healer • 5th Generation</div>
+                    <p style="color: #666;">Trained in Tibetan monasteries, crystal energy specialist</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="team-img">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Sophie Laurent">
+                    </div>
+                    <h3>Sophie Laurent</h3>
+                    <div class="team-title">Spa Director • Forbes Five-Star</div>
+                    <p style="color: #666;">Former director of Four Seasons Global Spa Development</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Footer -->
+    <footer class="luxury-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>CRYSTAL SANCTUARY</h3>
+                    <p style="color: var(--platinum); line-height: 1.8; margin-bottom: 30px;">
+                        World's premier seven-star wellness destination. 
+                        Where ancient healing meets cutting-edge science.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>TREATMENTS</h3>
+                    <div class="footer-links">
+                        <a href="#">Diamond & Gold Therapy</a>
+                        <a href="#">Crystal Healing</a>
+                        <a href="#">IV Nutrient Therapy</a>
+                        <a href="#">Cryotherapy</a>
+                        <a href="#">Neuro-Optimization</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>PROGRAMS</h3>
+                    <div class="footer-links">
+                        <a href="#">Rebirth Retreat</a>
+                        <a href="#">Executive Vitality</a>
+                        <a href="#">Detox & Renewal</a>
+                        <a href="#">Anti-Aging</a>
+                        <a href="#">Stress Mastery</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>CONTACT</h3>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-phone"></i> +27 11 555 WELL</a>
+                        <a href="#"><i class="fas fa-envelope"></i> wellness@bingleisure.com</a>
+                        <a href="#"><i class="fas fa-clock"></i> 6AM - 10PM Daily</a>
+                        <a href="#"><i class="fas fa-map-marker-alt"></i> East Wing, Resort Valley</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2024 BINGE LEISURE WELLNESS • FORBES FIVE-STAR SPA • SEVEN-STAR CERTIFIED</p>
+                <p style="margin-top: 10px;">Medical Director: Dr. Ava Chen, MD • Investment Value: R85,000,000+ in Healing Technology</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Program tabs functionality
+        const programTabs = document.querySelectorAll('.program-tab');
+        const programContents = document.querySelectorAll('.program-content');
+
+        programTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const programId = this.dataset.program;
+                
+                // Remove active class from all tabs and contents
+                programTabs.forEach(t => t.classList.remove('active'));
+                programContents.forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Show corresponding content
+                document.getElementById(`${programId}Program`).classList.add('active');
+            });
+        });
+
+        // Booking form validation
+        const bookingForm = document.querySelector('.booking-form');
+        const bookBtn = document.querySelector('.crystal-btn[style*="SECURE BOOKING"]');
+
+        bookBtn.addEventListener('click', function() {
+            const date = document.getElementById('bookingDate').value;
+            const treatment = document.getElementById('treatmentType').value;
+            
+            if (!date || !treatment) {
+                alert('Please select a date and treatment type.');
+                return;
+            }
+            
+            // In a real implementation, this would submit to a backend
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> PROCESSING...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-check"></i> BOOKING CONFIRMED!';
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-calendar-check"></i> SECURE BOOKING';
+                    this.disabled = false;
+                    alert('Your wellness concierge will contact you within 15 minutes to finalize details.');
+                }, 2000);
+            }, 1500);
+        });
+
+        // Set minimum booking date to tomorrow
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        document.getElementById('bookingDate').min = tomorrow.toISOString().split('T')[0];
+
+        // Animate elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.treatment-card, .signature-experience, .team-member').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
