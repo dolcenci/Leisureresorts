@@ -1,15 +1,20 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binge Leisure Resort | Book Your Luxury Stay</title>
+    <title>Binge Leisure Resort | Bookings & Accounting Dashboard</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
     <style>
         :root {
             --primary-color: #BC8A5F;
@@ -19,6 +24,9 @@
             --dark-color: #1A1A1A;
             --text-color: #333333;
             --text-light: #666666;
+            --revenue-color: #28a745;
+            --expense-color: #dc3545;
+            --profit-color: #17a2b8;
         }
         
         body {
@@ -88,6 +96,16 @@
             border-color: var(--accent-color);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(188, 138, 95, 0.3);
+        }
+        
+        .btn-success {
+            background-color: var(--revenue-color);
+            border-color: var(--revenue-color);
+        }
+        
+        .btn-danger {
+            background-color: var(--expense-color);
+            border-color: var(--expense-color);
         }
         
         .price-display {
@@ -206,10 +224,157 @@
             color: #721c24;
         }
         
+        .status-paid {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-expense {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
         .dining-option {
             border-left: 4px solid var(--secondary-color);
             padding-left: 15px;
             margin-bottom: 20px;
+        }
+        
+        /* Accounting Dashboard Styles */
+        .accounting-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        
+        .summary-card {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .summary-card.total-revenue {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border: 1px solid #c3e6cb;
+        }
+        
+        .summary-card.paid-revenue {
+            background: linear-gradient(135deg, #cce5ff, #b8daff);
+            border: 1px solid #b8daff;
+        }
+        
+        .summary-card.expenses {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border: 1px solid #f5c6cb;
+        }
+        
+        .summary-card.net-profit {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            border: 1px solid #bee5eb;
+        }
+        
+        .summary-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .summary-title {
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .expense-row {
+            background-color: rgba(220, 53, 69, 0.05);
+        }
+        
+        .expense-row td {
+            color: var(--expense-color);
+            font-weight: 600;
+        }
+        
+        .revenue-row td {
+            color: var(--revenue-color);
+            font-weight: 600;
+        }
+        
+        .amount-positive {
+            color: var(--revenue-color);
+            font-weight: 600;
+        }
+        
+        .amount-negative {
+            color: var(--expense-color);
+            font-weight: 600;
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+        
+        .modal-header {
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 20px 30px;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .badge-category {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-salary { background-color: #ffc107; color: #000; }
+        .badge-utilities { background-color: #17a2b8; color: white; }
+        .badge-food { background-color: #28a745; color: white; }
+        .badge-beverages { background-color: #007bff; color: white; }
+        .badge-entertainment { background-color: #6f42c1; color: white; }
+        .badge-marketing { background-color: #e83e8c; color: white; }
+        .badge-maintenance { background-color: #fd7e14; color: white; }
+        .badge-other { background-color: #6c757d; color: white; }
+        
+        .uploaded-file {
+            max-width: 100px;
+            max-height: 100px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        
+        .transaction-type-booking {
+            background-color: rgba(40, 167, 69, 0.1);
+        }
+        
+        .transaction-type-expense {
+            background-color: rgba(220, 53, 69, 0.1);
         }
     </style>
 </head>
@@ -220,11 +385,57 @@
                 <!-- Resort Header -->
                 <div class="resort-header text-center">
                     <h1 class="display-4 mb-3">Binge Leisure Resort</h1>
-                    <p class="lead mb-0">Book Your Elevated Luxury Experience</p>
+                    <p class="lead mb-0">Booking & Accounting Management Dashboard</p>
+                </div>
+                
+                <!-- Accounting Summary Dashboard -->
+                <div class="accounting-summary">
+                    <div class="dashboard-header">
+                        <h2><i class="fas fa-chart-line feature-icon"></i> Financial Overview</h2>
+                        <div class="action-buttons">
+                            <button class="btn btn-danger" id="addExpenseBtn">
+                                <i class="fas fa-plus-circle"></i> Add Expense
+                            </button>
+                            <button class="btn btn-success" onclick="location.href='#bookingForm'">
+                                <i class="fas fa-plus"></i> New Booking
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="summary-card total-revenue">
+                                <div class="summary-title">Total Bookings Value</div>
+                                <div class="summary-value" id="totalBookingsAmount">R0.00</div>
+                                <div class="summary-subtitle" id="totalBookingsCount">0 Bookings</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card paid-revenue">
+                                <div class="summary-title">Paid Revenue</div>
+                                <div class="summary-value" id="paidRevenueAmount">R0.00</div>
+                                <div class="summary-subtitle" id="paidBookingsCount">0 Paid</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card expenses">
+                                <div class="summary-title">Total Expenses</div>
+                                <div class="summary-value" id="totalExpensesAmount">R0.00</div>
+                                <div class="summary-subtitle" id="expensesCount">0 Expenses</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="summary-card net-profit">
+                                <div class="summary-title">Net Profit</div>
+                                <div class="summary-value" id="netProfitAmount">R0.00</div>
+                                <div class="summary-subtitle" id="profitMargin">0% Margin</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- Booking Form -->
-                <div class="booking-form">
+                <div class="booking-form" id="bookingFormSection">
                     <h2 class="mb-4">Make a Reservation</h2>
                     <form id="bookingForm">
                         <!-- Personal Information -->
@@ -436,30 +647,30 @@
                             </div>
                         </div>
                         
-                        <!-- ID Document Upload (Optional) -->
-                        <div class="mb-4">
-                            <label class="form-label">ID/Passport Document (Optional)</label>
-                            <p class="text-muted small mb-2">Upload a copy of your ID or passport for faster check-in.</p>
-                            <div class="file-upload-container" id="idUploadContainer">
-                                <input type="file" id="idDocument" accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
-                                <i class="fas fa-id-card fa-3x mb-2"></i>
-                                <p>Click to upload ID/Passport document<br>
-                                <small>PDF, JPG, or PNG (max 5MB)</small></p>
-                                <img id="idPreview" class="file-preview">
-                                <div class="upload-status" id="idUploadStatus">No file selected</div>
-                                <div class="progress" id="idUploadProgress">
-                                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
-                                </div>
+                        <!-- Special Requests & ID Upload -->
+                        <div class="row mb-4">
+                            <div class="col-md-12 mb-3">
+                                <label for="specialRequests" class="form-label">Special Requests</label>
+                                <textarea class="form-control" id="specialRequests" rows="3" placeholder="Any special requests or requirements..."></textarea>
                             </div>
                         </div>
                         
-                        <!-- Special Requests -->
                         <div class="mb-4">
-                            <label for="specialRequests" class="form-label">Special Requests</label>
-                            <textarea class="form-control" id="specialRequests" rows="3" placeholder="Any dietary requirements, celebration notes, or special requests..."></textarea>
+                            <h4 class="mb-3"><i class="fas fa-file-upload feature-icon"></i> Upload ID Document</h4>
+                            <div class="file-upload-container" id="idUploadContainer">
+                                <i class="fas fa-cloud-upload-alt fa-2x text-muted mb-3"></i>
+                                <p class="mb-2">Click to upload ID/Passport document</p>
+                                <p class="text-muted small mb-0">Supported files: PDF, JPG, PNG (Max 5MB)</p>
+                                <input type="file" class="d-none" id="idDocument" accept=".pdf,.jpg,.jpeg,.png">
+                            </div>
+                            <div class="upload-status" id="idUploadStatus">No file selected</div>
+                            <div class="progress" id="idUploadProgress">
+                                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                            </div>
+                            <img src="" id="idPreview" class="file-preview" alt="ID Preview">
                         </div>
                         
-                        <!-- Price Summary -->
+                        <!-- Price Calculation -->
                         <div class="price-display">
                             <h4 class="mb-3">Booking Summary</h4>
                             <div class="row">
@@ -486,26 +697,34 @@
                     </form>
                 </div>
                 
-                <!-- Bookings Table -->
+                <!-- Bookings & Transactions Table -->
                 <div class="bookings-table">
-                    <h3 class="mb-4">Recent Bookings</h3>
+                    <h3 class="mb-4"><i class="fas fa-list-alt feature-icon"></i> Bookings & Financial Transactions</h3>
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Guest Name</th>
-                                    <th>Accommodation</th>
-                                    <th>Check-in</th>
-                                    <th>Duration</th>
-                                    <th>Guests</th>
-                                    <th>Raised Dining</th>
-                                    <th>Total Amount</th>
-                                    <th>Date Booked</th>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Amount</th>
                                     <th>Status</th>
+                                    <th>Date</th>
+                                    <th>Documents</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="bookingsTableBody">
                                 <!-- Bookings will be loaded here -->
+                                <tr id="loadingRow">
+                                    <td colspan="9" class="text-center">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <p class="mt-2">Loading bookings and expenses...</p>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -513,14 +732,86 @@
             </div>
         </div>
     </div>
-
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
     
+    <!-- Add Expense Modal -->
+    <div class="modal fade" id="expenseModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-file-invoice-dollar me-2"></i> Add New Expense</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="expenseForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="expenseName" class="form-label">Expense Name *</label>
+                                <input type="text" class="form-control" id="expenseName" placeholder="e.g., Monthly Staff Salary" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="expenseCategory" class="form-label">Category *</label>
+                                <select class="form-select" id="expenseCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="salary">Salary & Wages</option>
+                                    <option value="utilities">Water & Electricity</option>
+                                    <option value="food">Food Supplies</option>
+                                    <option value="beverages">Beverages & Bar Stock</option>
+                                    <option value="entertainment">Concert Sound & Artists</option>
+                                    <option value="marketing">Marketing & Advertising</option>
+                                    <option value="maintenance">Maintenance & Repairs</option>
+                                    <option value="other">Other Expenses</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="expenseAmount" class="form-label">Amount (R) *</label>
+                                <input type="number" class="form-control" id="expenseAmount" min="0" step="0.01" placeholder="0.00" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="expenseDate" class="form-label">Date *</label>
+                                <input type="date" class="form-control" id="expenseDate" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="expenseDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="expenseDescription" rows="3" placeholder="Detailed description of the expense..."></textarea>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="expenseVendor" class="form-label">Vendor/Supplier</label>
+                                <input type="text" class="form-control" id="expenseVendor" placeholder="Company or individual name">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="expenseInvoice" class="form-label">Invoice/Reference Number</label>
+                                <input type="text" class="form-control" id="expenseInvoice" placeholder="e.g., INV-2023-001">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="expenseNotes" class="form-label">Additional Notes</label>
+                            <textarea class="form-control" id="expenseNotes" rows="2" placeholder="Any additional information..."></textarea>
+                        </div>
+                        
+                        <div class="text-end mt-4">
+                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-check-circle me-2"></i> Add Expense
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Your Firebase configuration (same as provided)
+        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAxKSE5ehafOnwm5W9i3kqbGup8xQ9nHKI",
             authDomain: "abceducation-d0254.firebaseapp.com",
@@ -536,12 +827,16 @@
         const database = firebase.database();
         const storage = firebase.storage();
 
-        // Reference to the resort bookings in the database
+        // References to database nodes
         const bookingsRef = database.ref('resortBookings');
+        const expensesRef = database.ref('resortExpenses');
 
         // File upload variables
         let idDocumentFile = null;
         let idDocumentUrl = '';
+        
+        // Arrays to store transactions
+        let allTransactions = [];
 
         // Set minimum dates for check-in and check-out
         const today = new Date();
@@ -552,11 +847,298 @@
             return date.toISOString().split('T')[0];
         };
         
+        // Initialize date fields
         document.getElementById('checkinDate').min = formatDate(today);
         document.getElementById('checkinDate').value = formatDate(today);
         document.getElementById('checkoutDate').min = formatDate(tomorrow);
         document.getElementById('checkoutDate').value = formatDate(tomorrow);
-        
+        document.getElementById('expenseDate').value = formatDate(today);
+        document.getElementById('diningDate').value = formatDate(today);
+
+        // Format currency
+        function formatCurrency(amount) {
+            return 'R' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+        }
+
+        // Update dashboard summary
+        function updateDashboardSummary() {
+            const bookings = allTransactions.filter(t => t.type === 'booking');
+            const expenses = allTransactions.filter(t => t.type === 'expense');
+            const paidBookings = bookings.filter(b => b.status === 'Paid');
+            
+            // Calculate totals
+            const totalBookingsAmount = bookings.reduce((sum, b) => sum + (b.totalAmount || b.amount || 0), 0);
+            const paidRevenueAmount = paidBookings.reduce((sum, b) => sum + (b.totalAmount || b.amount || 0), 0);
+            const totalExpensesAmount = expenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+            const netProfit = paidRevenueAmount - totalExpensesAmount;
+            
+            // Update UI
+            document.getElementById('totalBookingsAmount').textContent = formatCurrency(totalBookingsAmount);
+            document.getElementById('totalBookingsCount').textContent = `${bookings.length} Bookings`;
+            document.getElementById('paidRevenueAmount').textContent = formatCurrency(paidRevenueAmount);
+            document.getElementById('paidBookingsCount').textContent = `${paidBookings.length} Paid`;
+            document.getElementById('totalExpensesAmount').textContent = formatCurrency(totalExpensesAmount);
+            document.getElementById('expensesCount').textContent = `${expenses.length} Expenses`;
+            document.getElementById('netProfitAmount').textContent = formatCurrency(netProfit);
+            document.getElementById('profitMargin').textContent = paidRevenueAmount > 0 ? 
+                `${((netProfit / paidRevenueAmount) * 100).toFixed(1)}% Margin` : '0% Margin';
+            
+            // Update profit color based on value
+            const profitElement = document.getElementById('netProfitAmount');
+            if (netProfit < 0) {
+                profitElement.style.color = 'var(--expense-color)';
+            } else {
+                profitElement.style.color = 'var(--profit-color)';
+            }
+        }
+
+        // Get category badge class
+        function getCategoryBadgeClass(category) {
+            const badgeClasses = {
+                'salary': 'badge-salary',
+                'utilities': 'badge-utilities',
+                'food': 'badge-food',
+                'beverages': 'badge-beverages',
+                'entertainment': 'badge-entertainment',
+                'marketing': 'badge-marketing',
+                'maintenance': 'badge-maintenance',
+                'other': 'badge-other'
+            };
+            return badgeClasses[category] || 'badge-other';
+        }
+
+        // Render transactions table
+        function renderTransactionsTable() {
+            const tableBody = document.getElementById('bookingsTableBody');
+            const loadingRow = document.getElementById('loadingRow');
+            
+            if (allTransactions.length === 0) {
+                if (loadingRow) loadingRow.style.display = 'table-row';
+                return;
+            }
+            
+            if (loadingRow) loadingRow.style.display = 'none';
+            tableBody.innerHTML = '';
+            
+            // Sort by date (newest first)
+            const sortedTransactions = [...allTransactions].sort((a, b) => 
+                new Date(b.timestamp || b.date) - new Date(a.timestamp || a.date)
+            );
+            
+            sortedTransactions.forEach(transaction => {
+                const row = document.createElement('tr');
+                row.className = transaction.type === 'expense' ? 'expense-row' : 'transaction-type-booking';
+                
+                // Determine status badge
+                let statusBadge = '';
+                if (transaction.type === 'expense') {
+                    statusBadge = `<span class="status-badge status-expense">Expense</span>`;
+                } else {
+                    const badgeClass = transaction.status === 'Paid' ? 'status-paid' : 
+                                     transaction.status === 'Confirmed' ? 'status-confirmed' : 'status-pending';
+                    statusBadge = `<span class="status-badge ${badgeClass}">${transaction.status}</span>`;
+                }
+                
+                // Determine category badge for expenses
+                let categoryBadge = '';
+                if (transaction.type === 'expense' && transaction.category) {
+                    categoryBadge = `<span class="badge-category ${getCategoryBadgeClass(transaction.category)}">
+                                        ${transaction.category.charAt(0).toUpperCase() + transaction.category.slice(1)}
+                                    </span>`;
+                }
+                
+                // Create document preview
+                let documentPreview = '';
+                if (transaction.idDocumentUrl) {
+                    documentPreview = `<a href="${transaction.idDocumentUrl}" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                          <i class="fas fa-file-pdf"></i> View ID
+                                       </a>`;
+                } else {
+                    documentPreview = '<span class="text-muted">No documents</span>';
+                }
+                
+                // Get transaction description
+                let description = '';
+                if (transaction.type === 'expense') {
+                    description = transaction.description || transaction.name || 'Expense';
+                } else {
+                    description = `${transaction.roomName || ''} - ${transaction.stayDuration || 0} nights`;
+                }
+                
+                // Determine action buttons
+                let actionButtons = '';
+                if (transaction.type === 'expense') {
+                    actionButtons = `<button class="btn btn-sm btn-outline-danger" onclick="deleteExpense('${transaction.id}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>`;
+                } else {
+                    if (transaction.status !== 'Paid') {
+                        actionButtons = `
+                            <button class="btn btn-sm btn-success" onclick="confirmPayment('${transaction.id}')">
+                                <i class="fas fa-check-circle"></i> Confirm Payment
+                            </button>`;
+                    } else {
+                        actionButtons = `<span class="text-muted">Paid</span>`;
+                    }
+                }
+                
+                // Get date for display
+                let displayDate = '';
+                if (transaction.type === 'expense') {
+                    displayDate = new Date(transaction.date).toLocaleDateString();
+                } else {
+                    displayDate = new Date(transaction.timestamp).toLocaleDateString();
+                }
+                
+                row.innerHTML = `
+                    <td>${transaction.id || transaction.bookingId || 'N/A'}</td>
+                    <td>${transaction.firstName ? `${transaction.firstName} ${transaction.lastName}` : transaction.name || 'N/A'}</td>
+                    <td>
+                        ${transaction.type === 'expense' ? 'Expense' : 'Booking'}
+                        ${categoryBadge}
+                    </td>
+                    <td>${description}</td>
+                    <td class="${transaction.type === 'expense' ? 'amount-negative' : 'amount-positive'}">
+                        ${transaction.type === 'expense' ? '-' : '+'}${formatCurrency(transaction.totalAmount || transaction.amount || 0)}
+                    </td>
+                    <td>${statusBadge}</td>
+                    <td>${displayDate}</td>
+                    <td>${documentPreview}</td>
+                    <td>${actionButtons}</td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+            
+            updateDashboardSummary();
+        }
+
+        // Load all transactions from Firebase
+        function loadAllTransactions() {
+            allTransactions = [];
+            
+            // Load bookings
+            bookingsRef.on('value', (snapshot) => {
+                const bookings = snapshot.val();
+                const bookingArray = [];
+                
+                if (bookings) {
+                    Object.entries(bookings).forEach(([key, booking]) => {
+                        bookingArray.push({
+                            ...booking,
+                            id: key,
+                            type: 'booking'
+                        });
+                    });
+                }
+                
+                // Update allTransactions with bookings
+                allTransactions = allTransactions.filter(t => t.type !== 'booking');
+                allTransactions.push(...bookingArray);
+                
+                // Load expenses
+                expensesRef.on('value', (expenseSnapshot) => {
+                    const expenses = expenseSnapshot.val();
+                    const expenseArray = [];
+                    
+                    if (expenses) {
+                        Object.entries(expenses).forEach(([key, expense]) => {
+                            expenseArray.push({
+                                ...expense,
+                                id: key,
+                                type: 'expense',
+                                status: 'Paid' // Expenses are always considered paid
+                            });
+                        });
+                    }
+                    
+                    // Update allTransactions with expenses
+                    allTransactions = allTransactions.filter(t => t.type !== 'expense');
+                    allTransactions.push(...expenseArray);
+                    
+                    renderTransactionsTable();
+                }, (error) => {
+                    console.error("Error loading expenses:", error);
+                    renderTransactionsTable();
+                });
+            }, (error) => {
+                console.error("Error loading bookings:", error);
+            });
+        }
+
+        // Confirm payment for a booking
+        async function confirmPayment(bookingId) {
+            try {
+                await bookingsRef.child(bookingId).update({
+                    status: 'Paid',
+                    paymentDate: new Date().toISOString()
+                });
+                
+                alert('Payment confirmed! Revenue has been updated.');
+            } catch (error) {
+                console.error('Error confirming payment:', error);
+                alert('Error confirming payment. Please try again.');
+            }
+        }
+
+        // Delete expense
+        async function deleteExpense(expenseId) {
+            if (confirm('Are you sure you want to delete this expense?')) {
+                try {
+                    await expensesRef.child(expenseId).remove();
+                    alert('Expense deleted successfully!');
+                } catch (error) {
+                    console.error('Error deleting expense:', error);
+                    alert('Error deleting expense. Please try again.');
+                }
+            }
+        }
+
+        // Add expense
+        document.getElementById('expenseForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            try {
+                const expenseData = {
+                    name: document.getElementById('expenseName').value,
+                    category: document.getElementById('expenseCategory').value,
+                    amount: parseFloat(document.getElementById('expenseAmount').value),
+                    date: document.getElementById('expenseDate').value || formatDate(today),
+                    description: document.getElementById('expenseDescription').value,
+                    vendor: document.getElementById('expenseVendor').value,
+                    invoice: document.getElementById('expenseInvoice').value,
+                    notes: document.getElementById('expenseNotes').value,
+                    timestamp: new Date().toISOString(),
+                    type: 'expense'
+                };
+                
+                // Push to Firebase
+                await expensesRef.push(expenseData);
+                
+                // Reset form and close modal
+                document.getElementById('expenseForm').reset();
+                document.getElementById('expenseDate').value = formatDate(today);
+                
+                const modal = bootstrap.Modal.getInstance(document.getElementById('expenseModal'));
+                modal.hide();
+                
+                alert('Expense added successfully!');
+            } catch (error) {
+                console.error('Error adding expense:', error);
+                alert('Error adding expense. Please try again.');
+            }
+        });
+
+        // Add expense button
+        document.getElementById('addExpenseBtn').addEventListener('click', function() {
+            // Set default date to today
+            document.getElementById('expenseDate').value = formatDate(today);
+            
+            const expenseModal = new bootstrap.Modal(document.getElementById('expenseModal'));
+            expenseModal.show();
+        });
+
+        // ========== EXISTING BOOKING FUNCTIONALITY ==========
         // Update checkout date based on stay duration
         document.getElementById('stayDuration').addEventListener('change', function() {
             const duration = parseInt(this.value);
@@ -803,7 +1385,8 @@
                     idDocumentUrl: idDocumentUrl || '',
                     timestamp,
                     status,
-                    totalAmount
+                    totalAmount,
+                    type: 'booking'
                 };
                 
                 // Push to Firebase
@@ -849,56 +1432,10 @@
             }
         });
 
-        // Load and display bookings from Firebase
-        bookingsRef.on('value', (snapshot) => {
-            const bookings = snapshot.val();
-            const tableBody = document.getElementById('bookingsTableBody');
-            tableBody.innerHTML = '';
-            
-            if (bookings) {
-                Object.entries(bookings).forEach(([key, booking]) => {
-                    const row = document.createElement('tr');
-                    
-                    // Format the date for display
-                    const bookingDate = new Date(booking.timestamp);
-                    const formattedDate = bookingDate.toLocaleDateString();
-                    
-                    // Format check-in date
-                    const checkinDate = new Date(booking.checkinDate);
-                    const formattedCheckin = checkinDate.toLocaleDateString();
-                    
-                    // Format dining info
-                    let diningInfo = 'No';
-                    if (booking.includeDining) {
-                        diningInfo = `Yes (${booking.diningGuests} guests)`;
-                    }
-                    
-                    // Status badge
-                    let statusClass = 'status-confirmed';
-                    if (booking.status === 'Pending') statusClass = 'status-pending';
-                    if (booking.status === 'Cancelled') statusClass = 'status-cancelled';
-                    
-                    row.innerHTML = `
-                        <td>${booking.firstName} ${booking.lastName}</td>
-                        <td>${booking.roomName}</td>
-                        <td>${formattedCheckin}</td>
-                        <td>${booking.stayDuration} nights</td>
-                        <td>${booking.guestCount}</td>
-                        <td>${diningInfo}</td>
-                        <td>R${parseInt(booking.totalAmount).toLocaleString()}</td>
-                        <td>${formattedDate}</td>
-                        <td><span class="status-badge ${statusClass}">${booking.status}</span></td>
-                    `;
-                    
-                    tableBody.appendChild(row);
-                });
-            } else {
-                tableBody.innerHTML = '<tr><td colspan="9" class="text-center">No bookings found</td></tr>';
-            }
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllTransactions();
         });
     </script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
