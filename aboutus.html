@@ -2,27 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Binge Leisure Resort | About Our Luxury Destination</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
+    
+    <!-- === 3RD PARTY CSS LIBRARIES (Colorful & Responsive) === -->
+    <!-- Bootstrap 5 (Responsive Grid, Components, Utilities) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome 6 (Vibrant Icon Set) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Animate.css -->
+    <!-- Google Fonts: Elegant & Modern Pairing -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Animate.css (Rich, Pre-built Animations) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Hover.css (Adds micro-interactions for color pop) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css">
+    <!-- AOS (Animate on Scroll Library - For colorful fade effects on scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
+        /* ---------- ROOT VARIABLES (Rich, Colorful Palette) ---------- */
         :root {
             --primary-gold: #D4AF37;
-            --secondary-gold: #FFD700;
-            --diamond-white: #F0F8FF;
+            --secondary-gold: #FFD966;
+            --vibrant-emerald: #00B894;
+            --vibrant-sunset: #FF6B6B;
+            --vibrant-sapphire: #0984E3;
+            --vibrant-amethyst: #A29BFE;
+            --diamond-white: #F8F9FA;
             --luxury-black: #0A0A0A;
-            --platinum: #E5E4E2;
-            --emerald: #50C878;
-            --sapphire: #0F52BA;
-            --shadow-glow: 0 0 30px rgba(212, 175, 55, 0.3);
-            --transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --platinum: #E9ECEF;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --shadow-glow: 0 0 35px rgba(212, 175, 55, 0.4);
+            --transition-bounce: all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
         }
         
         * {
@@ -33,551 +44,344 @@
         
         body {
             font-family: 'Montserrat', sans-serif;
-            color: #333;
-            background-color: #fefefe;
+            color: #2C3E50;
+            background: linear-gradient(145deg, #FFFFFF 0%, #FDFBF7 100%);
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         
-        h1, h2, h3, h4, h5, .display-font {
+        h1, h2, h3, h4, .display-font {
             font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         
-        /* Luxury Navigation */
+        /* ----- Luxury Navigation (Glossy & Colorful Accent) ----- */
         .luxury-navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 20px 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            transition: var(--transition);
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(12px);
+            padding: 1.2rem 0;
+            z-index: 1030;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
         }
         
         .luxury-navbar.scrolled {
-            padding: 15px 0;
-            background: rgba(10, 10, 10, 0.98);
+            padding: 0.8rem 0;
+            background: rgba(0, 0, 0, 0.96);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
         }
         
         .nav-logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 700;
+            font-size: 1.9rem;
+            font-weight: 800;
             color: var(--primary-gold);
             text-decoration: none;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #D4AF37, #FFE55C);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: var(--transition-bounce);
         }
+        .nav-logo:hover { opacity: 0.9; transform: scale(1.02);}
         
         .nav-links a {
-            color: var(--platinum);
+            color: #f8f9fa;
             text-decoration: none;
-            margin: 0 20px;
+            margin: 0 1.2rem;
             font-weight: 500;
-            font-size: 16px;
+            font-size: 0.95rem;
             letter-spacing: 1px;
             position: relative;
-            transition: var(--transition);
+            transition: all 0.3s;
         }
-        
         .nav-links a:after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -6px;
             left: 0;
             width: 0;
-            height: 2px;
-            background: var(--primary-gold);
-            transition: var(--transition);
+            height: 2.5px;
+            background: linear-gradient(90deg, #D4AF37, #FFB347);
+            transition: 0.3s;
         }
+        .nav-links a:hover { color: #FFD966; }
+        .nav-links a:hover:after { width: 100%; }
         
-        .nav-links a:hover {
+        .luxury-btn {
+            background: transparent;
             color: var(--primary-gold);
+            border: 2px solid var(--primary-gold);
+            padding: 10px 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 40px;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+        }
+        .luxury-btn:hover {
+            background: var(--primary-gold);
+            color: #000;
+            box-shadow: 0 0 15px rgba(212,175,55,0.6);
+            transform: translateY(-3px);
         }
         
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
+        /* ----- HERO SECTION (Colorful Gradient Overlay) ----- */
         .about-hero {
             height: 100vh;
-            background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.9)), 
+            background: linear-gradient(125deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%), 
                         url('https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             display: flex;
             align-items: center;
-            justify-content: center;
             text-align: center;
-            color: white;
-            padding-top: 80px;
+            position: relative;
         }
         
         .diamond-title {
             font-size: 5rem;
-            margin-bottom: 30px;
-            position: relative;
-            display: inline-block;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFF, #FFD966, #D4AF37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             letter-spacing: 2px;
         }
         
-        .diamond-title:after {
-            content: '✦';
-            position: absolute;
-            top: -20px;
-            right: -40px;
-            color: var(--primary-gold);
-            font-size: 2.5rem;
-            animation: sparkle 3s infinite;
-        }
-        
-        .diamond-title:before {
-            content: '✦';
-            position: absolute;
-            bottom: -20px;
-            left: -40px;
-            color: var(--primary-gold);
-            font-size: 2.5rem;
-            animation: sparkle 3s infinite 1.5s;
-        }
-        
-        @keyframes sparkle {
-            0%, 100% { opacity: 0.3; transform: scale(0.9); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-        
         .hero-subtitle {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
+            color: rgba(255,255,240,0.95);
             max-width: 800px;
-            margin: 0 auto 40px;
-            color: var(--platinum);
-            font-weight: 300;
-            line-height: 1.6;
+            margin: 1.5rem auto;
+            font-weight: 400;
+            backdrop-filter: blur(2px);
         }
         
-        /* Diamond Stats Section */
-        .diamond-stats {
+        /* ----- VIDEO SHOWCASE SECTION (✨ New Addition: YouTube Shorts Integration) ----- */
+        .video-showcase {
             padding: 100px 0;
-            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%);
-            color: white;
+            background: linear-gradient(120deg, #fdfbfb 0%, #f3f0e7 100%);
             position: relative;
             overflow: hidden;
         }
         
-        .diamond-stats:before {
-            content: '';
+        .video-wrapper {
+            background: #0A0A0A;
+            border-radius: 32px;
+            padding: 15px;
+            box-shadow: 0 30px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(212,175,55,0.2);
+            transition: transform 0.4s ease;
+        }
+        
+        .video-wrapper:hover {
+            transform: scale(1.02);
+            box-shadow: 0 35px 55px rgba(212,175,55,0.25);
+        }
+        
+        /* Responsive YouTube embed container (16:9 style for Shorts) */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (good for Shorts landscape fit) */
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+        }
+        
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            border: 0;
+        }
+        
+        .video-caption {
+            margin-top: 30px;
+            text-align: center;
+            background: rgba(212,175,55,0.1);
+            padding: 20px;
+            border-radius: 60px;
+            backdrop-filter: blur(5px);
+            border-left: 4px solid var(--primary-gold);
+        }
+        
+        .video-caption h3 {
+            font-size: 1.8rem;
+            color: #1e1e1e;
+            margin-bottom: 10px;
+        }
+        
+        .video-caption p {
+            font-size: 1.05rem;
+            color: #2d3436;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* ----- Diamond Stats (Vibrant Cards) ----- */
+        .diamond-stats {
+            padding: 90px 0;
+            background: linear-gradient(135deg, #0B132B, #1C2541);
+            color: white;
         }
         
         .stat-card {
-            text-align: center;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 1;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 35px;
+            padding: 35px 20px;
+            transition: all 0.4s;
+            border: 1px solid rgba(212,175,55,0.3);
         }
-        
-        .stat-icon {
-            font-size: 3rem;
-            color: var(--primary-gold);
-            margin-bottom: 20px;
-            display: inline-block;
-            animation: float 6s ease-in-out infinite;
+        .stat-card:hover {
+            transform: translateY(-12px);
+            background: rgba(212,175,55,0.15);
+            border-color: #FFD966;
         }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .stat-number {
+        .stat-icon i {
             font-size: 3.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 10px;
+            color: #FFD966;
+            text-shadow: 0 0 12px rgba(0,0,0,0.3);
+        }
+        .stat-number {
+            font-size: 3.2rem;
+            font-weight: 800;
             font-family: 'Cormorant Garamond', serif;
         }
         
-        .stat-label {
-            font-size: 1.1rem;
-            color: var(--platinum);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-        
-        /* Our Story Section */
+        /* ----- Our Story (Colorful Quote Accents) ----- */
         .our-story {
             padding: 120px 0;
-            background-color: var(--diamond-white);
-            position: relative;
-        }
-        
-        .story-content {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
+            background: linear-gradient(45deg, #F9F6F0, #FFFFFF);
         }
         
         .section-title {
-            font-size: 3.5rem;
-            margin-bottom: 40px;
-            color: var(--luxury-black);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--primary-gold);
+            font-size: 3.8rem;
+            margin-bottom: 45px;
+            background: linear-gradient(130deg, #B8860B, #D4AF37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .story-text {
-            font-size: 1.2rem;
+            font-size: 1.18rem;
             line-height: 1.8;
-            color: #555;
-            margin-bottom: 40px;
+            color: #2C3E50;
+            margin-bottom: 30px;
         }
         
         .signature {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            color: var(--primary-gold);
-            margin-top: 40px;
+            font-size: 2.2rem;
+            color: #D4AF37;
             font-style: italic;
+            border-top: 2px dashed #D4AF37;
+            display: inline-block;
+            padding-top: 20px;
         }
         
-        /* Value Proposition */
-        .value-proposition {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #F8F8F8 0%, #FFFFFF 100%);
-        }
-        
+        /* ----- Value Proposition (Vibrant gradients hover) ----- */
         .value-card {
             background: white;
-            border-radius: 15px;
-            padding: 50px 30px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            transition: var(--transition);
-            height: 100%;
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            position: relative;
-            overflow: hidden;
+            border-radius: 28px;
+            padding: 45px 25px;
+            transition: all 0.4s;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border-bottom: 5px solid #D4AF37;
         }
-        
-        .value-card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
-        }
-        
         .value-card:hover {
-            transform: translateY(-15px);
-            box-shadow: var(--shadow-glow);
+            transform: translateY(-12px);
+            background: linear-gradient(145deg, #fff, #fff9ef);
+            box-shadow: 0 25px 45px rgba(212,175,55,0.2);
+        }
+        .value-icon i {
+            font-size: 3.2rem;
+            color: #E67E22;
+            transition: 0.3s;
+        }
+        .value-card:hover .value-icon i {
+            color: #D4AF37;
+            transform: rotate(5deg);
         }
         
-        .value-icon {
-            font-size: 3rem;
-            color: var(--primary-gold);
-            margin-bottom: 25px;
-            display: inline-block;
-        }
-        
-        .value-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--luxury-black);
-        }
-        
-        .value-text {
-            color: #666;
-            line-height: 1.7;
-        }
-        
-        /* Team Section */
+        /* ----- Team Section with dynamic border ----- */
         .team-section {
-            padding: 120px 0;
-            background-color: var(--luxury-black);
+            background: #0c0f1c;
             color: white;
         }
-        
         .team-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
+            background: rgba(255,255,245,0.05);
+            border-radius: 35px;
             overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            transition: var(--transition);
+            transition: 0.4s;
+            backdrop-filter: blur(6px);
         }
-        
         .team-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-gold);
-            box-shadow: var(--shadow-glow);
+            border: 1px solid #D4AF37;
+            transform: scale(1.02);
         }
+        .team-name { color: #FFD966; }
         
-        .team-img {
-            height: 300px;
-            overflow: hidden;
-        }
-        
-        .team-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-        
-        .team-card:hover .team-img img {
-            transform: scale(1.05);
-        }
-        
-        .team-info {
-            padding: 30px;
-        }
-        
-        .team-name {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: white;
-        }
-        
-        .team-position {
-            color: var(--primary-gold);
-            font-size: 1rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-        
-        .team-bio {
-            color: #aaa;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        /* Diamond Experience */
-        .diamond-experience {
-            padding: 100px 0;
-            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), 
-                        url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-attachment: fixed;
-            color: white;
-            text-align: center;
-        }
-        
-        .experience-title {
-            font-size: 3.5rem;
-            margin-bottom: 40px;
-            color: var(--primary-gold);
-        }
-        
-        .experience-text {
-            font-size: 1.3rem;
-            max-width: 800px;
-            margin: 0 auto 50px;
-            line-height: 1.8;
-            color: var(--platinum);
-        }
-        
-        /* Luxury Footer */
+        /* ----- Footer elegant gold touches ----- */
         .luxury-footer {
-            background: var(--luxury-black);
-            color: white;
-            padding: 80px 0 30px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            background: #0a0a0a;
+            border-top: 3px solid #D4AF37;
         }
-        
         .footer-logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            color: var(--primary-gold);
-            margin-bottom: 20px;
-            display: inline-block;
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #D4AF37, #F7DC6F);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-        
-        .footer-column h4 {
-            color: white;
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h4:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background: var(--primary-gold);
-        }
-        
-        .footer-links a {
-            color: #aaa;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 12px;
-            transition: var(--transition);
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary-gold);
-            padding-left: 5px;
-        }
-        
         .social-icons a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            margin-right: 10px;
-            color: var(--platinum);
-            font-size: 1.2rem;
-            transition: var(--transition);
+            background: #1F1F1F;
+            transition: 0.3s;
         }
-        
         .social-icons a:hover {
-            background: var(--primary-gold);
-            color: var(--luxury-black);
-            transform: translateY(-5px);
+            background: #D4AF37;
+            color: #0a0a0a;
+            transform: translateY(-6px);
         }
         
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #777;
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .diamond-title {
-                font-size: 3.5rem;
-            }
-            
-            .section-title {
-                font-size: 2.8rem;
-            }
-            
-            .nav-links a {
-                margin: 0 10px;
-            }
-        }
-        
+        /* ----- Additional Responsiveness & Colorful touches ----- */
         @media (max-width: 768px) {
-            .diamond-title {
-                font-size: 2.8rem;
-            }
-            
-            .diamond-title:after, .diamond-title:before {
-                display: none;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
-                padding: 0 20px;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .stat-number {
-                font-size: 2.5rem;
-            }
+            .diamond-title { font-size: 2.8rem; }
+            .section-title { font-size: 2.4rem; }
+            .video-caption h3 { font-size: 1.4rem; }
         }
         
-        /* Luxury Button */
-        .luxury-btn {
-            background: transparent;
-            color: var(--primary-gold);
-            border: 2px solid var(--primary-gold);
-            padding: 15px 35px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border-radius: 0;
-            position: relative;
-            overflow: hidden;
-            transition: var(--transition);
-            z-index: 1;
-            text-decoration: none;
-            display: inline-block;
+        /* Sparkle animation from original kept & upgraded */
+        @keyframes gentleGlow {
+            0% { text-shadow: 0 0 2px gold; opacity: 0.7; }
+            100% { text-shadow: 0 0 15px #ffd700; opacity: 1; }
         }
-        
-        .luxury-btn:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
-            transition: var(--transition);
-            z-index: -1;
-        }
-        
-        .luxury-btn:hover {
-            color: var(--luxury-black);
-            background: var(--primary-gold);
-            box-shadow: var(--shadow-glow);
-        }
-        
-        .luxury-btn:hover:before {
-            left: 100%;
-        }
-        
-        /* Diamond Background Pattern */
-        .diamond-pattern {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-image: 
-                linear-gradient(45deg, rgba(212, 175, 55, 0.03) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(212, 175, 55, 0.03) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(212, 175, 55, 0.03) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(212, 175, 55, 0.03) 75%);
-            background-size: 40px 40px;
-            background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
-            z-index: 0;
-            pointer-events: none;
+        .fa-gem, .fa-crown {
+            animation: gentleGlow 2s infinite alternate;
         }
     </style>
 </head>
 <body>
-    <!-- Luxury Navigation -->
+
+    <!-- ===== LUXURY NAVIGATION ===== -->
     <nav class="luxury-navbar" id="navbar">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
-                <a href="#" class="nav-logo">BINGE LEISURE</a>
+                <a href="#" class="nav-logo">✦ BINGE LEISURE</a>
                 <div class="nav-links d-none d-md-flex">
                     <a href="index.html">Home</a>
                     <a href="booking.html">Book</a>
@@ -585,12 +389,12 @@
                     <a href="experiences.html">Experiences</a>
                     <a href="contact.html">Contact</a>
                 </div>
-                <a href="booking.html" class="luxury-btn d-none d-md-inline-block">Reserve Now</a>
+                <a href="booking.html" class="luxury-btn d-none d-md-inline-block">Reserve Suite</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- ===== HERO SECTION ===== -->
     <section class="about-hero">
         <div class="container">
             <div class="row justify-content-center">
@@ -607,177 +411,175 @@
         </div>
     </section>
 
-    <!-- Diamond Stats -->
-    <section class="diamond-stats">
-        <div class="diamond-pattern"></div>
+    <!-- ===== ✨ NEW SECTION: VIDEO SHOWCASE (YouTube Shorts Integration) ===== -->
+    <section class="video-showcase" id="videoShowcase">
         <div class="container">
-            <div class="row text-center">
-                <div class="col-md-3 col-6 mb-5 mb-md-0">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-gem"></i>
+            <div class="row justify-content-center">
+                <div class="col-lg-10" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="video-wrapper">
+                        <div class="video-container">
+                            <!-- YouTube Shorts embed code that showcases Binge Leisure Resort in a premium light -->
+                            <iframe 
+                                src="https://www.youtube.com/embed/E29XtuCfGCA" 
+                                title="Binge Leisure Resort - Elevated Experience on the Vaal Dam" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                            </iframe>
                         </div>
+                    </div>
+                    <div class="video-caption" data-aos="fade-up" data-aos-delay="200">
+                        <h3><i class="fas fa-play-circle text-warning me-2"></i> The Binge Moment – Elevated Luxury</h3>
+                        <p>Step into our world. This exclusive preview captures the essence of Binge Leisure Resort:  
+                        the iconic 40-foot raised dining, serene dam vistas, and bespoke hospitality that sets us apart. 
+                        Witness the fusion of architectural brilliance and natural harmony.</p>
+                        <div class="mt-3">
+                            <span class="badge bg-dark text-warning p-2 me-2"><i class="fas fa-crown"></i> Signature Experience</span>
+                            <span class="badge bg-dark text-warning p-2"><i class="fas fa-water"></i> Vaal Dam Majesty</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DIAMOND STATS (Colorful, Existing Content enhanced) ===== -->
+    <section class="diamond-stats">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="stat-card hvr-grow">
+                        <div class="stat-icon"><i class="fas fa-gem"></i></div>
                         <div class="stat-number">15+</div>
                         <div class="stat-label">Years of Excellence</div>
                     </div>
                 </div>
-                <div class="col-md-3 col-6 mb-5 mb-md-0">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-arrow-up"></i>
-                        </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="stat-card hvr-grow">
+                        <div class="stat-icon"><i class="fas fa-arrow-up"></i></div>
                         <div class="stat-number">40 FT</div>
                         <div class="stat-label">Raised Dining</div>
                     </div>
                 </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-award"></i>
-                        </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="stat-card hvr-grow">
+                        <div class="stat-icon"><i class="fas fa-award"></i></div>
                         <div class="stat-number">28</div>
                         <div class="stat-label">Luxury Awards</div>
                     </div>
                 </div>
-                <div class="col-md-3 col-6">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-heart"></i>
-                        </div>
+                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="stat-card hvr-grow">
+                        <div class="stat-icon"><i class="fas fa-heart"></i></div>
                         <div class="stat-number">99.7%</div>
-                        <div class="stat-label">Guest Satisfaction</div>
+                        <div class="stat-label">Guest Delight</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Our Story -->
+    <!-- ===== OUR STORY ===== -->
     <section class="our-story" id="story">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="story-content">
-                        <h2 class="section-title animate__animated animate__fadeIn">Our Legacy of Luxury</h2>
-                        <p class="story-text animate__animated animate__fadeIn animate__delay-1s">
-                            Founded in 2008 by visionary architect Marcus Binge, our resort was conceived as a sanctuary 
-                            where innovation meets tradition. What began as a single architectural marvel—the 40-foot 
-                            raised dining platform—has evolved into South Africa's most exclusive luxury destination.
-                        </p>
-                        <p class="story-text animate__animated animate__fadeIn animate__delay-2s">
-                            Every aspect of Binge Leisure Resort is meticulously designed to offer unparalleled value. 
-                            Our commitment extends beyond luxury to sustainable excellence, with eco-friendly practices 
-                            integrated into every operation. The resort's architecture harmonizes with the surrounding 
-                            landscape, creating a seamless blend of natural beauty and human ingenuity.
-                        </p>
-                        <p class="story-text animate__animated animate__fadeIn animate__delay-3s">
-                            Today, we host discerning travelers from across the globe, each seeking the unique experience 
-                            that only elevation—both physical and experiential—can provide. Our team of 150 dedicated 
-                            professionals ensures every moment exceeds expectations.
-                        </p>
-                        <div class="signature">Marcus Binge</div>
-                        <div class="mt-4">Founder & Visionary</div>
-                    </div>
+                <div class="col-lg-10" data-aos="fade-right">
+                    <h2 class="section-title text-center">Our Legacy of Luxury</h2>
+                    <p class="story-text">Founded in 2008 by visionary architect Marcus Binge, our resort was conceived as a sanctuary 
+                        where innovation meets tradition. What began as a single architectural marvel—the 40-foot 
+                        raised dining platform—has evolved into South Africa's most exclusive luxury destination.</p>
+                    <p class="story-text">Every aspect of Binge Leisure Resort is meticulously designed to offer unparalleled value. 
+                        Our commitment extends beyond luxury to sustainable excellence, with eco-friendly practices 
+                        integrated into every operation. The resort's architecture harmonizes with the surrounding 
+                        landscape, creating a seamless blend of natural beauty and human ingenuity.</p>
+                    <p class="story-text">Today, we host discerning travelers from across the globe, each seeking the unique experience 
+                        that only elevation—both physical and experiential—can provide. Our team of 150 dedicated 
+                        professionals ensures every moment exceeds expectations.</p>
+                    <div class="signature">Marcus Binge <i class="fas fa-feather-alt ms-2"></i></div>
+                    <div class="mt-3 fst-italic">Founder & Visionary</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Value Proposition -->
-    <section class="value-proposition">
+    <!-- ===== VALUE PROPOSITION ===== -->
+    <section class="value-proposition py-5">
         <div class="container">
-            <h2 class="section-title text-center mb-5">Unmatched Value Experience</h2>
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
-                    <div class="value-card animate__animated animate__fadeInUp">
-                        <div class="value-icon">
-                            <i class="fas fa-crown"></i>
-                        </div>
+            <h2 class="section-title text-center">Unmatched Value Experience</h2>
+            <div class="row g-4 mt-3">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="value-card hvr-float">
+                        <div class="value-icon"><i class="fas fa-crown"></i></div>
                         <h3 class="value-title">Exclusive Access</h3>
-                        <p class="value-text">
-                            Experience our signature 40-foot raised dining, private dam access, and curated performances 
+                        <p class="value-text">Experience our signature 40-foot raised dining, private dam access, and curated performances 
                             that transform your stay into an unforgettable journey. Each element is crafted to provide 
-                            maximum value through unique, once-in-a-lifetime experiences.
-                        </p>
+                            maximum value through unique, once-in-a-lifetime experiences.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="value-card animate__animated animate__fadeInUp animate__delay-1s">
-                        <div class="value-icon">
-                            <i class="fas fa-hand-sparkles"></i>
-                        </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="value-card hvr-float">
+                        <div class="value-icon"><i class="fas fa-hand-sparkles"></i></div>
                         <h3 class="value-title">Personalized Service</h3>
-                        <p class="value-text">
-                            From dedicated concierge to private butlers, our 1:3 staff-to-guest ratio ensures 
+                        <p class="value-text">From dedicated concierge to private butlers, our 1:3 staff-to-guest ratio ensures 
                             attention to every detail. Our value proposition includes complimentary experiences 
-                            that competitors charge extra for, maximizing your investment in luxury.
-                        </p>
+                            that competitors charge extra for, maximizing your investment in luxury.</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="value-card animate__animated animate__fadeInUp animate__delay-2s">
-                        <div class="value-icon">
-                            <i class="fas fa-leaf"></i>
-                        </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="value-card hvr-float">
+                        <div class="value-icon"><i class="fas fa-leaf"></i></div>
                         <h3 class="value-title">Sustainable Luxury</h3>
-                        <p class="value-text">
-                            True luxury respects its environment. Our eco-friendly practices, from solar-powered 
+                        <p class="value-text">True luxury respects its environment. Our eco-friendly practices, from solar-powered 
                             villas to zero-waste dining, ensure your stay contributes positively to preservation 
-                            efforts while delivering uncompromised excellence.
-                        </p>
+                            efforts while delivering uncompromised excellence.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Leadership Team -->
-    <section class="team-section">
+    <!-- ===== LEADERSHIP TEAM ===== -->
+    <section class="team-section py-5">
         <div class="container">
-            <h2 class="section-title text-center mb-5" style="color: var(--primary-gold);">Visionary Leadership</h2>
+            <h2 class="section-title text-center text-warning">Visionary Leadership</h2>
             <div class="row g-4">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6" data-aos="flip-left">
                     <div class="team-card">
                         <div class="team-img">
-                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Marcus Binge">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" class="img-fluid" alt="Marcus Binge">
                         </div>
-                        <div class="team-info">
+                        <div class="team-info p-4">
                             <h3 class="team-name">Marcus Binge</h3>
-                            <div class="team-position">Founder & CEO</div>
-                            <p class="team-bio">
-                                Award-winning architect with 25+ years in luxury hospitality. Visionary behind 
-                                the raised dining concept that revolutionized resort experiences globally.
-                            </p>
+                            <div class="team-position text-warning">Founder & CEO</div>
+                            <p class="team-bio">Award-winning architect with 25+ years in luxury hospitality. Visionary behind 
+                                the raised dining concept that revolutionized resort experiences globally.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="200">
                     <div class="team-card">
                         <div class="team-img">
-                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=761&q=80" alt="Isabella Moreau">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=761&q=80" class="img-fluid" alt="Isabella Moreau">
                         </div>
-                        <div class="team-info">
+                        <div class="team-info p-4">
                             <h3 class="team-name">Isabella Moreau</h3>
-                            <div class="team-position">Executive Chef</div>
-                            <p class="team-bio">
-                                Michelin-starred chef curating our elevated dining experience. Her farm-to-table 
-                                philosophy ensures culinary excellence that matches our physical heights.
-                            </p>
+                            <div class="team-position text-warning">Executive Chef</div>
+                            <p class="team-bio">Michelin-starred chef curating our elevated dining experience. Her farm-to-table 
+                                philosophy ensures culinary excellence that matches our physical heights.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="400">
                     <div class="team-card">
                         <div class="team-img">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="David Chen">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" class="img-fluid" alt="David Chen">
                         </div>
-                        <div class="team-info">
+                        <div class="team-info p-4">
                             <h3 class="team-name">David Chen</h3>
-                            <div class="team-position">Head of Experiences</div>
-                            <p class="team-bio">
-                                Former luxury cruise director bringing world-class entertainment and curated 
-                                performances to our elevated stage and natural dam activities.
-                            </p>
+                            <div class="team-position text-warning">Head of Experiences</div>
+                            <p class="team-bio">Former luxury cruise director bringing world-class entertainment and curated 
+                                performances to our elevated stage and natural dam activities.</p>
                         </div>
                     </div>
                 </div>
@@ -785,144 +587,107 @@
         </div>
     </section>
 
-    <!-- Diamond Experience -->
-    <section class="diamond-experience">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <h2 class="experience-title">The Diamond Standard</h2>
-                    <p class="experience-text">
-                        At Binge Leisure Resort, we've redefined value in luxury hospitality. Every rand spent 
-                        returns tenfold in experience, memory, and transformation. Our commitment isn't just to 
-                        luxury—it's to creating moments that become lifelong treasures.
-                    </p>
-                    <p class="experience-text">
-                        From the engineering marvel of our raised structures to the sustainable practices 
-                        preserving our natural dam, every element represents an investment in excellence 
-                        that pays dividends in guest satisfaction and environmental stewardship.
-                    </p>
-                    <a href="booking.html" class="luxury-btn mt-4">Experience The Difference</a>
-                </div>
-            </div>
+    <!-- ===== DIAMOND EXPERIENCE ===== -->
+    <section class="diamond-experience py-5" style="background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80'); background-size: cover; background-attachment: fixed;">
+        <div class="container text-center text-white py-5">
+            <h2 class="experience-title text-warning display-4">The Diamond Standard</h2>
+            <p class="experience-text fs-5">At Binge Leisure Resort, we've redefined value in luxury hospitality. Every rand spent 
+                returns tenfold in experience, memory, and transformation. Our commitment isn't just to 
+                luxury—it's to creating moments that become lifelong treasures.</p>
+            <p class="experience-text">From the engineering marvel of our raised structures to the sustainable practices 
+                preserving our natural dam, every element represents an investment in excellence 
+                that pays dividends in guest satisfaction and environmental stewardship.</p>
+            <a href="booking.html" class="luxury-btn mt-4 bg-transparent">Experience The Difference</a>
         </div>
     </section>
 
-    <!-- Luxury Footer -->
+    <!-- ===== LUXURY FOOTER ===== -->
     <footer class="luxury-footer">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 mb-5 mb-lg-0">
-                    <div class="footer-logo">BINGE LEISURE</div>
-                    <p class="text-light mb-4">
-                        Elevating luxury experiences since 2008. Where every moment is crafted, 
-                        every detail perfected, and every guest valued beyond measure.
-                    </p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-logo">✦ BINGE LEISURE</div>
+                    <p class="text-light-50 mt-3">Elevating luxury experiences since 2008. Where every moment is crafted, 
+                        every detail perfected, and every guest valued beyond measure.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#" class="me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-tripadvisor"></i></a>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-4 mb-5 mb-md-0">
-                    <h4>Explore</h4>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h4 class="text-warning">Explore</h4>
                     <div class="footer-links">
-                        <a href="index.html">Home</a>
-                        <a href="about.html">About Us</a>
-                        <a href="booking.html">Book Now</a>
-                        <a href="experiences.html">Experiences</a>
-                        <a href="contact.html">Contact</a>
+                        <a href="#" class="d-block text-white-50 text-decoration-none py-1">Home</a>
+                        <a href="#" class="d-block text-white-50 text-decoration-none py-1">About Us</a>
+                        <a href="#" class="d-block text-white-50 text-decoration-none py-1">Book Now</a>
+                        <a href="#" class="d-block text-white-50 text-decoration-none py-1">Experiences</a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 mb-5 mb-md-0">
-                    <h4>Accommodations</h4>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h4 class="text-warning">Accommodations</h4>
                     <div class="footer-links">
-                        <a href="#">Treetop Villas</a>
-                        <a href="#">Waterfront Suites</a>
-                        <a href="#">Executive Residence</a>
-                        <a href="#">Group Retreats</a>
-                        <a href="#">Seasonal Packages</a>
+                        <a href="#" class="d-block text-white-50 text-decoration-none py-1">Treetop Villas</a>
+                        <a href="#" class="d-block text-white-50 text-decoration-none py-1">Waterfront Suites</a>
+                        <a href="#" class="d-block text-white-50 text-decoration-none py-1">Executive Residence</a>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4">
-                    <h4>Contact Info</h4>
+                    <h4 class="text-warning">Contact Info</h4>
                     <div class="footer-links">
-                        <a href="#"><i class="fas fa-map-marker-alt me-2"></i> Luxury Lane, Resort Valley</a>
-                        <a href="#"><i class="fas fa-phone me-2"></i> +27 11 555 7890</a>
-                        <a href="#"><i class="fas fa-envelope me-2"></i> luxury@bingleisure.com</a>
-                        <a href="#"><i class="fas fa-clock me-2"></i> 24/7 Concierge</a>
+                        <a href="#" class="d-block text-white-50 text-decoration-none py-1"><i class="fas fa-map-marker-alt me-2"></i> Luxury Lane, Resort Valley</a>
+                        <a href="#" class="d-block text-white-50 text-decoration-none py-1"><i class="fas fa-phone me-2"></i> +27 11 555 7890</a>
+                        <a href="#" class="d-block text-white-50 text-decoration-none py-1"><i class="fas fa-envelope me-2"></i> luxury@bingleisure.com</a>
                     </div>
                 </div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2024 Binge Leisure Resort. All rights reserved. Property value: R85,000,000+</p>
-                <p class="mt-2">Designed with <i class="fas fa-gem" style="color: var(--primary-gold);"></i> for those who appreciate true value</p>
+            <div class="copyright text-center mt-5 pt-3 border-top border-secondary">
+                <p>&copy; 2024 Binge Leisure Resort. All rights reserved. <i class="fas fa-gem text-warning"></i> The pinnacle of elevated luxury.</p>
             </div>
         </div>
     </footer>
 
+    <!-- ===== 3RD PARTY JAVASCRIPT LIBS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS (Animate on Scroll) - adds colorful scroll based reveals -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- jQuery (optional, enhances some interactive effects but site works without. Used for extra smoothness) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <script>
+        // Initialize AOS for beautiful scroll animations
+        AOS.init({
+            duration: 900,
+            once: true,
+            offset: 120,
+        });
+        
         // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 100) {
+                $('#navbar').addClass('scrolled');
             } else {
-                navbar.classList.remove('scrolled');
+                $('#navbar').removeClass('scrolled');
             }
-            
-            // Animate elements on scroll
-            animateOnScroll();
         });
         
         // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = this.hash;
+            if(target && $(target).length) {
+                $('html, body').animate({
+                    scrollTop: $(target).offset().top - 80
+                }, 800);
+            }
         });
         
-        // Animate elements on scroll
-        function animateOnScroll() {
-            const elements = document.querySelectorAll('.animate__animated');
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
-                if(elementPosition < screenPosition) {
-                    const animationClass = element.classList[1];
-                    if(!element.classList.contains('animate__faster')) {
-                        element.classList.add('animate__faster');
-                    }
-                }
-            });
-        }
-        
-        // Initialize animations
-        document.addEventListener('DOMContentLoaded', function() {
-            animateOnScroll();
-            
-            // Add sparkle effect to diamonds
-            const diamonds = document.querySelectorAll('.fa-gem, .fa-crown');
-            diamonds.forEach(diamond => {
-                diamond.addEventListener('mouseenter', function() {
-                    this.style.animation = 'none';
-                    setTimeout(() => {
-                        this.style.animation = 'sparkle 0.5s ease';
-                    }, 10);
-                });
-            });
+        // Additional dynamic color effect on video caption sparkle
+        $(".video-wrapper").hover(function() {
+            $(this).css("box-shadow", "0 0 30px rgba(212,175,55,0.7)");
+        }, function() {
+            $(this).css("box-shadow", "0 30px 50px rgba(0,0,0,0.2)");
         });
     </script>
 </body>
