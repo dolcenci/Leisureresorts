@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binge Leisure Resort | Elevated Luxury</title>
+    <title>Binge Leisure Resort | Elevated Luxury | Video Showcase</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -447,6 +447,97 @@
             color: var(--text-light);
         }
         
+        /* ========== NEW VIDEO GRID SECTION ========== */
+        .video-showcase {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, #ffffff, var(--light-color));
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border: 1px solid rgba(188, 138, 95, 0.2);
+        }
+        
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary-color);
+        }
+        
+        .video-wrapper {
+            position: relative;
+            background: #000;
+            aspect-ratio: 16 / 9;
+            display: block;
+        }
+        
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        
+        .video-info {
+            padding: 22px 20px 24px;
+            background: white;
+        }
+        
+        .video-info h3 {
+            font-size: 1.65rem;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+        
+        .video-info p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .video-info p i {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+        
+        .video-badge {
+            display: inline-block;
+            background: rgba(188, 138, 95, 0.15);
+            padding: 5px 12px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+        
+        @media (max-width: 768px) {
+            .video-grid {
+                gap: 25px;
+            }
+            .video-info h3 {
+                font-size: 1.4rem;
+            }
+        }
+        
         /* Footer */
         footer {
             background-color: var(--dark-color);
@@ -583,46 +674,19 @@
                 
                 <ul class="nav-links">
                     <li><a href="indexmaps.html">Home</a></li>
-
- 
-<li><a href="aboutus.html">About-Us</a></li>
-<li><a href="luxurysignup.html">Signup5</a></li>
- 
-
-                    
-
-
-                    <li><a href="Bookings.html">Book</a></li>
-
-
-
-                    
-
-<li><a href="page1.html">page 1</a></li>
-                    <li><a href="page2catery.html">page 2</a></li>
-
-<li><a href="page3spa.html">page 3</a></li>
-                    
-<li><a href="page4events.html">page 4</a></li>
-
-
-
-                    <li><a href="#features">Unique Features</a></li>
+                    <li><a href="aboutus.html">About-Us</a></li>
                     <li><a href="luxurysignup.html">Signup5</a></li>
+                    <li><a href="Bookings.html">Book</a></li>
+                    <li><a href="page1.html">page 1</a></li>
+                    <li><a href="page2catery.html">page 2</a></li>
+                    <li><a href="page3spa.html">page 3</a></li>
+                    <li><a href="page4events.html">page 4</a></li>
+                    <li><a href="#features">Unique Features</a></li>
                     <li><a href="#accommodations">Accommodations</a></li>
-
-                    
                     <li><a href="#dining">Raised Dining</a></li>
                     <li><a href="#dam">Natural Dam</a></li>
                     <li><a href="#experiences">Experiences</a></li>
-
-
-
-                    
                 </ul>
-
-
- 
                 
                 <div class="nav-actions">
                     <a href="#" class="btn">Book Now</a>
@@ -807,6 +871,51 @@
         </div>
     </section>
 
+    <!-- ========== NEW VIDEO SHOWCASE GRID SECTION | Only One Video Plays at a Time ========== -->
+    <section class="video-showcase" id="videoGallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Moments from Binge Leisure</h2>
+                <p>Immerse yourself in the elevated luxury, exclusive dam views, and curated resort experiences.</p>
+            </div>
+            <div class="video-grid" id="videoGridContainer">
+                <!-- Video Card 1 -->
+                <div class="video-card" data-video-id="Wy7zh0pXO8k">
+                    <div class="video-wrapper">
+                        <div id="player-Wy7zh0pXO8k"></div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-badge"><i class="fas fa-crown"></i> Signature Highlight</div>
+                        <h3>Raised Dining · 40ft Elevation</h3>
+                        <p><i class="fas fa-utensils"></i> Culinary masterpiece with panoramic dam views — an unforgettable journey above the treetops.</p>
+                    </div>
+                </div>
+                <!-- Video Card 2 -->
+                <div class="video-card" data-video-id="0EFc5q7sbAo">
+                    <div class="video-wrapper">
+                        <div id="player-0EFc5q7sbAo"></div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-badge"><i class="fas fa-water"></i> Natural Wonder</div>
+                        <h3>Vaal Dam · Serene Escapes</h3>
+                        <p><i class="fas fa-ship"></i> Exclusive water activities, sunset cruises, and the breathtaking fusion of luxury and nature.</p>
+                    </div>
+                </div>
+                <!-- Video Card 3 -->
+                <div class="video-card" data-video-id="RB3qY2OP0K0">
+                    <div class="video-wrapper">
+                        <div id="player-RB3qY2OP0K0"></div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-badge"><i class="fas fa-music"></i> Curated Evenings</div>
+                        <h3>Live Performances · Starry Nights</h3>
+                        <p><i class="fas fa-theater-masks"></i> World-class entertainment on the resort stage — intimate experiences under the African sky.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -829,7 +938,7 @@
                         <li><a href="#features">Unique Features</a></li>
                         <li><a href="#accommodations">Accommodations</a></li>
                         <li><a href="#dining">Raised Dining</a></li>
-                        <li><a href="#dam">Natural Dam</a></li>
+                        <li><a href="#videoGallery">Video Gallery</a></li>
                     </ul>
                 </div>
                 
@@ -859,6 +968,8 @@
         </div>
     </footer>
 
+    <!-- YouTube IFrame API for one-at-a-time playback control -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script>
         // Header scroll effect
         window.addEventListener('scroll', function() {
@@ -874,10 +985,8 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
                 const targetId = this.getAttribute('href');
                 if(targetId === '#') return;
-                
                 const targetElement = document.querySelector(targetId);
                 if(targetElement) {
                     window.scrollTo({
@@ -892,34 +1001,76 @@
         const today = new Date();
         const tomorrow = new Date(today);
         tomorrow.setDate(tomorrow.getDate() + 1);
-        
+        const formatDate = (date) => date.toISOString().split('T')[0];
         const checkinInput = document.querySelector('input[type="date"]');
         const checkoutInput = document.querySelectorAll('input[type="date"]')[1];
+        if(checkinInput && checkoutInput) {
+            checkinInput.value = formatDate(today);
+            checkoutInput.value = formatDate(tomorrow);
+            checkinInput.min = formatDate(today);
+            checkoutInput.min = formatDate(tomorrow);
+            checkinInput.addEventListener('change', function() {
+                const nextDay = new Date(this.value);
+                nextDay.setDate(nextDay.getDate() + 1);
+                checkoutInput.min = formatDate(nextDay);
+                if(new Date(checkoutInput.value) < nextDay) checkoutInput.value = formatDate(nextDay);
+            });
+        }
         
-        // Format date as YYYY-MM-DD
-        const formatDate = (date) => {
-            return date.toISOString().split('T')[0];
+        // ---- YOUTUBE API : SINGLE VIDEO PLAY AT A TIME ----
+        let players = {}; // store player objects by video ID
+        const videoIds = ['Wy7zh0pXO8k', '0EFc5q7sbAo', 'RB3qY2OP0K0'];
+        
+        // This function is called when YouTube API is ready
+        window.onYouTubeIframeAPIReady = function() {
+            videoIds.forEach(id => {
+                const containerId = `player-${id}`;
+                const element = document.getElementById(containerId);
+                if (element) {
+                    players[id] = new YT.Player(containerId, {
+                        height: '100%',
+                        width: '100%',
+                        videoId: id,
+                        playerVars: {
+                            modestbranding: 1,
+                            rel: 0,
+                            showinfo: 0,
+                            controls: 1,
+                            playsinline: 1,
+                            enablejsapi: 1,
+                            origin: window.location.origin
+                        },
+                        events: {
+                            onStateChange: onPlayerStateChange
+                        }
+                    });
+                }
+            });
         };
         
-        checkinInput.value = formatDate(today);
-        checkoutInput.value = formatDate(tomorrow);
-        
-        // Set minimum dates to today
-        checkinInput.min = formatDate(today);
-        checkoutInput.min = formatDate(tomorrow);
-        
-        // Update checkout min date when checkin changes
-        checkinInput.addEventListener('change', function() {
-            const checkinDate = new Date(this.value);
-            const nextDay = new Date(checkinDate);
-            nextDay.setDate(nextDay.getDate() + 1);
-            checkoutInput.min = formatDate(nextDay);
-            
-            // If checkout is before new min, update it
-            if(new Date(checkoutInput.value) < nextDay) {
-                checkoutInput.value = formatDate(nextDay);
+        // Handle state changes: if any video starts playing, pause all others
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                const currentPlayer = event.target;
+                // get video id of current player
+                let currentId = null;
+                for (const [id, player] of Object.entries(players)) {
+                    if (player === currentPlayer) {
+                        currentId = id;
+                        break;
+                    }
+                }
+                // Pause all other players
+                for (const [id, player] of Object.entries(players)) {
+                    if (id !== currentId && player && typeof player.pauseVideo === 'function') {
+                        player.pauseVideo();
+                    }
+                }
             }
-        });
+        }
+        
+        // Fallback: if API takes too long, reload iframe but we have full support
+        // Also ensure that videos don't autoplay on load (default is no autoplay)
     </script>
 </body>
 </html>
