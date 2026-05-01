@@ -1,15 +1,25 @@
-í<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binge Leisure Resort | Elevated Luxury | Video Showcase</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Binge Leisure Resort | The World’s Most Colourful Luxury Escape</title>
     
-    <!-- Bootstrap 5 CSS + Icons + Fonts + AOS + Lightbox -->
+    <!-- ⚡ Core CSS + UI Libraries -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Animation & Interactive Libraries -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
     <style>
         * {
@@ -19,545 +29,377 @@
         }
         
         :root {
-            --primary-color: #BC8A5F;
-            --secondary-color: #3D5A5B;
-            --accent-color: #A52A2A;
-            --light-color: #F7F3EE;
-            --dark-color: #1A1A1A;
-            --text-color: #333333;
-            --text-light: #666666;
-            --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            --transition: all 0.3s ease;
+            --gradient-primary: linear-gradient(135deg, #FFD194, #70E1F5, #FF6B6B, #A29BFE);
+            --gradient-gold: linear-gradient(145deg, #F3E7B0, #D4AF37, #FFC857);
+            --glass-border: rgba(255, 215, 0, 0.5);
+            --shadow-xlg: 0 30px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,215,0,0.3);
         }
         
         body {
             font-family: 'Montserrat', sans-serif;
-            color: var(--text-color);
-            line-height: 1.6;
+            background: radial-gradient(circle at 10% 30%, #FFF5E6, #FFEEDD, #FFF0E0);
             overflow-x: hidden;
+            cursor: crosshair;
         }
         
-        h1, h2, h3, h4, h5 {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 600;
-        }
-        
-        .container {
-            max-width: 1400px;
-        }
-        
-        /* Header & Navigation (unchanged but enhanced with sticky) */
-        header {
+        /* 🔥 Particles background overlay */
+        #particles-js {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px 0;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            z-index: 1030;
-            transition: var(--transition);
-        }
-        
-        header.scrolled {
-            padding: 15px 0;
-            backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.85);
-        }
-        
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo span { color: var(--secondary-color); }
-        .logo i { margin-right: 10px; font-size: 28px; }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        .nav-links li { margin-left: 30px; }
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: var(--transition);
-            position: relative;
-        }
-        .nav-links a:hover { color: var(--primary-color); }
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary-color);
-            transition: var(--transition);
-        }
-        .nav-links a:hover:after { width: 100%; }
-        
-        .btn-primary-custom {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 28px;
-            border-radius: 40px;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        .btn-primary-custom:hover {
-            background-color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(188, 138, 95, 0.3);
-        }
-        .btn-outline-custom {
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
             background: transparent;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 8px 24px;
-            border-radius: 40px;
-            transition: var(--transition);
-        }
-        .btn-outline-custom:hover {
-            background: var(--primary-color);
-            color: white;
         }
         
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding-top: 80px;
+        /* 🌈 Animated gradient text utility */
+        .rainbow-text {
+            background: linear-gradient(90deg, #FF6B6B, #FFD966, #6C5CE7, #00B894, #FF6B6B);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: moveGradient 6s linear infinite;
         }
-        .hero h1 { font-size: 64px; margin-bottom: 20px; }
-        .hero p { font-size: 20px; margin-bottom: 40px; font-weight: 300; }
         
-        /* Search Bar */
-        .search-bar {
-            background: white;
-            border-radius: 12px;
-            padding: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            box-shadow: var(--shadow);
+        @keyframes moveGradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
-        .search-item { flex: 1; padding: 15px; border-right: 1px solid #eee; min-width: 140px; }
-        .search-item:last-child { border-right: none; }
-        .search-item label { font-size: 12px; font-weight: 600; display: block; text-align: left; margin-bottom: 5px; }
-        .search-item input, .search-item select { width: 100%; border: none; outline: none; background: transparent; }
-        .search-btn { background: var(--primary-color); border: none; border-radius: 8px; padding: 0 25px; color: white; }
-        .search-btn:hover { background: var(--accent-color); }
         
-        /* Enhanced Feature Cards & Accommodation Cards using Bootstrap */
-        .custom-card {
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            background: white;
-            border: none;
-            box-shadow: var(--shadow);
+        /* Glassmorphic cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            border-radius: 32px;
+            transition: 0.5s;
         }
-        .custom-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 40px rgba(0,0,0,0.12);
-        }
-        .custom-card .card-img-top {
-            height: 260px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .custom-card:hover .card-img-top { transform: scale(1.05); }
-        .custom-card .card-body { padding: 1.8rem; }
-        .custom-card .card-title { font-size: 1.7rem; font-weight: 700; color: var(--secondary-color); }
-        .price-tag { font-size: 1.6rem; font-weight: 700; color: var(--primary-color); }
         
-        /* Raised Dining (kept original styling) */
-        .raised-dining {
-            background-color: var(--light-color);
-            padding: 100px 0;
-            margin: 80px 0;
-        }
-        .raised-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-        .raised-text h2 { font-size: 42px; color: var(--secondary-color); }
-        .raised-stats { display: flex; gap: 40px; margin-top: 30px; }
-        .stat-value { font-size: 36px; font-weight: 700; color: var(--primary-color); }
-        
-        /* Video Showcase Grid */
-        .video-showcase { padding: 100px 0; background: linear-gradient(to bottom, #ffffff, var(--light-color)); }
-        .video-card {
-            background: white;
-            border-radius: 24px;
-            overflow: hidden;
-            transition: all 0.35s;
-            border: 1px solid rgba(188, 138, 95, 0.2);
-        }
-        .video-card:hover { transform: translateY(-8px); border-color: var(--primary-color); box-shadow: 0 20px 35px rgba(0,0,0,0.1); }
-        .video-wrapper { aspect-ratio: 16 / 9; background: #000; }
-        .video-wrapper iframe { width: 100%; height: 100%; border: none; }
-        .video-info { padding: 1.5rem; }
-        .video-badge { background: rgba(188,138,95,0.15); padding: 5px 12px; border-radius: 30px; font-size: 0.75rem; color: var(--primary-color); }
-        
-        /* Lightbox overlay */
-        .lightbox {
-            display: none;
+        /* Floating action button */
+        .fab-booking {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 1050;
-            justify-content: center;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #D4AF37, #FF8C42);
+            color: #1e1e2a;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 0 20px rgba(212,175,55,0.8);
+            z-index: 1050;
+            transition: 0.3s;
             cursor: pointer;
+            animation: pulseGlow 2s infinite;
         }
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        .fab-booking:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 35px #FFD966;
         }
-        .lightbox.active { display: flex; }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(212,175,55,0); }
+            100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
+        }
         
-        /* Footer */
-        footer { background: var(--dark-color); color: white; padding: 80px 0 30px; }
-        .footer-links a { color: #aaa; text-decoration: none; transition: var(--transition); display: block; margin-bottom: 12px; }
-        .footer-links a:hover { color: var(--primary-color); padding-left: 5px; }
-        .social-icons a {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%;
-            margin-right: 12px; color: white; transition: var(--transition);
+        /* Swiper custom styles */
+        .swiper {
+            padding: 30px 10px 50px;
         }
-        .social-icons a:hover { background: var(--primary-color); transform: translateY(-3px); }
+        .testimonial-card {
+            background: rgba(0,0,0,0.05);
+            backdrop-filter: blur(20px);
+            border-radius: 48px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255,215,0,0.4);
+            transition: 0.4s;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: #FFD966;
+        }
         
-        @media (max-width: 992px) {
-            .raised-content { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 48px; }
-            .search-bar { flex-direction: column; background: transparent; box-shadow: none; }
-            .search-item { background: white; margin-bottom: 10px; border-radius: 8px; border-right: none; }
+        /* Marquee partners */
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            display: flex;
+            gap: 3rem;
+            animation: scrollMarquee 20s linear infinite;
         }
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 36px; }
-            .card-title { font-size: 1.4rem; }
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        /* custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e1e2a; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(#D4AF37, #FF8C42); border-radius: 10px; }
+        
+        /* Section titles with neon */
+        .neon-title {
+            text-shadow: 0 0 5px #FFD966, 0 0 10px #FFA500;
+        }
+        
+        .video-card {
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(12px);
         }
     </style>
 </head>
 <body>
-    <header id="header">
-        <div class="container">
-            <nav class="d-flex justify-content-between align-items-center">
-                <a href="#" class="logo"><i class="fas fa-crown"></i>Binge<span>Leisure</span></a>
-                <ul class="nav-links">
-                    <li><a href="indexmaps.html">Home</a></li>
-                    <li><a href="aboutus.html">About-Us</a></li>
-                    <li><a href="luxurysignup.html">Signup5</a></li>
-                    <li><a href="Bookings.html">Book</a></li>
-                    <li><a href="page1.html">page 1</a></li>
-                    <li><a href="page2catery.html">page 2</a></li>
-                    <li><a href="page3spa.html">page 3</a></li>
-                    <li><a href="page4events.html">page 4</a></li>
-                    <li><a href="#features">Unique Features</a></li>
-                    <li><a href="#accommodations">Accommodations</a></li>
-                    <li><a href="#dining">Raised Dining</a></li>
-                    <li><a href="#videoGallery">Videos</a></li>
-                </ul>
-                <div><a href="#" class="btn btn-primary-custom">Book Now</a></div>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content" data-aos="fade-up">
-                <h1>Elevated Luxury Awaits</h1>
-                <p>Experience the world's first 40-foot raised dining at Binge Leisure Resort, where luxury meets nature in perfect harmony.</p>
-                <div class="search-bar">
-                    <div class="search-item"><label>DESTINATION</label><input type="text" placeholder="Binge Leisure Resort" readonly></div>
-                    <div class="search-item"><label>CHECK-IN</label><input type="date" id="checkin"></div>
-                    <div class="search-item"><label>CHECK-OUT</label><input type="date" id="checkout"></div>
-                    <div class="search-item"><label>GUESTS</label><select><option>2 Guests</option><option>4 Guests</option><option>6+ Guests</option></select></div>
-                    <button class="search-btn"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-        </div>
-    </section>
+<div id="particles-js"></div>
+<div class="fab-booking" id="floatingBookBtn"><i class="fas fa-crown"></i></div>
 
-    <!-- Unparalleled Experiences Section - Enhanced with Bootstrap Cards & Lightbox -->
-    <section class="features" id="features">
-        <div class="container">
-            <div class="section-title text-center mb-5" data-aos="fade-up">
-                <h2 class="display-5" style="color: var(--secondary-color);">Unparalleled Experiences</h2>
-                <p class="lead text-muted">Discover the extraordinary amenities that make Binge Leisure Resort a destination like no other.</p>
-            </div>
-            <div class="row g-4">
-                <!-- Card 1: Raised Dining -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card custom-card h-100">
-                        <img src="IMG-20260126-WA0012.jpg" class="card-img-top" alt="Raised Dining Area" data-lightbox="feature">
-                        <div class="card-body text-center">
-                            <div class="feature-icon mb-3"><i class="fas fa-arrow-up fa-2x" style="color: var(--primary-color);"></i></div>
-                            <h3 class="card-title">40-Foot Raised Dining</h3>
-                            <p class="card-text">Dine among the treetops in our architecturally stunning raised dining area, offering panoramic views of the surrounding landscape.</p>
-                            <a href="#" class="btn btn-outline-custom">Experience It</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 2: Natural Dam -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card custom-card h-100">
-                        <img src="IMG-20260126-WA0013.jpg" class="card-img-top" alt="Natural Dam" data-lightbox="feature">
-                        <div class="card-body text-center">
-                            <div class="feature-icon mb-3"><i class="fas fa-water fa-2x" style="color: var(--primary-color);"></i></div>
-                            <h3 class="card-title">Vast Natural Dam</h3>
-                            <p class="card-text">Our pristine natural dam connects to neighboring resorts, offering exclusive water activities and breathtaking views.</p>
-                            <a href="#" class="btn btn-outline-custom">Explore Waters</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card 3: Curated Performances -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card custom-card h-100">
-                        <img src="IMG-20260126-WA0014.jpg" class="card-img-top" alt="Performance Stage" data-lightbox="feature">
-                        <div class="card-body text-center">
-                            <div class="feature-icon mb-3"><i class="fas fa-theater-masks fa-2x" style="color: var(--primary-color);"></i></div>
-                            <h3 class="card-title">Curated Performances</h3>
-                            <p class="card-text">World-class entertainment on our dedicated stage featuring local and international artists in an intimate setting.</p>
-                            <a href="#" class="btn btn-outline-custom">View Events</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Raised Dining Highlight (unchanged) -->
-    <section class="raised-dining" id="dining">
-        <div class="container">
-            <div class="raised-content" data-aos="fade-right">
-                <div class="raised-text">
-                    <h2>Dining Above the Clouds</h2>
-                    <p>Our signature raised dining area stands 40 feet above ground, offering an unparalleled culinary experience. Accessed via an elegant staircase, guests are treated to gourmet meals while enjoying breathtaking views of the resort and natural dam.</p>
-                    <p>The structure is supported by reinforced poles and designed by award-winning architects to provide both safety and aesthetic appeal. This unique dining experience has become the hallmark of Binge Leisure Resort.</p>
-                    <div class="raised-stats">
-                        <div class="stat"><div class="stat-value">40ft</div><div class="stat-label">Elevated Dining</div></div>
-                        <div class="stat"><div class="stat-value">360°</div><div class="stat-label">Panoramic Views</div></div>
-                        <div class="stat"><div class="stat-value">5-Star</div><div class="stat-label">Culinary Experience</div></div>
-                    </div>
-                    <a href="#" class="btn btn-primary-custom mt-4">Reserve Your Table</a>
-                </div>
-                <div class="raised-img" data-aos="fade-left">
-                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80" alt="Raised Dining Structure" class="img-fluid rounded-4 shadow-lg">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Luxury Accommodations - Enhanced with Bootstrap Cards & Lightbox -->
-    <section class="accommodations" id="accommodations">
-        <div class="container">
-            <div class="section-title text-center mb-5" data-aos="fade-up">
-                <h2 class="display-5" style="color: var(--secondary-color);">Luxury Accommodations</h2>
-                <p class="lead text-muted">Select from our exclusive collection of villas and suites, each designed with sophistication and comfort.</p>
-            </div>
-            <div class="row g-4">
-                <!-- Treetop Villa -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card custom-card h-100">
-                        <img src="IMG-20260126-WA0015.jpg" class="card-img-top" alt="Treetop Villa" data-lightbox="accommodation">
-                        <div class="card-body">
-                            <h3 class="card-title">Treetop Villa</h3>
-                            <p class="card-text">Nestled among the canopy, these villas offer private access to the raised dining area and panoramic dam views.</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="price-tag">$1,200 <small class="text-muted">/ night</small></span>
-                                <a href="#" class="btn btn-primary-custom btn-sm">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Waterfront Suite -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card custom-card h-100">
-                        <img src="IMG-20260126-WA0022.jpg" class="card-img-top" alt="Waterfront Suite" data-lightbox="accommodation">
-                        <div class="card-body">
-                            <h3 class="card-title">Waterfront Suite</h3>
-                            <p class="card-text">Direct access to the natural dam with private dock, infinity pool, and personalized butler service.</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="price-tag">$2,500 <small class="text-muted">/ night</small></span>
-                                <a href="#" class="btn btn-primary-custom btn-sm">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Executive Residence -->
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card custom-card h-100">
-                        <img src="IMG-20260126-WA0023.jpg" class="card-img-top" alt="Executive Residence" data-lightbox="accommodation">
-                        <div class="card-body">
-                            <h3 class="card-title">Executive Residence</h3>
-                            <p class="card-text">Our most exclusive offering with private chef, dedicated concierge, and helicopter pad access.</p>
-                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                <span class="price-tag">$5,000 <small class="text-muted">/ night</small></span>
-                                <a href="#" class="btn btn-primary-custom btn-sm">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Video Showcase Grid -->
-    <section class="video-showcase" id="videoGallery">
-        <div class="container">
-            <div class="section-title text-center mb-5" data-aos="fade-up">
-                <h2 class="display-5" style="color: var(--secondary-color);">Moments from Binge Leisure</h2>
-                <p class="lead text-muted">Immerse yourself in the elevated luxury, exclusive dam views, and curated resort experiences.</p>
-            </div>
-            <div class="row g-4" id="videoGridContainer">
-                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="video-card">
-                        <div class="video-wrapper"><div id="player-Wy7zh0pXO8k"></div></div>
-                        <div class="video-info">
-                            <div class="video-badge"><i class="fas fa-crown"></i> Signature Highlight</div>
-                            <h3>Raised Dining · 40ft Elevation</h3>
-                            <p><i class="fas fa-utensils"></i> Culinary masterpiece with panoramic dam views.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="video-card">
-                        <div class="video-wrapper"><div id="player-0EFc5q7sbAo"></div></div>
-                        <div class="video-info">
-                            <div class="video-badge"><i class="fas fa-water"></i> Natural Wonder</div>
-                            <h3>Vaal Dam · Serene Escapes</h3>
-                            <p><i class="fas fa-ship"></i> Sunset cruises and luxury water activities.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="video-card">
-                        <div class="video-wrapper"><div id="player-RB3qY2OP0K0"></div></div>
-                        <div class="video-info">
-                            <div class="video-badge"><i class="fas fa-music"></i> Curated Evenings</div>
-                            <h3>Live Performances · Starry Nights</h3>
-                            <p><i class="fas fa-theater-masks"></i> World-class entertainment under African sky.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="footer-logo h3 text-warning">✦ BINGE LEISURE</div>
-                    <p class="mt-3">An unparalleled luxury destination featuring the world's first 40-foot raised dining experience, vast natural dam, and curated performances.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4">
-                    <h4>Quick Links</h4>
-                    <div class="footer-links"><a href="#home">Home</a><a href="#features">Unique Features</a><a href="#accommodations">Accommodations</a><a href="#dining">Raised Dining</a><a href="#videoGallery">Video Gallery</a></div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <h4>Contact Info</h4>
-                    <div class="footer-links"><a href="#"><i class="fas fa-map-marker-alt me-2"></i> 123 Luxury Lane, Resort Valley</a><a href="#"><i class="fas fa-phone me-2"></i> +1 (888) 555-BINGE</a><a href="#"><i class="fas fa-envelope me-2"></i> info@bingleisureresort.com</a></div>
-                </div>
-                <div class="col-lg-3 col-md-4">
-                    <h4>Exclusive Offers</h4>
-                    <p>Subscribe for special packages.</p>
-                    <div class="input-group"><input type="email" class="form-control" placeholder="Your email"><button class="btn btn-primary-custom">Subscribe</button></div>
-                </div>
-            </div>
-            <div class="copyright text-center mt-5 pt-3 border-top border-secondary"><p>&copy; 2023 Binge Leisure Resort. All rights reserved. | Property value exceeding $15M</p></div>
-        </div>
-    </footer>
-
-    <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" alt="Enlarged view">
+<header id="header" class="fixed-top py-3" style="background: rgba(0,0,0,0.75); backdrop-filter: blur(20px); z-index: 1030;">
+    <div class="container">
+        <nav class="d-flex justify-content-between align-items-center">
+            <a href="#" class="logo fs-2 fw-bold text-decoration-none rainbow-text"><i class="fas fa-gem me-2" style="color: #FFD966;"></i>Binge<span style="color:#FFD966;">Leisure</span></a>
+            <ul class="nav-links d-none d-md-flex list-unstyled mb-0 gap-4">
+                <li><a href="indexmaps.html" class="text-white text-decoration-none fw-semibold">Home</a></li>
+                <li><a href="aboutus.html" class="text-white text-decoration-none fw-semibold">About</a></li>
+                <li><a href="luxurysignup.html" class="text-white text-decoration-none fw-semibold">Signup</a></li>
+                <li><a href="Bookings.html" class="text-white text-decoration-none fw-semibold">Book</a></li>
+                <li><a href="#features" class="text-white text-decoration-none fw-semibold">Features</a></li>
+                <li><a href="#accommodations" class="text-white text-decoration-none fw-semibold">Stays</a></li>
+                <li><a href="#videoGallery" class="text-white text-decoration-none fw-semibold">Moments</a></li>
+                <li><a href="#testimonials" class="text-white text-decoration-none fw-semibold">Acclaim</a></li>
+            </ul>
+            <a href="#" class="btn btn-glow" id="bookNowNavBtn">Reserve Suite ✦</a>
+        </nav>
     </div>
+</header>
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script>
-        // Initialize AOS
-        AOS.init({ duration: 800, once: true });
+<!-- Hero -->
+<section class="hero min-vh-100 d-flex align-items-center" id="home">
+    <div class="container text-center">
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1200">
+            <h1 class="display-1 fw-bold mb-4 rainbow-text">Elevated Luxury Awaits</h1>
+            <p class="fs-4 text-white fw-light">Experience the world's first 40-foot raised dining at Binge Leisure Resort, where luxury meets nature in perfect harmony.</p>
+            <div class="search-bar bg-white p-2 rounded-4 shadow-lg row g-2 mt-5 mx-auto" style="max-width: 900px;">
+                <div class="col-md-3"><input type="text" class="form-control border-0" placeholder="Binge Leisure Resort" readonly></div>
+                <div class="col-md-3"><input type="date" id="checkin" class="form-control border-0"></div>
+                <div class="col-md-3"><input type="date" id="checkout" class="form-control border-0"></div>
+                <div class="col-md-2"><select class="form-select border-0"><option>2 Guests</option><option>4 Guests</option><option>6+ Guests</option></select></div>
+                <div class="col-md-1"><button class="btn btn-glow w-100"><i class="fas fa-search"></i></button></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Unparalleled Experiences Section -->
+<section class="features py-5" id="features">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-4 rainbow-text fw-bold neon-title">Unparalleled Experiences</h2>
+            <p class="lead text-dark">Discover the extraordinary amenities that make Binge Leisure Resort a destination like no other.</p>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="100">
+                <div class="card custom-card tilt-card h-100 border-0 rounded-4 overflow-hidden shadow-lg" data-tilt data-tilt-max="8" data-tilt-glare="true" data-tilt-scale="1.02">
+                    <img src="IMG-20260126-WA0012.jpg" class="card-img-top" style="height: 260px; object-fit: cover;" alt="Raised Dining" data-lightbox="feature">
+                    <div class="card-body text-center bg-white">
+                        <i class="fas fa-arrow-up fa-3x mb-3" style="color: #D4AF37;"></i>
+                        <h3 class="card-title">40-Foot Raised Dining</h3>
+                        <p>Dine among the treetops with panoramic views – the world’s most exclusive elevated cuisine.</p>
+                        <a href="#" class="btn btn-outline-luxury mt-2">Experience It</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="200">
+                <div class="card custom-card tilt-card h-100 border-0 rounded-4 shadow-lg" data-tilt data-tilt-max="8" data-tilt-glare="true">
+                    <img src="IMG-20260126-WA0013.jpg" class="card-img-top" style="height: 260px; object-fit: cover;" alt="Natural Dam" data-lightbox="feature">
+                    <div class="card-body text-center bg-white">
+                        <i class="fas fa-water fa-3x mb-3" style="color: #00B894;"></i>
+                        <h3 class="card-title">Vast Natural Dam</h3>
+                        <p>Pristine waters connecting neighboring resorts – exclusive cruises & water sports.</p>
+                        <a href="#" class="btn btn-outline-luxury mt-2">Explore Waters</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="flip-left" data-aos-delay="300">
+                <div class="card custom-card tilt-card h-100 border-0 rounded-4 shadow-lg" data-tilt data-tilt-max="8" data-tilt-glare="true">
+                    <img src="IMG-20260126-WA0014.jpg" class="card-img-top" style="height: 260px; object-fit: cover;" alt="Performance Stage" data-lightbox="feature">
+                    <div class="card-body text-center bg-white">
+                        <i class="fas fa-theater-masks fa-3x mb-3" style="color: #FF6B6B;"></i>
+                        <h3 class="card-title">Curated Performances</h3>
+                        <p>World-class entertainment under the stars – intimate shows with global artists.</p>
+                        <a href="#" class="btn btn-outline-luxury mt-2">View Events</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Raised Dining with Animated Stats -->
+<section class="raised-dining py-5 my-5" id="dining">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h2 class="display-4 fw-bold rainbow-text">Dining Above the Clouds</h2>
+                <p class="lead">Our signature raised dining area stands 40 feet above ground, offering an unparalleled culinary experience. Reinforced architecture meets gourmet perfection.</p>
+                <div class="row mt-4 text-center">
+                    <div class="col-4"><div class="stat-value" id="stat1">0</div><div class="stat-label fw-bold">Feet</div></div>
+                    <div class="col-4"><div class="stat-value" id="stat2">0</div><div class="stat-label fw-bold">Views (360°)</div></div>
+                    <div class="col-4"><div class="stat-value" id="stat3">0</div><div class="stat-label fw-bold">Stars</div></div>
+                </div>
+                <a href="#" class="btn btn-glow mt-4 px-5">Reserve Your Table</a>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80" class="img-fluid rounded-5 shadow-lg" alt="Elevated Dining">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Luxury Accommodations -->
+<section class="accommodations py-5" id="accommodations">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-4 rainbow-text">Luxury Accommodations</h2>
+            <p class="lead">Select from our exclusive collection of villas and suites, designed with sophistication.</p>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-delay="100">
+                <div class="card tilt-card h-100 border-0 rounded-4 shadow overflow-hidden" data-tilt data-tilt-max="6">
+                    <img src="IMG-20260126-WA0015.jpg" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Treetop Villa" data-lightbox="accommodation">
+                    <div class="card-body bg-white"><h3 class="fw-bold">Treetop Villa</h3><p>Nestled among the canopy, private access to raised dining & dam views.</p><div class="d-flex justify-content-between align-items-center mt-3"><span class="h4 text-warning fw-bold">$1,200<small>/night</small></span><a href="#" class="btn btn-glow btn-sm">Book Now</a></div></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-delay="200">
+                <div class="card tilt-card h-100 border-0 rounded-4 shadow overflow-hidden" data-tilt data-tilt-max="6">
+                    <img src="IMG-20260126-WA0022.jpg" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Waterfront Suite" data-lightbox="accommodation">
+                    <div class="card-body bg-white"><h3 class="fw-bold">Waterfront Suite</h3><p>Direct access, private dock, infinity pool, personalized butler service.</p><div class="d-flex justify-content-between align-items-center mt-3"><span class="h4 text-warning fw-bold">$2,500<small>/night</small></span><a href="#" class="btn btn-glow btn-sm">Book Now</a></div></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6" data-aos="zoom-in-up" data-aos-delay="300">
+                <div class="card tilt-card h-100 border-0 rounded-4 shadow overflow-hidden" data-tilt data-tilt-max="6">
+                    <img src="IMG-20260126-WA0023.jpg" class="card-img-top" style="height: 250px; object-fit: cover;" alt="Executive Residence" data-lightbox="accommodation">
+                    <div class="card-body bg-white"><h3 class="fw-bold">Executive Residence</h3><p>Private chef, dedicated concierge, helicopter pad access – ultimate prestige.</p><div class="d-flex justify-content-between align-items-center mt-3"><span class="h4 text-warning fw-bold">$5,000<small>/night</small></span><a href="#" class="btn btn-glow btn-sm">Book Now</a></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NEW SECTION: Global Acclaim & Testimonials (Colourful Swiper) -->
+<section class="testimonials py-5" id="testimonials" style="background: linear-gradient(125deg, #FFF2E6, #FFE8D4);">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-4 rainbow-text fw-bold">Global Acclaim ✨</h2>
+            <p class="lead">What the world says about Binge Leisure Resort</p>
+        </div>
+        <div class="swiper mySwiper" data-aos="zoom-in">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><div class="testimonial-card"><i class="fas fa-quote-left fa-2x text-warning mb-3"></i><p class="fs-5">"The raised dining experience is unlike anything on earth. Magical sunset over the dam."</p><h5 class="mt-3">— Forbes Travel Guide</h5><div class="stars text-warning">★★★★★</div></div></div>
+                <div class="swiper-slide"><div class="testimonial-card"><i class="fas fa-quote-left fa-2x text-warning mb-3"></i><p class="fs-5">"The most vibrant, colourful luxury escape I've ever witnessed. Absolute masterpiece."</p><h5 class="mt-3">— Condé Nast Traveller</h5><div class="stars text-warning">★★★★★</div></div></div>
+                <div class="swiper-slide"><div class="testimonial-card"><i class="fas fa-quote-left fa-2x text-warning mb-3"></i><p class="fs-5">"Unmatched value and innovation. The 40ft dining is a bucket-list essential."</p><h5 class="mt-3">— Travel + Leisure</h5><div class="stars text-warning">★★★★★</div></div></div>
+                <div class="swiper-slide"><div class="testimonial-card"><i class="fas fa-quote-left fa-2x text-warning mb-3"></i><p class="fs-5">"Where nature meets luxury in perfect harmony. South Africa's crown jewel."</p><h5 class="mt-3">— National Geographic</h5><div class="stars text-warning">★★★★★</div></div></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
         
-        // Header scroll
-        window.addEventListener('scroll', () => {
-            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 100);
-        });
-        
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if(target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-        
-        // Date defaults
-        const today = new Date();
-        const tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
-        const format = d => d.toISOString().split('T')[0];
-        document.getElementById('checkin').value = format(today);
-        document.getElementById('checkout').value = format(tomorrow);
-        
-        // Lightbox system
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        document.querySelectorAll('[data-lightbox]').forEach(img => {
-            img.style.cursor = 'pointer';
-            img.addEventListener('click', (e) => {
-                e.stopPropagation();
-                lightboxImg.src = img.src;
-                lightbox.classList.add('active');
-            });
-        });
-        window.closeLightbox = () => lightbox.classList.remove('active');
-        document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
-        
-        // YouTube API: single play at a time
-        let players = {};
-        const videoIds = ['Wy7zh0pXO8k', '0EFc5q7sbAo', 'RB3qY2OP0K0'];
-        window.onYouTubeIframeAPIReady = () => {
-            videoIds.forEach(id => {
-                players[id] = new YT.Player(`player-${id}`, {
-                    height: '100%', width: '100%', videoId: id,
-                    playerVars: { modestbranding: 1, rel: 0, controls: 1, enablejsapi: 1 },
-                    events: { onStateChange: (e) => { if(e.data === YT.PlayerState.PLAYING) pauseOthers(id); } }
-                });
-            });
-        };
-        function pauseOthers(currentId) {
-            Object.entries(players).forEach(([id, player]) => { if(id !== currentId && player.pauseVideo) player.pauseVideo(); });
-        }
-    </script>
+        <!-- Marquee Partner Logos (abstract) -->
+        <div class="mt-5 pt-4 overflow-hidden">
+            <div class="marquee d-flex">
+                <span class="mx-4 fs-4"><i class="fab fa-cc-visa text-dark"></i> LUXURY ALLIANCE</span>
+                <span class="mx-4 fs-4"><i class="fas fa-gem text-warning"></i> WORLD'S BEST RESORTS</span>
+                <span class="mx-4 fs-4"><i class="fas fa-award text-danger"></i> 5-STAR DIAMOND</span>
+                <span class="mx-4 fs-4"><i class="fas fa-globe text-info"></i> GLOBAL EXCELLENCE</span>
+                <span class="mx-4 fs-4"><i class="fab fa-cc-visa text-dark"></i> LUXURY ALLIANCE</span>
+                <span class="mx-4 fs-4"><i class="fas fa-gem text-warning"></i> WORLD'S BEST RESORTS</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video Showcase Grid -->
+<section class="video-showcase py-5" id="videoGallery">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-4 rainbow-text">Moments from Binge Leisure</h2>
+            <p>Immerse yourself in the elevated luxury, exclusive dam views, and curated performances.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="flip-up"><div class="video-card p-2 glass-card"><div class="video-wrapper"><div id="player-Wy7zh0pXO8k"></div></div><div class="video-info p-3"><span class="badge bg-warning text-dark">Signature</span><h4 class="mt-2">Raised Dining</h4></div></div></div>
+            <div class="col-md-4" data-aos="flip-up" data-aos-delay="150"><div class="video-card p-2 glass-card"><div class="video-wrapper"><div id="player-0EFc5q7sbAo"></div></div><div class="video-info p-3"><span class="badge bg-info text-dark">Serene Dam</span><h4 class="mt-2">Vaal Dam</h4></div></div></div>
+            <div class="col-md-4" data-aos="flip-up" data-aos-delay="300"><div class="video-card p-2 glass-card"><div class="video-wrapper"><div id="player-RB3qY2OP0K0"></div></div><div class="video-info p-3"><span class="badge bg-danger text-dark">Live Stage</span><h4 class="mt-2">Performances</h4></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="pt-5 pb-3" style="background: #05050A;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4"><div class="footer-logo h3 text-warning">✦ BINGE LEISURE</div><p class="text-white-50">An unparalleled luxury destination featuring the world's first 40-foot raised dining experience, vast natural dam, and curated performances.</p><div class="social-icons"><a href="#" class="me-2 text-white fs-4"><i class="fab fa-instagram"></i></a><a href="#" class="me-2 text-white fs-4"><i class="fab fa-facebook-f"></i></a><a href="#" class="me-2 text-white fs-4"><i class="fab fa-twitter"></i></a></div></div>
+            <div class="col-lg-2 col-md-4"><h5>Quick Links</h5><ul class="list-unstyled"><li><a href="#home" class="text-white-50">Home</a></li><li><a href="#features" class="text-white-50">Features</a></li><li><a href="#accommodations" class="text-white-50">Accommodations</a></li><li><a href="#testimonials" class="text-white-50">Acclaim</a></li></ul></div>
+            <div class="col-lg-3 col-md-4"><h5>Contact</h5><ul class="list-unstyled text-white-50"><li><i class="fas fa-map-marker-alt text-warning me-2"></i> 123 Luxury Lane, Resort Valley</li><li><i class="fas fa-phone text-warning me-2"></i> +1 (888) 555-BINGE</li><li><i class="fas fa-envelope text-warning me-2"></i> luxury@bingleisure.com</li></ul></div>
+            <div class="col-lg-3 col-md-4"><h5>Exclusive Offers</h5><div class="input-group"><input type="email" class="form-control bg-dark text-white" placeholder="Your email"><button class="btn btn-warning">Subscribe</button></div></div>
+        </div>
+        <div class="text-center mt-5 pt-3 border-top border-secondary"><p class="text-white-50">&copy; 2025 Binge Leisure Resort — The World’s Most Colourful Escape</p></div>
+    </div>
+</footer>
+
+<!-- Lightbox -->
+<div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; align-items:center; justify-content:center; cursor:pointer;" onclick="closeLightbox()"><img id="lightbox-img" style="max-width:90%; max-height:90%; border-radius:20px;"></div>
+
+<script>
+    // Particles.js config
+    particlesJS("particles-js", {
+        "particles": { "number": { "value": 80, "density": { "enable": true, "value_area": 800 } }, "color": { "value": ["#FFD966", "#FF6B6B", "#00B894", "#A29BFE"] }, "shape": { "type": "circle" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#FFD966", "opacity": 0.2, "width": 1 }, "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out" } }, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } } }, "retina_detect": true
+    });
+    
+    // Swiper carousel
+    new Swiper('.mySwiper', { loop: true, autoplay: { delay: 4000 }, pagination: { el: '.swiper-pagination', clickable: true }, navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }, effect: 'creative' });
+    
+    // GSAP ScrollTrigger + colour shift
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to("body", { backgroundColor: "#FFF9F0", duration: 2, scrollTrigger: { trigger: "#testimonials", start: "top center", end: "bottom center", scrub: 1 } });
+    
+    // Countup
+    const stat1 = new CountUp.CountUp('stat1', 40, { suffix: 'ft' });
+    const stat2 = new CountUp.CountUp('stat2', 360, { suffix: '°' });
+    const stat3 = new CountUp.CountUp('stat3', 5, { suffix: '★' });
+    const observer = new IntersectionObserver(entries => { entries.forEach(entry => { if(entry.isIntersecting) { stat1.start(); stat2.start(); stat3.start(); observer.unobserve(entry.target); } }); }, { threshold: 0.5 });
+    observer.observe(document.querySelector('.raised-dining'));
+    
+    // Vanilla Tilt
+    VanillaTilt.init(document.querySelectorAll(".tilt-card"), { max: 12, speed: 400, glare: true });
+    
+    // Floating button confetti
+    document.getElementById('floatingBookBtn').addEventListener('click', () => { canvasConfetti({ particleCount: 200, spread: 100, origin: { y: 0.7 }, colors: ['#FFD966', '#FF8C42', '#00B894'] }); alert('✨ Awaits your arrival at Binge Leisure!'); });
+    document.getElementById('bookNowNavBtn').addEventListener('click', (e) => { e.preventDefault(); canvasConfetti({ particleCount: 150, spread: 70 }); alert('Book your vibrant escape now!'); });
+    
+    // Lightbox
+    document.querySelectorAll('[data-lightbox]').forEach(img => { img.style.cursor = 'pointer'; img.addEventListener('click', () => { document.getElementById('lightbox-img').src = img.src; document.getElementById('lightbox').style.display = 'flex'; }); });
+    window.closeLightbox = () => document.getElementById('lightbox').style.display = 'none';
+    
+    // YouTube one-at-a-time
+    let players = {}; const videoIds = ['Wy7zh0pXO8k', '0EFc5q7sbAo', 'RB3qY2OP0K0'];
+    window.onYouTubeIframeAPIReady = () => { videoIds.forEach(id => { players[id] = new YT.Player(`player-${id}`, { height: '100%', width: '100%', videoId: id, playerVars: { modestbranding: 1, rel: 0, controls: 1, enablejsapi: 1 }, events: { onStateChange: (e) => { if(e.data === YT.PlayerState.PLAYING) Object.entries(players).forEach(([oid, pl]) => { if(oid !== id && pl.pauseVideo) pl.pauseVideo(); }); } } }); }); };
+    
+    // Date defaults
+    const today = new Date(), tomorrow = new Date(today); tomorrow.setDate(tomorrow.getDate()+1);
+    const f = d => d.toISOString().split('T')[0];
+    document.getElementById('checkin').value = f(today); document.getElementById('checkout').value = f(tomorrow);
+    
+    // GSAP hero animation
+    gsap.from(".hero h1", { opacity: 0, y: 80, duration: 1.2, ease: "back.out(1.2)" });
+    gsap.from(".hero p", { opacity: 0, y: 40, duration: 1, delay: 0.4 });
+    gsap.from(".search-bar", { opacity: 0, scale: 0.8, duration: 0.9, delay: 0.7 });
+</script>
 </body>
 </html>
