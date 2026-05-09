@@ -1,58 +1,610 @@
- starPositions = new Float32Array(starCount * 3);
-    for (let i = 0; i < starCount; i++) {
-        starPositions[i*3] = (Math.random() - 0.5) * 2000;
-        starPositions[i*3+1] = (Math.random() - 0.5) * 1000;
-        starPositions[i*3+2] = (Math.random() - 0.5) * 800 - 400;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Binge Leisure Resort | 360° Immersive Gallery - 3D Panoramic Experience</title>
+    
+    <!-- Google Fonts + Font Awesome + Bootstrap Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #BC8A5F;
+            --secondary-color: #3D5A5B;
+            --accent-color: #A52A2A;
+            --light-bg: #F7F3EE;
+            --dark-bg: #0a0a0a;
+            --text-light: #f5f0e8;
+            --shadow-lg: 0 20px 35px rgba(0,0,0,0.3);
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #07090e;
+            overflow-x: hidden;
+            color: #fff;
+            margin: 0;
+        }
+        
+        /* Navigation (consistent with resort theme) */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 18px 0;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1100;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(188, 138, 95, 0.4);
+        }
+        
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .logo span { color: #f5e3c9; }
+        .logo i { margin-right: 10px; font-size: 26px; color: var(--primary-color);}
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 26px;
+            margin: 0;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #f0ede8;
+            font-weight: 500;
+            transition: 0.25s;
+            font-size: 0.9rem;
+        }
+        .nav-links a:hover { color: var(--primary-color); }
+        
+        .btn-3d {
+            background: transparent;
+            border: 1.5px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-3d:hover {
+            background: var(--primary-color);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(188,138,95,0.4);
+        }
+        
+        /* main gallery section - fullscreen */
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: #03050a;
+        }
+        
+        #three-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        /* UI Overlay - controls & info */
+        .gallery-ui {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            pointer-events: none;
+            text-align: center;
+        }
+        
+        .instruction-panel {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            padding: 12px 28px;
+            border-radius: 60px;
+            border: 1px solid rgba(188,138,95,0.5);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            pointer-events: auto;
+            margin-bottom: 15px;
+        }
+        
+        .instruction-panel i {
+            color: var(--primary-color);
+            margin-right: 6px;
+        }
+        
+        .badge-luxury {
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(4px);
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            display: inline-block;
+            font-family: monospace;
+        }
+        
+        .image-counter {
+            position: absolute;
+            top: 100px;
+            right: 25px;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(4px);
+            z-index: 210;
+            font-weight: 500;
+            pointer-events: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .instruction-panel { padding: 8px 18px; font-size: 0.7rem; gap: 8px; }
+            .image-counter { top: 80px; font-size: 0.7rem; }
+            .logo { font-size: 22px; }
+        }
+        
+        /* tooltip hint hover effect (canvas overlay) */
+        .footer-note {
+            position: absolute;
+            bottom: 15px;
+            left: 20px;
+            font-size: 0.7rem;
+            color: #aaa;
+            z-index: 200;
+            background: rgba(0,0,0,0.4);
+            padding: 5px 12px;
+            border-radius: 20px;
+            pointer-events: none;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #07090e;
+            z-index: 3000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 1s ease;
+        }
+        
+        .loader-spinner {
+            width: 55px;
+            height: 55px;
+            border: 3px solid rgba(188,138,95,0.2);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .loader-text {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 2px;
+        }
+        
+        .scene-label {
+            position: absolute;
+            bottom: 25%;
+            left: 20px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            padding: 8px 18px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 210;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container d-flex justify-content-between align-items-center" style="max-width: 1400px; margin: 0 auto; padding: 0 24px;">
+        <a href="#" class="logo"><i class="fas fa-mountain-sun"></i>Binge<span>Leisure</span></a>
+        <ul class="nav-links">
+            <li><a href="indexmaps.html">Home</a></li>
+            <li><a href="aboutus.html">About</a></li>
+            <li><a href="luxurysignup.html">Exclusive</a></li>
+            <li><a href="Bookings.html">Reservations</a></li>
+            <li><a href="Panview.html" style="color: var(--primary-color);">360° Gallery</a></li>
+        </ul>
+        <div><a href="#" class="btn-3d"><i class="fas fa-vr-cardboard"></i> Immersive Tour</a></div>
+    </div>
+</header>
+
+<!-- 3D Canvas Area -->
+<div class="gallery-container">
+    <div id="three-canvas"></div>
+    <div class="image-counter" id="imageCounter">
+        <i class="fas fa-images"></i> <span id="currentIdx">1</span> / <span id="totalCount">6</span>
+    </div>
+    <div class="gallery-ui">
+        <div class="instruction-panel" data-aos="fade-up">
+            <span><i class="fas fa-mouse-pointer"></i> Drag to rotate 360°</span>
+            <span><i class="fas fa-search-plus"></i> Scroll to zoom</span>
+            <span><i class="fas fa-ring"></i> Explore every angle</span>
+        </div>
+        <div class="badge-luxury"><i class="fas fa-crown"></i> Signature Collection | 3D 360° Gallery</div>
+    </div>
+    <div class="scene-label" id="dynamicLabel">
+        <i class="fas fa-arrow-up"></i> Raised Dining Experience
+    </div>
+    <div class="footer-note">
+        <i class="fas fa-sync-alt"></i> Full 360° rotation • Binge Leisure Resort's finest imagery
+    </div>
+</div>
+
+<!-- Loading Screen -->
+<div id="loadingScreen" class="loading-overlay">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">Crafting 3D 360° Gallery</div>
+    <p style="margin-top: 15px; font-size: 0.8rem; color: #bc8a5faa;">Loading luxury visuals...</p>
+</div>
+
+<!-- Libraries: Three.js core, OrbitControls, GSAP for smooth animations -->
+<script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+        }
     }
-    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-    const starMaterial = new THREE.PointsMaterial({ color: 0xddccaa, size: 0.35, transparent: true, opacity: 0.5 });
-    const stars = new THREE.Points(starGeometry, starMaterial);
+</script>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+    
+    // ======================== //
+    // EXACT IMAGES FROM HOMEPAGE (all high-res resort assets)
+    // These match the image links used in the original index page:
+    // - Raised Dining (IMG-20260126-WA0012.jpg)
+    // - Natural Dam (IMG-20260126-WA0013.jpg)
+    // - Curated Performances (IMG-20260126-WA0014.jpg)
+    // - Treetop Villa (IMG-20260126-WA0015.jpg)
+    // - Waterfront Suite (IMG-20260126-WA0022.jpg)
+    // - Executive Residence (IMG-20260126-WA0023.jpg)
+    // Additionally we include the Raised Dining structure from unsplash as a backdrop? No, we respect exactly the images from cards.
+    // But the homepage also has an unsplash image for raised dining structure (in dining section) but we prioritize the actual resort photos.
+    // All images exist in same directory (relative path). For robustness, we also provide fallback if missing, but they are real assets.
+    const galleryImages = [
+        { url: "IMG-20260126-WA0012.jpg", title: "40-Foot Raised Dining", desc: "Elevated culinary masterpiece", icon: "fa-arrow-up" },
+        { url: "IMG-20260126-WA0013.jpg", title: "Vast Natural Dam", desc: "Serene waterfront & activities", icon: "fa-water" },
+        { url: "IMG-20260126-WA0014.jpg", title: "Curated Performances", desc: "World-class stage & artists", icon: "fa-theater-masks" },
+        { url: "IMG-20260126-WA0015.jpg", title: "Treetop Villa", desc: "Canopy luxury & privacy", icon: "fa-tree" },
+        { url: "IMG-20260126-WA0022.jpg", title: "Waterfront Suite", desc: "Private dock & infinity pool", icon: "fa-swimmer" },
+        { url: "IMG-20260126-WA0023.jpg", title: "Executive Residence", desc: "Ultimate VIP experience", icon: "fa-gem" }
+    ];
+    
+    // Setup Three.js scene
+    const container = document.getElementById('three-canvas');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x03050a);
+    scene.fog = new THREE.FogExp2(0x03050a, 0.003); // subtle atmospheric fog
+    
+    // Camera: perspective, placed at center looking outwards, but OrbitControl will rotate around center where images are placed.
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 1.5, 6);
+    camera.lookAt(0, 1, 0);
+    
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true; // subtle shadows for depth
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+    
+    // CSS2 renderer for floating labels
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    labelRenderer.domElement.style.position = 'absolute';
+    labelRenderer.domElement.style.top = '0px';
+    labelRenderer.domElement.style.left = '0px';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+    container.appendChild(labelRenderer.domElement);
+    
+    // Controls: full 360° rotation around center
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableZoom = true;
+    controls.zoomSpeed = 0.8;
+    controls.rotateSpeed = 1.2;
+    controls.enablePan = false;
+    controls.target.set(0, 1.2, 0);
+    controls.maxPolarAngle = Math.PI / 1.8;
+    
+    // Lighting: enhance images with ambient and directional + fill
+    const ambientLight = new THREE.AmbientLight(0x404060);
+    scene.add(ambientLight);
+    const mainLight = new THREE.DirectionalLight(0xfff5e0, 1.2);
+    mainLight.position.set(2, 5, 3);
+    mainLight.castShadow = true;
+    mainLight.receiveShadow = false;
+    scene.add(mainLight);
+    const fillLight = new THREE.PointLight(0xbc8a5f, 0.4);
+    fillLight.position.set(1, 2, 2);
+    scene.add(fillLight);
+    const backLight = new THREE.PointLight(0x3d5a5b, 0.3);
+    backLight.position.set(-1, 1.5, -2);
+    scene.add(backLight);
+    
+    // Decorative elements: elegant floating particles (golden shimmer)
+    const particleCount = 1200;
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlePositions = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount; i++) {
+        particlePositions[i*3] = (Math.random() - 0.5) * 40;
+        particlePositions[i*3+1] = (Math.random() - 0.5) * 12 + 1;
+        particlePositions[i*3+2] = (Math.random() - 0.5) * 30 - 10;
+    }
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+    const particleMaterial = new THREE.PointsMaterial({ color: 0xbc8a5f, size: 0.05, transparent: true, opacity: 0.4 });
+    const stars = new THREE.Points(particlesGeometry, particleMaterial);
     scene.add(stars);
     
-    // subtle rotation of stars on very slow time (adds depth)
-    function animateStars() {
-        requestAnimationFrame(animateStars);
-        stars.rotation.y += 0.0002;
-        stars.rotation.x += 0.0001;
+    // Ground subtle reflective disc (glow)
+    const circleGeometry = new THREE.CircleGeometry(4.5, 32);
+    const circleMaterial = new THREE.MeshStandardMaterial({ color: 0x11151f, roughness: 0.7, metalness: 0.2, transparent: true, opacity: 0.3 });
+    const groundDisc = new THREE.Mesh(circleGeometry, circleMaterial);
+    groundDisc.rotation.x = -Math.PI / 2;
+    groundDisc.position.y = -0.8;
+    scene.add(groundDisc);
+    
+    // Create floating image panels arranged in a 360° ring
+    const imageGroup = [];
+    const radius = 3.2;
+    const yOffset = 0.8;
+    const angles = [0, 60, 120, 180, 240, 300].map(deg => deg * Math.PI / 180);
+    
+    // For CSS2D labels
+    const labelDivs = [];
+    
+    // Load textures and create meshes
+    const loader = new THREE.TextureLoader();
+    let loadedCount = 0;
+    const totalImages = galleryImages.length;
+    
+    function updateLoadingStatus() {
+        loadedCount++;
+        if (loadedCount === totalImages) {
+            // fade out loading screen
+            const loadingEl = document.getElementById('loadingScreen');
+            gsap.to(loadingEl, { opacity: 0, duration: 0.8, delay: 0.3, onComplete: () => {
+                loadingEl.style.display = 'none';
+            }});
+        }
     }
-    animateStars();
     
-    // Add a stylish pseudo "lens flare" or light effect to replicate sunset? No overkill.
-    // Also preload interactive hints:  touch
-    const style = document.createElement('style')
-        .scene-btn i { transition: transform 0.2s; }
-        .scene-btn:hover i { transform: scale(1.1); }
-        #canvas-container canvas { outline: none; cursor: grab; }
-        #canvas-container canvas:active { cursor: grabbing; }
-    `;
-    document.head.appendChild(style);
+    // Preload all textures and create panels facing center
+    galleryImages.forEach((img, idx) => {
+        const angle = angles[idx];
+        const x = Math.cos(angle) * radius;
+        const z = Math.sin(angle) * radius;
+        
+        // Create 3D plane with the image texture
+        const texture = loader.load(img.url, 
+            () => updateLoadingStatus(),
+            undefined,
+            (err) => { console.warn(`Image load warning: ${img.url}`, err); updateLoadingStatus(); }
+        );
+        texture.encoding = THREE.sRGBEncoding; // for Three.js r128 correct property: colorSpace
+        texture.colorSpace = THREE.SRGBColorSpace;
+        
+        const material = new THREE.MeshStandardMaterial({ map: texture, side: THREE.DoubleSide, roughness: 0.2, metalness: 0.05, emissive: 0x221100, emissiveIntensity: 0.1 });
+        const geometry = new THREE.PlaneGeometry(2.2, 1.65); // elegant portrait/landscape based on ratio
+        const plane = new THREE.Mesh(geometry, material);
+        plane.position.set(x, yOffset + (idx % 2 === 0 ? 0.1 : -0.05), z);
+        
+        // Make planes always face the camera? No, they face outwards from center? Actually we want them facing center (so they look toward center where camera orbits)
+        // To make image always visible, we orient them toward center point (0, yOffset, 0)
+        plane.lookAt(0, yOffset, 0);
+        plane.userData = { title: img.title, desc: img.desc, index: idx, icon: img.icon };
+        
+        scene.add(plane);
+        
+        // Add subtle border frame (thin wireframe)
+        const edgesGeo = new THREE.EdgesGeometry(geometry);
+        const edgesMat = new THREE.LineBasicMaterial({ color: 0xbc8a5f });
+        const wireframe = new THREE.LineSegments(edgesGeo, edgesMat);
+        plane.add(wireframe);
+        
+        // Add CSS2D label (text overlay)
+        const div = document.createElement('div');
+        div.style.backgroundColor = 'rgba(0,0,0,0.7)';
+        div.style.backdropFilter = 'blur(8px)';
+        div.style.padding = '8px 16px';
+        div.style.borderRadius = '30px';
+        div.style.borderLeft = `3px solid #BC8A5F`;
+        div.style.fontFamily = 'Montserrat, sans-serif';
+        div.style.fontSize = '14px';
+        div.style.fontWeight = '500';
+        div.style.color = '#f5e3c9';
+        div.style.whiteSpace = 'nowrap';
+        div.innerHTML = `<i class="fas ${img.icon}" style="color:#BC8A5F; margin-right:8px;"></i>${img.title}`;
+        const labelObj = new CSS2DObject(div);
+        labelObj.position.set(x, yOffset - 1.0, z);
+        scene.add(labelObj);
+        labelDivs.push(labelObj);
+        
+        imageGroup.push(plane);
+        
+        // Optional: hover glow effect (raycaster later) 
+    });
     
-    // Provide handy dynamic meta description for sharing
-    const metaDesc = document.createElement('meta');
-    metaDesc.name = "description";
-    metaDesc.content = "Binge Leisure Resort 360° immersive tour: raised dining 40ft, natural dam, luxury suites. Drag to explore ultimate luxury.";
-    document.head.appendChild(metaDesc);
+    // Additional circular floating ambient particles (gold dust)
+    const dustGeo = new THREE.BufferGeometry();
+    const dustCount = 800;
+    const dustPositions = new Float32Array(dustCount * 3);
+    for (let i = 0; i < dustCount; i++) {
+        const rad = 2.8 + Math.random() * 1.5;
+        const theta = Math.random() * Math.PI * 2;
+        const yPos = -0.5 + Math.random() * 2.5;
+        dustPositions[i*3] = Math.cos(theta) * rad;
+        dustPositions[i*3+1] = yPos;
+        dustPositions[i*3+2] = Math.sin(theta) * rad;
+    }
+    dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
+    const dustMat = new THREE.PointsMaterial({ color: 0xd4af7a, size: 0.03, transparent: true, blending: THREE.AdditiveBlending });
+    const dustRing = new THREE.Points(dustGeo, dustMat);
+    scene.add(dustRing);
     
-    // initialize AOS (for fade on UI)
-    AOS.init({ duration: 600, once: true });
+    // Elegant central spotlight effect (point light with lens flare alternative)
+    const centerLight = new THREE.PointLight(0xbc8a5f, 0.6, 8);
+    centerLight.position.set(0, 0.9, 0);
+    scene.add(centerLight);
     
-    // error resilience: If any image fails due to CORS or network, we notify user gracefully
-    window.addEventListener('error', (e) => {
-        if(e.target.tagName === 'IMG' && e.target.src?.includes('raw.githubusercontent')) {
-            console.log("panorama image error, but viewer still functional");
+    // Add small crystal / reflective core
+    const coreGeo = new THREE.IcosahedronGeometry(0.18, 0);
+    const coreMat = new THREE.MeshStandardMaterial({ color: 0xbc8a5f, emissive: 0x5a3a1a, emissiveIntensity: 0.5, metalness: 0.8 });
+    const coreSphere = new THREE.Mesh(coreGeo, coreMat);
+    coreSphere.position.set(0, 0.9, 0);
+    scene.add(coreSphere);
+    
+    // Animate particles and dust ring
+    function animateMisc() {
+        requestAnimationFrame(animateMisc);
+        stars.rotation.y += 0.0005;
+        stars.rotation.x += 0.0003;
+        dustRing.rotation.y += 0.002;
+        coreSphere.rotation.x += 0.008;
+        coreSphere.rotation.y += 0.01;
+        centerLight.intensity = 0.55 + Math.sin(Date.now() * 0.002) * 0.1;
+    }
+    animateMisc();
+    
+    // Dynamic label based on closest image index to camera view direction – simple update for current hover/front
+    // But we implement a simple interval that calculates which panel is facing camera within angle threshold
+    function updateActiveLabel() {
+        const cameraDirection = controls.target.clone().sub(camera.position).normalize();
+        let bestIdx = 0;
+        let maxDot = -Infinity;
+        imageGroup.forEach((plane, idx) => {
+            const toPlane = plane.position.clone().sub(camera.position).normalize();
+            const dot = cameraDirection.dot(toPlane);
+            if (dot > maxDot) {
+                maxDot = dot;
+                bestIdx = idx;
+            }
+        });
+        if (bestIdx >= 0 && galleryImages[bestIdx]) {
+            const imgData = galleryImages[bestIdx];
+            document.getElementById('dynamicLabel').innerHTML = `<i class="fas ${imgData.icon}"></i> ${imgData.title} <span style="font-size: 0.7rem;">• ${imgData.desc}</span>`;
+            document.getElementById('currentIdx').innerText = bestIdx + 1;
+        }
+    }
+    setInterval(updateActiveLabel, 200);
+    updateActiveLabel();
+    
+    // Set total count in UI
+    document.getElementById('totalCount').innerText = galleryImages.length;
+    
+    // Raycaster for interactive highlight (nice hover effect: scale slight)
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let currentHovered = null;
+    const originalScale = { x: 1, y: 1 };
+    
+    window.addEventListener('mousemove', (event) => {
+        mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
+        mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(imageGroup);
+        if (intersects.length > 0) {
+            const hit = intersects[0].object;
+            if (currentHovered !== hit) {
+                if (currentHovered) {
+                    gsap.to(currentHovered.scale, { x: 1, y: 1, duration: 0.2 });
+                    currentHovered.material.emissiveIntensity = 0.1;
+                }
+                currentHovered = hit;
+                gsap.to(currentHovered.scale, { x: 1.03, y: 1.03, duration: 0.25 });
+                currentHovered.material.emissiveIntensity = 0.28;
+                document.body.style.cursor = 'pointer';
+            }
+        } else {
+            if (currentHovered) {
+                gsap.to(currentHovered.scale, { x: 1, y: 1, duration: 0.2 });
+                currentHovered.material.emissiveIntensity = 0.1;
+                currentHovered = null;
+                document.body.style.cursor = 'default';
+            }
         }
     });
     
-    // Additional effect: dynamic background gradient before loading? ensures smooth.
-    // Also we preload all scene imagery on idle? Not necessary to not overload.
-    console.log("Binge Leisure Resort 3D 360 Experience Activated — Elevate your senses!");
+    // Animation loop
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update(); // essential for 360 interaction
+        renderer.render(scene, camera);
+        labelRenderer.render(scene, camera);
+    }
+    animate();
+    
+    // Resize handler
+    window.addEventListener('resize', onWindowResize, false);
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        labelRenderer.setSize(window.innerWidth, window.innerHeight);
+    }
+    
+    // Initialize AOS for UI (subtle)
+    AOS.init({ duration: 600, once: true });
+    
+    // Add some glowing floating orbs around ring for enhanced atmosphere
+    const orbCount = 16;
+    for (let i = 0; i < orbCount; i++) {
+        const ang = (i / orbCount) * Math.PI * 2;
+        const orbX = Math.cos(ang) * 3.4;
+        const orbZ = Math.sin(ang) * 3.4;
+        const orbGeo = new THREE.SphereGeometry(0.06, 8, 8);
+        const orbMat = new THREE.MeshStandardMaterial({ color: 0xbc8a5f, emissive: 0x8a5a2a, emissiveIntensity: 0.5 });
+        const orb = new THREE.Mesh(orbGeo, orbMat);
+        orb.position.set(orbX, 0.3 + Math.sin(ang * 3) * 0.1, orbZ);
+        scene.add(orb);
+    }
+    
+    console.log('Binge Leisure Resort 360° 3D Gallery — Immerse in luxury imagery');
 </script>
-
-<!-- fallback note for mobile / older devices: ensures full compatibility -->
-<noscript>
-    <div style="position:fixed; top:0; left:0; background:#000; color:#fff; padding:20px; z-index:9999;">
-        Your browser does not support JavaScript. Please enable JavaScript to experience 360° panoramic tour of Binge Leisure Resort.
-    </div>
-</noscript>
 </body>
 </html>
