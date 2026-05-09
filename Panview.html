@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Binge Leisure Resort | 360° Dynamic Gallery - Chroma Experience</title>
+    <title>Binge Leisure | 360° Studio Gallery — Immersive Art experience</title>
     
     <!-- Google Fonts + Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,48 +18,41 @@
         
         :root {
             --primary-glow: #BC8A5F;
-            --secondary-shift: #3D5A5B;
-            --accent-pulse: #A52A2A;
         }
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background: radial-gradient(circle at 20% 30%, #0a0f1a, #020408);
+            background: #03050a;
             overflow-x: hidden;
             color: #fff;
-            margin: 0;
         }
         
-        /* Header with glassmorphism + gradient border */
+        /* Header Glass premium */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             padding: 18px 0;
-            background: rgba(5, 8, 15, 0.7);
-            backdrop-filter: blur(15px);
+            background: rgba(10, 12, 18, 0.75);
+            backdrop-filter: blur(16px);
             z-index: 1100;
-            border-bottom: 1px solid transparent;
-            border-image: linear-gradient(90deg, #BC8A5F, #D4AF7A, #3D5A5B, #BC8A5F) 1;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-bottom: 1px solid rgba(188,138,95,0.5);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.3);
         }
         
         .logo {
             font-family: 'Cormorant Garamond', serif;
             font-size: 30px;
             font-weight: 700;
-            background: linear-gradient(135deg, #BC8A5F, #F3D9B1, #E4B47E);
+            background: linear-gradient(135deg, #BC8A5F, #EBD6B0);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-decoration: none;
             display: flex;
             align-items: center;
         }
         .logo i {
-            background: none;
-            -webkit-background-clip: unset;
             color: #BC8A5F;
             margin-right: 10px;
             font-size: 28px;
@@ -68,21 +61,19 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 28px;
+            gap: 30px;
         }
         .nav-links a {
             text-decoration: none;
             color: #e0dcd5;
             font-weight: 500;
             transition: 0.3s;
-            position: relative;
         }
         .nav-links a:hover {
             color: #BC8A5F;
-            text-shadow: 0 0 6px rgba(188,138,95,0.6);
+            text-shadow: 0 0 5px rgba(188,138,95,0.5);
         }
-        
-        .btn-3d {
+        .btn-studio {
             background: linear-gradient(145deg, #BC8A5F, #9B6E48);
             border: none;
             color: white;
@@ -90,21 +81,20 @@
             border-radius: 40px;
             font-weight: 600;
             transition: all 0.3s;
-            box-shadow: 0 2px 10px rgba(188,138,95,0.4);
+            box-shadow: 0 2px 12px rgba(188,138,95,0.5);
         }
-        .btn-3d:hover {
-            transform: scale(1.03);
+        .btn-studio:hover {
+            transform: scale(1.02);
             background: linear-gradient(145deg, #D4A373, #BC8A5F);
-            box-shadow: 0 0 15px rgba(188,138,95,0.8);
         }
         
-        /* Fullscreen 3D Canvas */
-        .gallery-container {
+        /* Main 3D Canvas */
+        .studio-container {
             position: relative;
             width: 100%;
             height: 100vh;
             overflow: hidden;
-            background: #03050a;
+            background: #020308;
         }
         
         #three-canvas {
@@ -113,123 +103,102 @@
             display: block;
         }
         
-        /* UI Overlay — dynamic gradient panels */
+        /* UI */
         .gallery-ui {
             position: absolute;
             bottom: 30px;
             left: 0;
             right: 0;
             z-index: 200;
-            pointer-events: none;
             text-align: center;
+            pointer-events: none;
         }
         
-        .instruction-panel {
-            background: rgba(0,0,0,0.55);
+        .control-bar {
+            background: rgba(0,0,0,0.65);
             backdrop-filter: blur(12px);
             display: inline-flex;
-            align-items: center;
-            gap: 20px;
-            padding: 12px 28px;
+            gap: 25px;
+            padding: 10px 28px;
             border-radius: 60px;
-            border: 1px solid rgba(188,138,95,0.7);
-            font-size: 0.85rem;
+            border: 1px solid rgba(188,138,95,0.6);
             pointer-events: auto;
-            margin-bottom: 18px;
-            box-shadow: 0 0 20px rgba(188,138,95,0.2);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
         }
         
-        .instruction-panel i {
-            color: #BC8A5F;
-            filter: drop-shadow(0 0 3px #BC8A5F);
-        }
-        
-        .dynamic-badge {
-            background: linear-gradient(120deg, rgba(0,0,0,0.6), rgba(61,90,91,0.5));
-            backdrop-filter: blur(5px);
-            padding: 6px 20px;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-        }
-        
-        .image-counter {
+        .scene-badge {
             position: absolute;
-            top: 100px;
-            right: 25px;
-            background: linear-gradient(135deg, #000000aa, #1a1610aa);
-            backdrop-filter: blur(8px);
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-right: 2px solid #BC8A5F;
-            z-index: 210;
-            font-family: monospace;
-        }
-        
-        .scene-label {
-            position: absolute;
-            bottom: 25%;
-            left: 25px;
-            background: linear-gradient(95deg, #080c14dd, #1a1c2add);
+            bottom: 28%;
+            left: 28px;
+            background: linear-gradient(115deg, rgba(0,0,0,0.65), rgba(61,90,91,0.5));
             backdrop-filter: blur(12px);
             padding: 12px 24px;
             border-left: 5px solid #BC8A5F;
-            border-radius: 12px;
+            border-radius: 16px;
             font-weight: 600;
             font-size: 1rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             z-index: 210;
-            transition: all 0.2s;
+            pointer-events: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
         }
         
-        .autorotate-btn {
+        .counter {
+            position: absolute;
+            top: 100px;
+            right: 25px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-family: monospace;
+            letter-spacing: 1px;
+            border-right: 2px solid #BC8A5F;
+        }
+        
+        .auto-btn {
             position: absolute;
             bottom: 110px;
             right: 25px;
-            background: rgba(0,0,0,0.65);
+            background: rgba(0,0,0,0.7);
             backdrop-filter: blur(8px);
             border: 1px solid #BC8A5F;
             border-radius: 50px;
-            padding: 12px 20px;
+            padding: 10px 20px;
             cursor: pointer;
             z-index: 220;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-weight: 500;
             transition: 0.2s;
             pointer-events: auto;
-            font-size: 0.85rem;
         }
         
-        .autorotate-btn:hover {
+        .auto-btn:hover {
             background: #BC8A5F;
-            color: #0a0a0a;
-            box-shadow: 0 0 12px #BC8A5F;
+            color: #111;
+            box-shadow: 0 0 10px #BC8A5F;
         }
         
-        .footer-note {
+        .footer-hint {
             position: absolute;
             bottom: 18px;
             left: 20px;
-            font-size: 0.7rem;
-            color: #ccb;
             background: rgba(0,0,0,0.4);
             padding: 4px 12px;
             border-radius: 20px;
+            font-size: 0.7rem;
         }
         
-        .loading-overlay {
+        .loading-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, #0a0f1a, #020408);
+            background: radial-gradient(circle at center, #0a0f1a, #020308);
             z-index: 3000;
             display: flex;
             justify-content: center;
@@ -238,7 +207,7 @@
             transition: opacity 1s ease;
         }
         
-        .loader-spinner {
+        .loader {
             width: 60px;
             height: 60px;
             border: 3px solid rgba(188,138,95,0.2);
@@ -256,14 +225,13 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            font-family: 'Cormorant Garamond', serif;
         }
         
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .instruction-panel { padding: 8px 16px; gap: 10px; font-size: 0.7rem; }
-            .scene-label { font-size: 0.75rem; bottom: 22%; left: 12px; padding: 8px 14px; }
-            .autorotate-btn { bottom: 95px; right: 15px; padding: 8px 16px; }
+            .control-bar { padding: 6px 16px; gap: 12px; font-size: 0.7rem; }
+            .scene-badge { font-size: 0.75rem; padding: 8px 16px; bottom: 22%; }
+            .auto-btn { bottom: 85px; right: 15px; padding: 6px 14px; }
         }
     </style>
 </head>
@@ -271,51 +239,46 @@
 
 <header>
     <div class="container d-flex justify-content-between align-items-center" style="max-width: 1400px; margin: 0 auto; padding: 0 24px;">
-        <a href="#" class="logo"><i class="fas fa-mountain-sun"></i>Binge<span style="background: inherit;">Leisure</span></a>
+        <a href="#" class="logo"><i class="fas fa-crown"></i>Binge<span>Leisure</span></a>
         <ul class="nav-links">
             <li><a href="indexmaps.html">Home</a></li>
             <li><a href="aboutus.html">About</a></li>
             <li><a href="luxurysignup.html">Exclusive</a></li>
             <li><a href="Bookings.html">Reservations</a></li>
-            <li><a href="Panview.html" style="color: #BC8A5F;">360° Gallery</a></li>
+            <li><a href="Panview.html" style="color: #BC8A5F;">360° Studio</a></li>
         </ul>
-        <div><a href="#" class="btn-3d"><i class="fas fa-gem"></i> Book Escape</a></div>
+        <div><a href="#" class="btn-studio"><i class="fas fa-gem"></i> Visit</a></div>
     </div>
 </header>
 
-<div class="gallery-container">
+<div class="studio-container">
     <div id="three-canvas"></div>
-    <div class="image-counter" id="imageCounter">
-        <i class="fas fa-images"></i> <span id="currentIdx">1</span> / <span id="totalCount">6</span>
-    </div>
+    <div class="counter"><i class="fas fa-images"></i> <span id="currentIdx">1</span> / <span id="totalCount">6</span></div>
     <div class="gallery-ui">
-        <div class="instruction-panel" id="dynPanel">
+        <div class="control-bar">
             <span><i class="fas fa-mouse-pointer"></i> Drag 360°</span>
-            <span><i class="fas fa-expand-alt"></i> Scroll Zoom</span>
+            <span><i class="fas fa-search-plus"></i> Zoom</span>
             <span><i class="fas fa-sync-alt"></i> Auto-Rotate</span>
         </div>
-        <div class="dynamic-badge">
-            <i class="fas fa-crown" style="color:#BC8A5F;"></i> Chroma Experience | Binge Leisure
-        </div>
     </div>
-    <div class="scene-label" id="dynamicLabel">
-        <i class="fas fa-arrow-up"></i> Raised Dining · Glow Edition
+    <div class="scene-badge" id="dynamicLabel">
+        <i class="fas fa-arrow-up"></i> Raised Dining • Studio Edition
     </div>
-    <div class="autorotate-btn" id="autoRotateBtn">
-        <i class="fas fa-play-circle"></i> <span id="autoText">AUTO-ROTATE ON</span>
+    <div class="auto-btn" id="autoRotateBtn">
+        <i class="fas fa-play-circle"></i> <span id="autoText">AUTO ON</span>
     </div>
-    <div class="footer-note">
-        <i class="fas fa-palette"></i> Dynamic color moods • 360° Immersive
+    <div class="footer-hint">
+        <i class="fas fa-vr-cardboard"></i> Studio Gallery | Premium Visuals
     </div>
 </div>
 
-<div id="loadingScreen" class="loading-overlay">
-    <div class="loader-spinner"></div>
-    <div class="loader-text">Loading Spectacular 360° Gallery</div>
-    <p style="margin-top: 15px; font-size: 0.85rem; color: #bc8a5f;">Binge Leisure — Elevated Reality</p>
+<div id="loadingScreen" class="loading-screen">
+    <div class="loader"></div>
+    <div class="loader-text">Loading Immersive Studio Gallery</div>
+    <p style="margin-top: 12px; color:#BC8A5F;">Binge Leisure — Art of Luxury</p>
 </div>
 
-<!-- Import Maps & Libraries -->
+<!-- Import Maps -->
 <script type="importmap">
     {
         "imports": {
@@ -330,32 +293,35 @@
     import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
     import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
     
-    // ========== RESORT IMAGES (from homepage) ==========
+    // Resort images (from homepage source)
     const galleryImages = [
-        { url: "IMG-20260126-WA0012.jpg", title: "40ft Raised Dining", desc: "Treetop Gastronomy", icon: "fa-arrow-up", color: "#E6B17E" },
-        { url: "IMG-20260126-WA0013.jpg", title: "Natural Dam", desc: "Serene Private Marina", icon: "fa-water", color: "#5F9EA0" },
-        { url: "IMG-20260126-WA0014.jpg", title: "Curated Performances", desc: "Starlit Evenings", icon: "fa-theater-masks", color: "#C779D0" },
-        { url: "IMG-20260126-WA0015.jpg", title: "Treetop Villa", desc: "Canopy Hideaway", icon: "fa-tree", color: "#8FBC8F" },
-        { url: "IMG-20260126-WA0022.jpg", title: "Waterfront Suite", desc: "Infinity Bliss", icon: "fa-swimmer", color: "#48D1CC" },
-        { url: "IMG-20260126-WA0023.jpg", title: "Executive Residence", desc: "VIP Sanctuary", icon: "fa-gem", color: "#DAA520" }
+        { url: "IMG-20260126-WA0012.jpg", title: "40ft Raised Dining", desc: "Treetop Culinary", icon: "fa-arrow-up", accent: "#E6B17E" },
+        { url: "IMG-20260126-WA0013.jpg", title: "Natural Dam", desc: "Private Marina", icon: "fa-water", accent: "#6ba3b0" },
+        { url: "IMG-20260126-WA0014.jpg", title: "Curated Performances", desc: "Starlit Stage", icon: "fa-theater-masks", accent: "#C779D0" },
+        { url: "IMG-20260126-WA0015.jpg", title: "Treetop Villa", desc: "Canopy Retreat", icon: "fa-tree", accent: "#8FBC8F" },
+        { url: "IMG-20260126-WA0022.jpg", title: "Waterfront Suite", desc: "Infinity Views", icon: "fa-swimmer", accent: "#48D1CC" },
+        { url: "IMG-20260126-WA0023.jpg", title: "Executive Residence", desc: "VIP Sanctuary", icon: "fa-gem", accent: "#DAA520" }
     ];
     
-    // Setup scene, camera, renderers
+    // Setup scene
     const container = document.getElementById('three-canvas');
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x02060c);
-    scene.fog = new THREE.FogExp2(0x02060c, 0.008);
+    scene.background = new THREE.Color(0x01020a);
+    scene.fog = new THREE.FogExp2(0x01020a, 0.012);
     
-    const camera = new THREE.PerspectiveCamera(48, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, 1.2, 6.5);
-    camera.lookAt(0, 1, 0);
+    // Camera position to fit larger images closer arrangement
+    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.set(0, 1.4, 4.2);
+    camera.lookAt(0, 1.1, 0);
     
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.setPixelRatio(window.devicePixelRatio);
     container.appendChild(renderer.domElement);
     
+    // CSS2 Renderer for labels
     const labelRenderer = new CSS2DRenderer();
     labelRenderer.setSize(window.innerWidth, window.innerHeight);
     labelRenderer.domElement.style.position = 'absolute';
@@ -364,272 +330,280 @@
     labelRenderer.domElement.style.pointerEvents = 'none';
     container.appendChild(labelRenderer.domElement);
     
-    // Controls with autorotate capability
+    // Controls with auto-rotate (studio style)
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableZoom = true;
     controls.zoomSpeed = 0.9;
     controls.rotateSpeed = 1.4;
     controls.enablePan = false;
-    controls.target.set(0, 1.2, 0);
+    controls.target.set(0, 1.1, 0);
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 1.8;
+    controls.autoRotateSpeed = 1.4;
     controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
+    controls.dampingFactor = 0.06;
     
-    // Toggle autorotate button
-    let autoRotateActive = true;
+    // Auto-rotate toggle
+    let autoActive = true;
     const autoBtn = document.getElementById('autoRotateBtn');
-    const autoTextSpan = document.getElementById('autoText');
+    const autoSpan = document.getElementById('autoText');
     autoBtn.addEventListener('click', () => {
         controls.autoRotate = !controls.autoRotate;
-        autoRotateActive = controls.autoRotate;
-        autoTextSpan.innerText = autoRotateActive ? "AUTO-ROTATE ON" : "AUTO-ROTATE OFF";
-        autoBtn.style.background = autoRotateActive ? "rgba(188,138,95,0.8)" : "rgba(0,0,0,0.7)";
-        if (!autoRotateActive) autoBtn.style.borderColor = "#888";
-        else autoBtn.style.borderColor = "#BC8A5F";
+        autoActive = controls.autoRotate;
+        autoSpan.innerText = autoActive ? "AUTO ON" : "AUTO OFF";
+        autoBtn.style.background = autoActive ? "#BC8A5F" : "rgba(0,0,0,0.7)";
+        autoBtn.style.color = autoActive ? "#111" : "#fff";
     });
     
-    // ========== DYNAMIC COLOR SYSTEM ==========
-    // Main gradient ambient + colorful point lights that shift hues over time
-    const ambientLight = new THREE.AmbientLight(0x222222);
-    scene.add(ambientLight);
+    // ----- STUDIO ENVIRONMENT: Reflective glossy floor + backdrop + professional lighting -----
+    // Mirrored floor (semi-reflective)
+    const planeMat = new THREE.MeshStandardMaterial({ color: 0x10141f, roughness: 0.28, metalness: 0.85, emissive: 0x000000 });
+    const floorPlane = new THREE.Mesh(new THREE.PlaneGeometry(8, 8), planeMat);
+    floorPlane.rotation.x = -Math.PI / 2;
+    floorPlane.position.y = -0.6;
+    floorPlane.receiveShadow = true;
+    scene.add(floorPlane);
     
-    // Dynamic colored point lights orbiting slightly
-    const colorLights = [];
-    const lightColors = [0xBC8A5F, 0x3D5A5B, 0xD4AF37, 0xA52A2A, 0x4A90E2];
-    for (let i = 0; i < 5; i++) {
-        const light = new THREE.PointLight(lightColors[i % lightColors.length], 0.6, 12);
-        light.userData = { speed: 0.3 + i * 0.2, angle: (i * Math.PI * 2) / 5, radius: 2.4, height: 1.2 + i * 0.3 };
-        scene.add(light);
-        colorLights.push(light);
-    }
+    // Circular glossy pedestal stage
+    const stageMat = new THREE.MeshStandardMaterial({ color: 0x1a1e2a, metalness: 0.7, roughness: 0.3, emissive: 0x0a0a12 });
+    const stageDisc = new THREE.Mesh(new THREE.CylinderGeometry(3.2, 3.2, 0.08, 64), stageMat);
+    stageDisc.position.y = -0.55;
+    stageDisc.receiveShadow = true;
+    stageDisc.castShadow = true;
+    scene.add(stageDisc);
     
-    // main directional + fill
-    const mainLight = new THREE.DirectionalLight(0xffeebb, 1.1);
-    mainLight.position.set(3, 5, 2);
-    mainLight.castShadow = true;
-    scene.add(mainLight);
-    const backFill = new THREE.PointLight(0x9B6E48, 0.5);
-    backFill.position.set(-2, 1.5, -3);
-    scene.add(backFill);
+    // Outer ring (studio rim)
+    const rimMat = new THREE.MeshStandardMaterial({ color: 0xBC8A5F, metalness: 0.9, emissive: 0x3a2a1a });
+    const rimRing = new THREE.Mesh(new THREE.TorusGeometry(3.35, 0.06, 64, 200), rimMat);
+    rimRing.rotation.x = Math.PI / 2;
+    rimRing.position.y = -0.5;
+    scene.add(rimRing);
     
-    // Glowing central orb with gradient hue
-    const coreGlowMat = new THREE.MeshStandardMaterial({ color: 0xBC8A5F, emissive: 0x4a2a1a, emissiveIntensity: 0.7, metalness: 0.9 });
-    const coreOrb = new THREE.Mesh(new THREE.IcosahedronGeometry(0.22, 0), coreGlowMat);
-    coreOrb.position.set(0, 0.95, 0);
-    scene.add(coreOrb);
+    // Background curved subtle gradient via large sphere (interior studio feel)
+    const bgTexture = (() => {
+        const canvas = document.createElement('canvas');
+        canvas.width = 512;
+        canvas.height = 512;
+        const ctx = canvas.getContext('2d');
+        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        grad.addColorStop(0, '#080c1a');
+        grad.addColorStop(0.6, '#141b2b');
+        grad.addColorStop(1, '#2a2a3a');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        return new THREE.CanvasTexture(canvas);
+    })();
+    const backdropSphere = new THREE.Mesh(new THREE.SphereGeometry(14, 32, 32), new THREE.MeshStandardMaterial({ map: bgTexture, side: THREE.BackSide, roughness: 0.5 }));
+    scene.add(backdropSphere);
     
-    // floating particles with rainbow potential
-    const particleCount = 1800;
-    const particleGeo = new THREE.BufferGeometry();
-    const particlePositions = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount; i++) {
-        particlePositions[i*3] = (Math.random() - 0.5) * 24;
-        particlePositions[i*3+1] = (Math.random() - 0.5) * 7 + 0.8;
-        particlePositions[i*3+2] = (Math.random() - 0.5) * 20 - 6;
-    }
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-    const particleMat = new THREE.PointsMaterial({ color: 0xBC8A5F, size: 0.045, transparent: true, blending: THREE.AdditiveBlending });
-    const particleSystem = new THREE.Points(particleGeo, particleMat);
-    scene.add(particleSystem);
+    // Studio lighting: Key light + fill + rim lights
+    const keyLight = new THREE.DirectionalLight(0xffeedd, 1.2);
+    keyLight.position.set(2, 3, 2);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 1024;
+    scene.add(keyLight);
     
-    // Dust ring gradient
-    const dustRingGeo = new THREE.BufferGeometry();
-    const dustCount = 1200;
-    const dustPositions = new Float32Array(dustCount * 3);
+    const fillLight = new THREE.PointLight(0xBC8A5F, 0.5);
+    fillLight.position.set(-1, 1.8, 2);
+    scene.add(fillLight);
+    
+    const rimLight1 = new THREE.PointLight(0xD4AF37, 0.7);
+    rimLight1.position.set(2, 1.5, -2.5);
+    scene.add(rimLight1);
+    
+    const rimLight2 = new THREE.PointLight(0x6FA8DC, 0.6);
+    rimLight2.position.set(-2, 1.5, -2.8);
+    scene.add(rimLight2);
+    
+    const accentLight = new THREE.PointLight(0xBC8A5F, 0.45);
+    accentLight.position.set(0, 0.5, 2.2);
+    scene.add(accentLight);
+    
+    // Ambient with subtle color change (dynamic)
+    const ambient = new THREE.AmbientLight(0x22223b, 0.55);
+    scene.add(ambient);
+    
+    // Decorative particles (floating dust)
+    const dustCount = 1400;
+    const dustGeo = new THREE.BufferGeometry();
+    const dustPos = new Float32Array(dustCount * 3);
     for (let i = 0; i < dustCount; i++) {
-        const rad = 2.6 + Math.random() * 1.4;
-        const theta = Math.random() * Math.PI * 2;
-        dustPositions[i*3] = Math.cos(theta) * rad;
-        dustPositions[i*3+1] = -0.2 + Math.random() * 2.2;
-        dustPositions[i*3+2] = Math.sin(theta) * rad;
+        dustPos[i*3] = (Math.random() - 0.5) * 7;
+        dustPos[i*3+1] = (Math.random() - 0.5) * 3 + 0.2;
+        dustPos[i*3+2] = (Math.random() - 0.5) * 8 - 2;
     }
-    dustRingGeo.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3));
-    const dustMat = new THREE.PointsMaterial({ color: 0xd4aa6a, size: 0.03, transparent: true, blending: THREE.AdditiveBlending });
-    const dustRing = new THREE.Points(dustRingGeo, dustMat);
-    scene.add(dustRing);
+    dustGeo.setAttribute('position', new THREE.BufferAttribute(dustPos, 3));
+    const dustMat = new THREE.PointsMaterial({ color: 0xBC8A5F, size: 0.025, transparent: true, blending: THREE.AdditiveBlending });
+    const dustPoints = new THREE.Points(dustGeo, dustMat);
+    scene.add(dustPoints);
     
-    // Create image planes in a circle
-    const radius = 3.3;
-    const yOffset = 0.85;
+    // ---------- IMAGE DISPLAY (larger, closer to each other) ----------
+    // reduce radius from 3.3 -> 2.2 (makes images closer together)
+    const radius = 2.25;
+    const yBase = 0.95;
     const angles = [0, 60, 120, 180, 240, 300].map(deg => deg * Math.PI / 180);
-    const imageMeshes = [];
-    let loadedImages = 0;
-    const total = galleryImages.length;
+    const imagePlanes = [];
+    let loadedCount = 0;
+    const totalImages = galleryImages.length;
+    const textureLoader = new THREE.TextureLoader();
     
-    const loader = new THREE.TextureLoader();
-    function onImageLoad() {
-        loadedImages++;
-        if (loadedImages === total) {
-            document.getElementById('loadingScreen').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('loadingScreen').style.display = 'none';
-            }, 800);
+    function assetLoaded() {
+        loadedCount++;
+        if (loadedCount === totalImages) {
+            const loaderDiv = document.getElementById('loadingScreen');
+            gsap.to(loaderDiv, { opacity: 0, duration: 0.8, delay: 0.3, onComplete: () => loaderDiv.style.display = 'none' });
         }
     }
+    
+    // larger plane dimensions: width 2.8, height 2.1 (more prominent)
+    const planeWidth = 2.8;
+    const planeHeight = 2.1;
     
     galleryImages.forEach((img, idx) => {
         const angle = angles[idx];
         const x = Math.cos(angle) * radius;
         const z = Math.sin(angle) * radius;
         
-        const texture = loader.load(img.url, onImageLoad, undefined, (err) => { console.warn(err); onImageLoad(); });
+        const texture = textureLoader.load(img.url, assetLoaded, undefined, (err) => { console.warn(err); assetLoaded(); });
         texture.colorSpace = THREE.SRGBColorSpace;
-        const material = new THREE.MeshStandardMaterial({ map: texture, side: THREE.DoubleSide, roughness: 0.2, metalness: 0.1, emissive: 0x442200, emissiveIntensity: 0.08 });
-        const geometry = new THREE.PlaneGeometry(2.25, 1.7);
+        const material = new THREE.MeshStandardMaterial({ map: texture, side: THREE.DoubleSide, roughness: 0.22, metalness: 0.08, emissive: 0x331a0a, emissiveIntensity: 0.08 });
+        const geometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
         const plane = new THREE.Mesh(geometry, material);
-        plane.position.set(x, yOffset + (idx % 2 === 0 ? 0.05 : -0.05), z);
-        plane.lookAt(0, yOffset, 0);
-        plane.userData = { title: img.title, desc: img.desc, index: idx, icon: img.icon };
+        plane.position.set(x, yBase + (idx % 2 === 0 ? 0.08 : -0.03), z);
+        plane.lookAt(0, yBase, 0);
+        plane.userData = { title: img.title, desc: img.desc, idx: idx, icon: img.icon };
+        plane.castShadow = true;
+        plane.receiveShadow = false;
         scene.add(plane);
         
-        // decorative border
-        const edges = new THREE.EdgesGeometry(geometry);
-        const lineMat = new THREE.LineBasicMaterial({ color: 0xBC8A5F });
-        const wire = new THREE.LineSegments(edges, lineMat);
-        plane.add(wire);
+        // Elegant golden frame edge
+        const edgesGeo = new THREE.EdgesGeometry(geometry);
+        const frameMat = new THREE.LineBasicMaterial({ color: 0xBC8A5F });
+        const wireframe = new THREE.LineSegments(edgesGeo, frameMat);
+        plane.add(wireframe);
         
-        // CSS2D Label
+        // CSS2D Label (positioned slightly below each panel)
         const div = document.createElement('div');
-        div.style.background = 'linear-gradient(125deg, rgba(0,0,0,0.8), rgba(61,90,91,0.7))';
-        div.style.backdropFilter = 'blur(6px)';
+        div.style.background = 'linear-gradient(95deg, rgba(0,0,0,0.7), rgba(61,90,91,0.6))';
+        div.style.backdropFilter = 'blur(8px)';
         div.style.padding = '6px 16px';
-        div.style.borderRadius = '30px';
-        div.style.border = `1px solid ${img.color || '#BC8A5F'}`;
+        div.style.borderRadius = '40px';
+        div.style.border = `1px solid ${img.accent || '#BC8A5F'}`;
         div.style.fontSize = '12px';
         div.style.fontWeight = 'bold';
-        div.style.color = '#f5e3c9';
+        div.style.color = '#f5ead6';
         div.innerHTML = `<i class="fas ${img.icon}" style="color:#BC8A5F; margin-right:6px;"></i>${img.title}`;
         const labelObj = new CSS2DObject(div);
-        labelObj.position.set(x, yOffset - 0.95, z);
+        labelObj.position.set(x, yBase - 1.25, z);
         scene.add(labelObj);
         
-        imageMeshes.push(plane);
+        imagePlanes.push(plane);
     });
     
-    // Extra decorative shimmer rings
-    const ringGeo = new THREE.TorusGeometry(3.1, 0.04, 64, 400);
-    const ringMat = new THREE.MeshStandardMaterial({ color: 0xBC8A5F, emissive: 0x5A3A2A, emissiveIntensity: 0.4 });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.rotation.x = Math.PI / 2;
-    ring.position.y = 0.2;
-    scene.add(ring);
+    // Additional gallery accents: floating spotlights around each image
+    const spotGroup = [];
+    for (let i = 0; i < 6; i++) {
+        const ang = angles[i];
+        const xSpot = Math.cos(ang) * (radius + 0.4);
+        const zSpot = Math.sin(ang) * (radius + 0.4);
+        const spotLight = new THREE.PointLight(0xBC8A5F, 0.4);
+        spotLight.position.set(xSpot, yBase + 0.4, zSpot);
+        scene.add(spotLight);
+        spotGroup.push(spotLight);
+    }
     
-    const ring2Geo = new THREE.TorusGeometry(3.6, 0.03, 64, 400);
-    const ring2Mat = new THREE.MeshStandardMaterial({ color: 0xD4AF37, emissive: 0x8B5A2B });
-    const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
-    ring2.rotation.x = Math.PI / 2 + 0.2;
-    ring2.position.y = 0.4;
-    scene.add(ring2);
+    // Central crystal pedestal (interactive)
+    const crystalMat = new THREE.MeshStandardMaterial({ color: 0xBC8A5F, emissive: 0x3a2a1a, metalness: 0.9, roughness: 0.2 });
+    const centerCyl = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.28, 0.5, 16), crystalMat);
+    centerCyl.position.set(0, -0.35, 0);
+    centerCyl.castShadow = true;
+    scene.add(centerCyl);
     
-    // ========== ANIMATION LOOP (COLOR SHIFTS, AUTO-ROTATE, ROTATING LIGHTS) ==========
-    let time = 0;
+    const centerOrb = new THREE.Mesh(new THREE.SphereGeometry(0.19, 24, 24), crystalMat);
+    centerOrb.position.set(0, -0.05, 0);
+    scene.add(centerOrb);
     
-    function animateDynamicColors() {
-        time += 0.012;
-        // Shift ambient light intensity warm/cool
-        const hueShift = (Math.sin(time * 0.25) * 0.2) + 0.4;
-        const rColor = 0.7 + Math.sin(time * 0.31) * 0.15;
-        const gColor = 0.55 + Math.sin(time * 0.42) * 0.2;
-        const bColor = 0.45 + Math.cos(time * 0.37) * 0.2;
-        ambientLight.intensity = 0.5 + Math.sin(time * 0.2) * 0.1;
-        mainLight.intensity = 1.0 + Math.sin(time * 0.5) * 0.15;
-        mainLight.color.setHSL(0.09, 0.7, 0.65);
+    // Dynamic color & lighting animation (studio vibe)
+    let t = 0;
+    function animateColors() {
+        requestAnimationFrame(animateColors);
+        t += 0.012;
         
-        // Update colored point lights positions & colors dynamically
-        colorLights.forEach((light, i) => {
-            const angle = time * 0.5 + i;
-            const rad = 2.9;
-            light.position.x = Math.cos(angle) * rad;
-            light.position.z = Math.sin(angle) * rad;
-            light.position.y = 1.1 + Math.sin(angle * 1.7) * 0.5;
-            const hue = (time * 0.1 + i * 0.4) % 1;
-            light.color.setHSL(hue, 0.8, 0.55);
-            light.intensity = 0.55 + Math.sin(time * 1.2 + i) * 0.2;
+        // subtle shifting of studio lights
+        const hue = (t * 0.08) % 1;
+        fillLight.intensity = 0.55 + Math.sin(t * 0.9) * 0.15;
+        rimLight1.intensity = 0.65 + Math.cos(t * 0.7) * 0.12;
+        accentLight.intensity = 0.5 + Math.sin(t * 1.2) * 0.1;
+        keyLight.intensity = 1.1 + Math.sin(t * 0.5) * 0.1;
+        
+        // rotating accents on image spots
+        spotGroup.forEach((light, i) => {
+            light.intensity = 0.35 + Math.sin(t * 1.5 + i) * 0.15;
         });
         
-        // Rotating core orb colour
-        const orbHue = (time * 0.15) % 1;
-        coreGlowMat.color.setHSL(orbHue, 0.9, 0.55);
-        coreGlowMat.emissiveIntensity = 0.6 + Math.sin(time * 1.8) * 0.2;
-        coreOrb.rotation.y += 0.01;
-        coreOrb.rotation.x += 0.008;
+        // Crystal orb pulse
+        const pulse = 0.55 + Math.sin(t * 2.2) * 0.12;
+        centerOrb.material.emissiveIntensity = pulse;
+        centerCyl.material.emissiveIntensity = pulse * 0.6;
         
-        // Particle system gradient colors
-        const particleHue = (time * 0.1) % 1;
-        particleMat.color.setHSL(particleHue, 0.9, 0.7);
-        dustMat.color.setHSL(particleHue + 0.2, 0.8, 0.6);
+        // Dust particles drifting
+        dustPoints.rotation.y += 0.002;
         
-        // Rotate rings
-        ring.rotation.z += 0.003;
-        ring2.rotation.z -= 0.004;
-        dustRing.rotation.y += 0.002;
-        particleSystem.rotation.y = time * 0.05;
+        // rotating stage ring
+        rimRing.rotation.z += 0.003;
         
-        // Update UI panel gradient
-        const dynPanel = document.getElementById('dynPanel');
-        if (dynPanel) {
-            const bgHue = (time * 0.08) % 360;
-            dynPanel.style.background = `linear-gradient(115deg, rgba(0,0,0,0.7), hsla(${bgHue}, 40%, 20%, 0.7))`;
-            dynPanel.style.borderColor = `hsl(${bgHue}, 70%, 60%)`;
-        }
-        
-        // Update scene label with current focus index (closest plane)
+        // Update current focused image label
         let bestIdx = 0;
         let maxDot = -Infinity;
         const camDir = controls.target.clone().sub(camera.position).normalize();
-        imageMeshes.forEach((plane, idx) => {
+        imagePlanes.forEach((plane, i) => {
             const toPlane = plane.position.clone().sub(camera.position).normalize();
             const dot = camDir.dot(toPlane);
             if (dot > maxDot) {
                 maxDot = dot;
-                bestIdx = idx;
+                bestIdx = i;
             }
         });
-        if (galleryImages[bestIdx]) {
-            const imgData = galleryImages[bestIdx];
-            document.getElementById('dynamicLabel').innerHTML = `<i class="fas ${imgData.icon}" style="color: ${imgData.color}"></i> ${imgData.title} <span style="font-size:0.75rem;"> • ${imgData.desc}</span>`;
+        const activeImg = galleryImages[bestIdx];
+        if (activeImg) {
+            document.getElementById('dynamicLabel').innerHTML = `<i class="fas ${activeImg.icon}" style="color:${activeImg.accent}"></i> ${activeImg.title} <span style="font-size:0.8rem;">• ${activeImg.desc}</span>`;
             document.getElementById('currentIdx').innerText = bestIdx + 1;
         }
-        
-        requestAnimationFrame(animateDynamicColors);
     }
+    animateColors();
     
-    animateDynamicColors();
-    
-    // Hover interaction: scale on mouseover (raycaster)
+    // Hover interaction (scale up slightly)
     const raycaster = new THREE.Raycaster();
     const mouse = new THREE.Vector2();
-    let hoveredObj = null;
+    let hoveredImage = null;
     window.addEventListener('mousemove', (event) => {
         mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
         mouse.y = -(event.clientY / renderer.domElement.clientHeight) * 2 + 1;
         raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects(imageMeshes);
+        const intersects = raycaster.intersectObjects(imagePlanes);
         if (intersects.length) {
             const hit = intersects[0].object;
-            if (hoveredObj !== hit) {
-                if (hoveredObj) hoveredObj.scale.set(1, 1, 1);
-                hoveredObj = hit;
-                hoveredObj.scale.set(1.04, 1.04, 1);
-                document.body.style.cursor = 'pointer';
+            if (hoveredImage !== hit) {
+                if (hoveredImage) hoveredImage.scale.set(1, 1, 1);
+                hoveredImage = hit;
+                hoveredImage.scale.set(1.045, 1.045, 1);
+                document.body.style.cursor = 'grab';
             }
         } else {
-            if (hoveredObj) {
-                hoveredObj.scale.set(1, 1, 1);
-                hoveredObj = null;
+            if (hoveredImage) {
+                hoveredImage.scale.set(1, 1, 1);
+                hoveredImage = null;
                 document.body.style.cursor = 'default';
             }
         }
     });
     
-    // Set total counter
+    // Set total image count
     document.getElementById('totalCount').innerText = galleryImages.length;
     
     // Rendering loop
     function renderLoop() {
         requestAnimationFrame(renderLoop);
-        controls.update(); // handles autoRotate internally
+        controls.update(); // auto-rotate handled
         renderer.render(scene, camera);
         labelRenderer.render(scene, camera);
     }
@@ -642,16 +616,16 @@
         labelRenderer.setSize(window.innerWidth, window.innerHeight);
     });
     
-    // initial loading force close (safety)
+    // Fallback hide loader after max 4 secs
     setTimeout(() => {
-        const loading = document.getElementById('loadingScreen');
-        if (loading && loading.style.display !== 'none') {
-            loading.style.opacity = '0';
-            setTimeout(() => { loading.style.display = 'none'; }, 600);
-        }
+        const loadScr = document.getElementById('loadingScreen');
+        if (loadScr.style.display !== 'none') loadScr.style.display = 'none';
     }, 4000);
     
-    console.log("Binge Leisure | 360° Dynamic Gallery with AutoRotate & Chroma FX");
+    // GSAP import for fade (lightweight)
+    import('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js').then(gsapMod => {
+        window.gsap = gsapMod.default || gsapMod;
+    });
 </script>
 </body>
 </html>
